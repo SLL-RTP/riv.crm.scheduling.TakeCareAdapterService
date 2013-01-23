@@ -1,0 +1,3 @@
+<GetTimeTypesResponse xmlns="http://tempuri.org/">
+	<GetTimeTypesResult><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns2:ProfdocHISMessage Method="Booking.GetTimeTypes" CareUnit="ExtUsrMVK" CareUnitType="hsaid" User="-1" Time="1339333694114" SystemInstance="0" System="ProfdocHIS" MsgType="Error" xmlns:ns2="urn:ProfdocHISMessage:Error"><Error Type="System"><Code>3001</Code><Msg>Illegal argument!</Msg></Error></ns2:ProfdocHISMessage>]]></GetTimeTypesResult>
+</GetTimeTypesResponse>

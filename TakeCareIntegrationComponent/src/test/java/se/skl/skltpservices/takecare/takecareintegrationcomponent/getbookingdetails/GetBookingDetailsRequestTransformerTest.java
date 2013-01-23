@@ -1,0 +1,76 @@
+package se.skl.skltpservices.takecare.takecareintegrationcomponent.getbookingdetails;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
+
+import java.math.BigInteger;
+
+import org.junit.Test;
+import org.mule.api.transformer.TransformerException;
+import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
+import org.soitoolkit.commons.mule.util.MiscUtil;
+
+import se.skl.skltpservices.takecare.TakeCareUtil;
+import se.skl.skltpservices.takecare.booking.GetBookings;
+import se.skl.skltpservices.takecare.booking.getbookingsrequest.ProfdocHISMessage;
+
+public class GetBookingDetailsRequestTransformerTest {
+
+	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetBookings.class);
+	private static final JaxbUtil jaxbUtil_message = new JaxbUtil(ProfdocHISMessage.class);
+
+	@Test
+	public void testTransformer_ok() throws Exception {
+
+		// Specify input and expected result
+		String input = MiscUtil.readFileAsString("src/test/resources/testfiles/GetBookingDetails/request-input.xml");
+
+		GetBookingDetailsRequestTransformer transformer = new GetBookingDetailsRequestTransformer();
+		String result = (String) transformer.pojoTransform(input, "UTF-8");
+
+		/* Bookings */
+		GetBookings bookings = (GetBookings) jaxbUtil_outgoing.unmarshal(result);
+		String careunitId = bookings.getCareunitid();
+		String careunitType = bookings.getCareunitidtype();
+		String externalUser = bookings.getExternaluser();
+		String tcPassword = bookings.getTcpassword();
+		String tcUsername = bookings.getTcusername();
+		String xml = bookings.getXml();
+
+		assertEquals(TakeCareUtil.HSAID, careunitType);
+		assertEquals("HSA-VKK123", careunitId);
+		assertEquals(TakeCareUtil.EXTERNAL_USER, externalUser);
+		assertEquals("", tcPassword);
+		assertEquals("", tcUsername);
+
+		/* ProfdocHISMessage */
+		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(xml);
+		String msgCareunitId = message.getCareUnitId();
+		String msgCareunitIdType = message.getCareUnitIdType();
+		String msgInvokingSystem = message.getInvokingSystem();
+		String msgMessageType = message.getMsgType();
+		BigInteger msgTime = message.getTime();
+		String bookingId = message.getBookingId();
+		String patientId = message.getPatientId();
+
+		assertEquals("HSA-VKK123", msgCareunitId);
+		assertEquals(TakeCareUtil.HSAID, msgCareunitIdType);
+		assertEquals(TakeCareUtil.INVOKING_SYSTEM, msgInvokingSystem);
+		assertEquals(TakeCareUtil.REQUEST, msgMessageType);
+		assertNull(patientId);
+		assertNotNull(bookingId);
+		assertNotNull(msgTime);
+
+	}
+
+	@Test(expected = TransformerException.class)
+	public void testBadInputGivesTransformerException() throws Exception {
+		String input = MiscUtil
+				.readFileAsString("src/test/resources/testfiles/GetBookingDetails/request-bad-input.xml");
+		GetBookingDetailsRequestTransformer transformer = new GetBookingDetailsRequestTransformer();
+		transformer.pojoTransform(input, "UTF-8");
+		fail("Expected TransformException when bad input");
+	}
+}

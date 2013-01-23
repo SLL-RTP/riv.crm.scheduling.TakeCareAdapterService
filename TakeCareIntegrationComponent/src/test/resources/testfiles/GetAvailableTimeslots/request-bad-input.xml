@@ -1,0 +1,12 @@
+<urn:WrongElement
+	xmlns:urn="urn:riv:crm:scheduling:GetAvailableTimeslotsResponder:1">
+	<urn:healthcare_facility>HSA-VKK123</urn:healthcare_facility>
+	<urn:bookingId>1234567890</urn:bookingId>
+	<urn:startDateInclusive>12121212121200</urn:startDateInclusive>
+	<urn:endDateInclusive>12121213121200</urn:endDateInclusive>
+	<urn:performer>PERFORMER</urn:performer>
+	<urn:timeTypeName>TIMETYPE</urn:timeTypeName>
+	<urn:timeTypeID>1</urn:timeTypeID>
+	<urn:careTypeName>TIMETYPE NAME</urn:careTypeName>
+	<urn:careTypeID>121212121212</urn:careTypeID>
+</urn:WrongElement>

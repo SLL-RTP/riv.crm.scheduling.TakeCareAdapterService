@@ -1,0 +1,22 @@
+<xs:schema targetNamespace="urn:ProfdocHISMessage:MakeBooking:Request"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="ProfdocHISMessage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CareUnitIdType" type="xs:string" />
+				<xs:element name="CareUnitId" type="xs:string" />
+				<xs:element name="StartTime" type="xs:unsignedLong" />
+				<xs:element name="EndTime" type="xs:unsignedLong" />
+				<xs:element name="TimeTypeId" type="xs:unsignedShort" />
+				<xs:element name="ResourceId" type="xs:unsignedLong" />
+				<xs:element name="PatientId" type="xs:unsignedLong" />
+				<xs:element name="PatientReason" type="xs:string"
+					minOccurs="0" />
+			</xs:sequence>
+			<xs:attribute name="MsgType" fixed="Request" type="xs:string" />
+			<xs:attribute name="Time" type="xs:unsignedLong" use="required" />
+			<xs:attribute name="InvokingSystem" type="xs:string"
+				use="required" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

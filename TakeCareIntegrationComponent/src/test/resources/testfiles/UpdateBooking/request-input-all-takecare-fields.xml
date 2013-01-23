@@ -1,0 +1,17 @@
+<urn:UpdateBooking xmlns:urn="urn:riv:crm:scheduling:UpdateBookingResponder:1"
+	xmlns:urn1="urn:riv:crm:scheduling:1">
+	<urn:healthcare_facility_med>HSA-VKK123</urn:healthcare_facility_med>
+	<urn:requestedTimeslot>
+		<urn1:startTimeInclusive>20120615200000</urn1:startTimeInclusive>
+		<urn1:endTimeExclusive>20120615210000</urn1:endTimeExclusive>
+		<urn1:healthcare_facility>HSA-VKK123</urn1:healthcare_facility>
+		<urn1:subject_of_care>191414141414</urn1:subject_of_care>
+		<urn1:reason>Reason</urn1:reason>
+		<urn1:resourceID>2</urn1:resourceID>
+		<urn1:timeTypeID>1</urn1:timeTypeID>
+		<urn1:bookingId>1234567890</urn1:bookingId>
+	</urn:requestedTimeslot>
+	<urn:subject_of_care_info>
+		<urn1:phone>1234567890</urn1:phone>
+	</urn:subject_of_care_info>
+</urn:UpdateBooking>

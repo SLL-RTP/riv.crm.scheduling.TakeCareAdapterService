@@ -1,0 +1,3 @@
+<GetTimeTypesResponse xmlns="http://tempuri.org/">
+	<GetTimeTypesResult><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns2:ProfdocHISMessage Method="Booking.GetTimeTypes" CareUnit="Careunit ID" CareUnitType="hsaid" User="DRJEKYLL" SystemInstance="0" System="ProfdocHIS" MsgType="Response" xmlns:ns2="urn:ProfdocHISMessage:GetTimeTypes:Response"><TimeTypes CareUnitName="Careunit name" CareUnitId="Careunit ID" CareUnitIdType="hsaid"><TimeType><TimeTypeId>0</TimeTypeId><TimeTypeName>Tidstyp0</TimeTypeName></TimeType><TimeType><TimeTypeId>1</TimeTypeId><TimeTypeName>Tidstyp1</TimeTypeName></TimeType></TimeTypes></ns2:ProfdocHISMessage>]]></GetTimeTypesResult>
+</GetTimeTypesResponse>

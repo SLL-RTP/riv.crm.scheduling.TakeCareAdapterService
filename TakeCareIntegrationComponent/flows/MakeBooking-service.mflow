@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="MakeBooking">
+    <flow SubFlow="false" name="MakeBooking-service">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane entity-id="a4d7e85b-83ec-49f0-9a22-a77312b8a1a7">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="0d765219-3478-450c-80cb-a48b08b5f435">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/https/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/https/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="${MAKEBOOKING_INBOUND_URL}" name="address"/>
+                    <property name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="followRedirects"/>
+                    <property name="ref"/>
+                    <property value="soitoolkit-https-connector" name="connector-ref"/>
+                    <property value="soitoolkit-https-connector" name="connector-ref-outbound"/>
+                    <property value="logReqIn" name="transformer-refs"/>
+                    <property value="createSoapFaultIfException logRespOut" name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="${MAKEBOOKING_INBOUND_URL}" name="address"/>
+                    <property name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="followRedirects"/>
+                    <property name="ref"/>
+                    <property value="soitoolkit-https-connector" name="connector-ref"/>
+                    <property value="logReqIn" name="transformer-refs"/>
+                    <property value="createSoapFaultIfException logRespOut" name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="SOAP" entity-id="b11c93c4-1320-4cd2-b22f-c1ec4f051f93">
+                <properties>
+                    <property name="configuration-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/cxf/proxy-service" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="configuration-ref"/>
+                    <property name="bindingId"/>
+                    <property name="port"/>
+                    <property value="urn:riv:crm:scheduling:MakeBooking:1:rivtabp20" name="namespace"/>
+                    <property value="MakeBookingResponderService" name="service"/>
+                    <property name="serviceClass"/>
+                    <property name="validationEnabled"/>
+                    <property name="payload"/>
+                    <property name="mtomEnabled"/>
+                    <property value="classpath:/schemas/interactions/MakeBookingInteraction/MakeBookingInteraction_1.0_rivtabp20.wsdl" name="wsdlLocation"/>
+                    <property name="enableMuleSoapHeaders"/>
+                </properties>
+            </pattern>
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="transform-request" entity-id="366d2ed1-a8d5-4414-81af-5383c3b3d7a4">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property value="se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking.MakeBookingRequestTransformer" name="class"/>
+                </properties>
+            </pattern>
+            <response entity-id="54c3f579-3049-42be-b48d-e733e80061ad">
+                <compartment entity-id="13862315-c609-4683-98a2-516d0fdc40a5">
+                    <lane entity-id="66f14b5e-2ae0-4890-8489-4a791d8a9d60">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="transform-response" entity-id="36e836e5-42a2-483c-9a4e-ce62077a28ef">
+                            <properties>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="encoding"/>
+<property name="mimeType"/>
+<property value="se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking.MakeBookingResponseTransformer" name="class"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </response>
+            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="SOAP" entity-id="6020533b-4a07-418e-8a3a-39655b136942">
+                <properties>
+                    <property name="configuration-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/cxf/proxy-client" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="operation"/>
+                    <property name="serviceClass"/>
+                    <property name="decoupledEndpoint"/>
+                    <property name="payload"/>
+                    <property name="port"/>
+                    <property name="mtomEnabled"/>
+                    <property name="wsdlLocation"/>
+                    <property name="enableMuleSoapHeaders"/>
+                </properties>
+            </pattern>
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="1ed3500b-ccf1-4dd3-85e5-84fdfdaf0f1c">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/https/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/https/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="${MAKEBOOKING_OUTBOUND_URL}" name="address"/>
+                    <property value="${SERVICE_TIMEOUT_MS}" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="followRedirects"/>
+                    <property name="ref"/>
+                    <property value="soitoolkit-https-connector" name="connector-ref"/>
+                    <property value="soitoolkit-https-connector" name="connector-ref-outbound"/>
+                    <property value="logReqOut" name="transformer-refs"/>
+                    <property value="logRespIn" name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="${MAKEBOOKING_OUTBOUND_URL}" name="address"/>
+                    <property value="${SERVICE_TIMEOUT_MS}" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="followRedirects"/>
+                    <property name="ref"/>
+                    <property value="soitoolkit-https-connector" name="connector-ref"/>
+                    <property value="logReqOut" name="transformer-refs"/>
+                    <property value="logRespIn" name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+            <unknown entity-id="9d412b0a-d536-4f62-9249-0f37269371c9">
+                <content>&lt;custom-exception-strategy xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot; class=&quot;org.soitoolkit.commons.mule.error.ServiceExceptionStrategy&quot;/&gt;</content>
+            </unknown>
+        </lane>
+    </flow>
+</mule-configuration>

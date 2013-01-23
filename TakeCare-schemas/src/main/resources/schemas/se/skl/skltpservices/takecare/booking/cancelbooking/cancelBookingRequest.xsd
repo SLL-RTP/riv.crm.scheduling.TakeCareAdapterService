@@ -1,0 +1,16 @@
+<xs:schema targetNamespace="urn:ProfdocHISMessage:CancelBooking:Request"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="ProfdocHISMessage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="BookingId" type="xs:string" />
+				<xs:element name="PatientReason" type="xs:string"
+					minOccurs="0" />
+			</xs:sequence>
+			<xs:attribute name=" MsgType " fixed="Request" type="xs:string" />
+			<xs:attribute name="Time" type="xs:unsignedLong" use="required" />
+			<xs:attribute name="InvokingSystem" type="xs:string"
+				use="required" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

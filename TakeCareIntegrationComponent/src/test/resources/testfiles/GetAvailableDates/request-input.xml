@@ -1,0 +1,12 @@
+<_1:GetAvailableDates
+	xmlns:_1="urn:riv:crm:scheduling:GetAvailableDatesResponder:1">
+	<_1:healthcare_facility>HSA-VKK123</_1:healthcare_facility>
+	<_1:bookingId></_1:bookingId>
+	<_1:startDateInclusive>20111216</_1:startDateInclusive>
+	<_1:endDateInclusive>20111231</_1:endDateInclusive>
+	<_1:performer></_1:performer>
+	<_1:timeTypeName></_1:timeTypeName>
+	<_1:timeTypeID>1</_1:timeTypeID>
+	<_1:careTypeName></_1:careTypeName>
+	<_1:careTypeID />
+</_1:GetAvailableDates>

@@ -1,0 +1,5 @@
+<urn:CancelBooking xmlns:urn="urn:riv:crm:scheduling:CancelBookingResponder:1">
+	<urn:healthcare_facility>HSA-VKK123</urn:healthcare_facility>
+	<urn:bookingId>1234567890</urn:bookingId>
+	<urn:message>I want to cancel this</urn:message>
+</urn:CancelBooking>

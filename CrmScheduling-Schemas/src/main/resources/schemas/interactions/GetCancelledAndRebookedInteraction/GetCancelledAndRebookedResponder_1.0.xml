@@ -1,0 +1,6 @@
+<tns:GetCancelledAndRebooked xmlns:tns="urn:riv:crm:scheduling:GetCancelledAndRebookedResponder:1" xmlns:tns1="urn:riv:crm:scheduling:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:riv:crm:scheduling:GetCancelledAndRebookedResponder:1 GetCancelledAndRebookedResponder_1.0.xsd ">
+  <tns:healthcare_facility>tns:healthcare_facility</tns:healthcare_facility>
+  <tns:startDateInclusive>20010101</tns:startDateInclusive>
+  <tns:endDateInclusive>20010101</tns:endDateInclusive>
+  <tns:typeOfList>tns:typeOfList</tns:typeOfList>
+</tns:GetCancelledAndRebooked>

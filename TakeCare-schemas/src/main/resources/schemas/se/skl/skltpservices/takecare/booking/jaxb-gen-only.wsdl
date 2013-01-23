@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions 
+	name="jaxb.gen.only"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns="urn:jaxb.gen.only" 
+	targetNamespace="urn:jaxb.gen.only">
+
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import schemaLocation="./gettimetypes/getTimeTypesResponse.xsd" namespace="urn:ProfdocHISMessage:GetTimeTypes:Response"/>
+			<xsd:import schemaLocation="./gettimetypes/getTimeTypesRequest.xsd" namespace="urn:ProfdocHISMessage:GetTimeTypes:Request"/>
+			<xsd:import schemaLocation="./getavailabledates/getAvailableDatesResponse.xsd" namespace="urn:ProfdocHISMessage:GetAvailableDates:Response"/>
+			<xsd:import schemaLocation="./getavailabledates/getAvailableDatesRequest.xsd" namespace="urn:ProfdocHISMessage:GetAvailableDates:Request"/>
+			<xsd:import schemaLocation="./getavailabletimeslots/getAvailableTimeslotsResponse.xsd" namespace="urn:ProfdocHISMessage:GetAvailableTimeslots:Response"/>
+			<xsd:import schemaLocation="./getavailabletimeslots/getAvailableTimeslotsRequest.xsd" namespace="urn:ProfdocHISMessage:GetAvailableTimeslots:Request"/>
+			<xsd:import schemaLocation="./makebooking/makeBookingResponse.xsd" namespace="urn:ProfdocHISMessage:MakeBooking:Response"/>
+			<xsd:import schemaLocation="./makebooking/makeBookingRequest.xsd" namespace="urn:ProfdocHISMessage:MakeBooking:Request"/>
+			<xsd:import schemaLocation="./reschedulebooking/rescheduleBookingResponse.xsd" namespace="urn:ProfdocHISMessage:RescheduleBooking:Response"/>
+			<xsd:import schemaLocation="./reschedulebooking/rescheduleBookingRequest.xsd" namespace="urn:ProfdocHISMessage:RescheduleBooking:Request"/>
+			<xsd:import schemaLocation="./cancelbooking/cancelBookingResponse.xsd" namespace="urn:ProfdocHISMessage:CancelBooking:Response"/>
+			<xsd:import schemaLocation="./cancelbooking/cancelBookingRequest.xsd" namespace="urn:ProfdocHISMessage:CancelBooking:Request"/>
+			<xsd:import schemaLocation="./getbookings/getBookingsResponse.xsd" namespace="urn:ProfdocHISMessage:GetBookings:Response"/>
+			<xsd:import schemaLocation="./getbookings/getBookingsRequest.xsd" namespace="urn:ProfdocHISMessage:GetBookings:Request"/>
+			<xsd:import schemaLocation="./error/error.xsd" namespace="urn:ProfdocHISMessage:Error"/>
+		</xsd:schema>
+	</wsdl:types>
+
+</wsdl:definitions>

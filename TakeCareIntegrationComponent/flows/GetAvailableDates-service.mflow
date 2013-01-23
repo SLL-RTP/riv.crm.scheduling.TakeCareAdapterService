@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="GetAvailableDates">
+    <flow SubFlow="false" name="GetAvailableDates-service">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane entity-id="26c36c2e-e268-4929-bfe9-bb8fd9160e87">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="eb837117-f4bf-4b64-9617-c20e926cb4ca">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/https/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/https/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="${GETAVAILABLEDATES_INBOUND_URL}" name="address"/>
+                    <property name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="followRedirects"/>
+                    <property name="ref"/>
+                    <property value="soitoolkit-https-connector" name="connector-ref"/>
+                    <property value="soitoolkit-https-connector" name="connector-ref-outbound"/>
+                    <property value="logReqIn" name="transformer-refs"/>
+                    <property value="createSoapFaultIfException logRespOut" name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="${GETAVAILABLEDATES_INBOUND_URL}" name="address"/>
+                    <property name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="followRedirects"/>
+                    <property name="ref"/>
+                    <property value="soitoolkit-https-connector" name="connector-ref"/>
+                    <property value="logReqIn" name="transformer-refs"/>
+                    <property value="createSoapFaultIfException logRespOut" name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="SOAP" entity-id="572c0b38-dc4f-4765-b72f-1218c6217e8c">
+                <properties>
+                    <property name="configuration-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/cxf/proxy-service" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="configuration-ref"/>
+                    <property name="bindingId"/>
+                    <property name="port"/>
+                    <property value="urn:riv:crm:scheduling:GetAvailableDates:1:rivtabp20" name="namespace"/>
+                    <property value="GetAvailableDatesResponderService" name="service"/>
+                    <property name="serviceClass"/>
+                    <property name="validationEnabled"/>
+                    <property name="payload"/>
+                    <property name="mtomEnabled"/>
+                    <property value="classpath:/schemas/interactions/GetAvailableDatesInteraction/GetAvailableDatesInteraction_1.0_rivtabp20.wsdl" name="wsdlLocation"/>
+                    <property name="enableMuleSoapHeaders"/>
+                </properties>
+            </pattern>
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="transform-request" entity-id="0edc7102-a078-47bf-b197-97aeeb8ba929">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property value="se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabledates.GetAvailableDatesRequestTransformer" name="class"/>
+                </properties>
+            </pattern>
+            <response entity-id="44ea81b4-d13c-43e5-8ec1-8f71da91d5bf">
+                <compartment entity-id="7517013c-a96d-4439-b4f2-7b5ca3495750">
+                    <lane entity-id="e2351714-d194-4d41-a487-b4558e2b64b9">
+                        <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="transform-response" entity-id="6adbb30f-3ef9-496c-a850-cbe7c121a3b3">
+                            <properties>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="encoding"/>
+<property name="mimeType"/>
+<property value="se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabledates.GetAvailableDatesResponseTransformer" name="class"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </response>
+            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="SOAP" entity-id="82403933-c915-4168-b714-e85c0fdd3df3">
+                <properties>
+                    <property name="configuration-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/cxf/proxy-client" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="operation"/>
+                    <property name="serviceClass"/>
+                    <property name="decoupledEndpoint"/>
+                    <property name="payload"/>
+                    <property name="port"/>
+                    <property name="mtomEnabled"/>
+                    <property name="wsdlLocation"/>
+                    <property name="enableMuleSoapHeaders"/>
+                </properties>
+            </pattern>
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="c63efe22-04aa-4d7a-907c-fd83313be06b">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/https/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/https/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="${GETAVAILABLEDATES_OUTBOUND_URL}" name="address"/>
+                    <property value="${SERVICE_TIMEOUT_MS}" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="followRedirects"/>
+                    <property name="ref"/>
+                    <property value="soitoolkit-https-connector" name="connector-ref"/>
+                    <property value="soitoolkit-https-connector" name="connector-ref-outbound"/>
+                    <property value="logReqOut" name="transformer-refs"/>
+                    <property value="logRespIn" name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="${GETAVAILABLEDATES_OUTBOUND_URL}" name="address"/>
+                    <property value="${SERVICE_TIMEOUT_MS}" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="followRedirects"/>
+                    <property name="ref"/>
+                    <property value="soitoolkit-https-connector" name="connector-ref"/>
+                    <property value="logReqOut" name="transformer-refs"/>
+                    <property value="logRespIn" name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+            <unknown entity-id="f08cc416-e6c9-4737-b229-d7a29d9fbbfd">
+                <content>&lt;custom-exception-strategy xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot; class=&quot;org.soitoolkit.commons.mule.error.ServiceExceptionStrategy&quot;/&gt;</content>
+            </unknown>
+        </lane>
+    </flow>
+</mule-configuration>

@@ -1,0 +1,4 @@
+<urn:GetSubjectOfCareSchedule xmlns:urn="urn:riv:crm:scheduling:GetSubjectOfCareScheduleResponder:1">
+	<urn:healthcare_facility>HSA-VKK123</urn:healthcare_facility>
+    <urn:subject_of_care>191414141414</urn:subject_of_care>
+</urn:GetSubjectOfCareSchedule>

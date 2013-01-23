@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CancelBooking">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelBookingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CancelBookingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAvailableDates">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAvailableDatesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAvailableDatesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAvailableTimeslots">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAvailableTimeslotsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAvailableTimeslotsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBookings">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBookingsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBookingsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTimeTypes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTimeTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTimeTypesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MakeBooking">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MakeBookingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MakeBookingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RescheduleBooking">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RescheduleBookingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RescheduleBookingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CancelBookingSoapIn">
+    <wsdl:part name="parameters" element="tns:CancelBooking" />
+  </wsdl:message>
+  <wsdl:message name="CancelBookingSoapOut">
+    <wsdl:part name="parameters" element="tns:CancelBookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAvailableDatesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAvailableDates" />
+  </wsdl:message>
+  <wsdl:message name="GetAvailableDatesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAvailableDatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAvailableTimeslotsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAvailableTimeslots" />
+  </wsdl:message>
+  <wsdl:message name="GetAvailableTimeslotsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAvailableTimeslotsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBookingsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBookings" />
+  </wsdl:message>
+  <wsdl:message name="GetBookingsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBookingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTimeTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTimeTypes" />
+  </wsdl:message>
+  <wsdl:message name="GetTimeTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTimeTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="MakeBookingSoapIn">
+    <wsdl:part name="parameters" element="tns:MakeBooking" />
+  </wsdl:message>
+  <wsdl:message name="MakeBookingSoapOut">
+    <wsdl:part name="parameters" element="tns:MakeBookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="RescheduleBookingSoapIn">
+    <wsdl:part name="parameters" element="tns:RescheduleBooking" />
+  </wsdl:message>
+  <wsdl:message name="RescheduleBookingSoapOut">
+    <wsdl:part name="parameters" element="tns:RescheduleBookingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BookingSoap">
+    <wsdl:operation name="CancelBooking">
+      <wsdl:input message="tns:CancelBookingSoapIn" />
+      <wsdl:output message="tns:CancelBookingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableDates">
+      <wsdl:input message="tns:GetAvailableDatesSoapIn" />
+      <wsdl:output message="tns:GetAvailableDatesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableTimeslots">
+      <wsdl:input message="tns:GetAvailableTimeslotsSoapIn" />
+      <wsdl:output message="tns:GetAvailableTimeslotsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBookings">
+      <wsdl:input message="tns:GetBookingsSoapIn" />
+      <wsdl:output message="tns:GetBookingsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTimeTypes">
+      <wsdl:input message="tns:GetTimeTypesSoapIn" />
+      <wsdl:output message="tns:GetTimeTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MakeBooking">
+      <wsdl:input message="tns:MakeBookingSoapIn" />
+      <wsdl:output message="tns:MakeBookingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RescheduleBooking">
+      <wsdl:input message="tns:RescheduleBookingSoapIn" />
+      <wsdl:output message="tns:RescheduleBookingSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BookingSoap" type="tns:BookingSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CancelBooking">
+      <soap:operation soapAction="http://tempuri.org/CancelBooking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableDates">
+      <soap:operation soapAction="http://tempuri.org/GetAvailableDates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableTimeslots">
+      <soap:operation soapAction="http://tempuri.org/GetAvailableTimeslots" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookings">
+      <soap:operation soapAction="http://tempuri.org/GetBookings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTimeTypes">
+      <soap:operation soapAction="http://tempuri.org/GetTimeTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MakeBooking">
+      <soap:operation soapAction="http://tempuri.org/MakeBooking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RescheduleBooking">
+      <soap:operation soapAction="http://tempuri.org/RescheduleBooking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BookingSoap12" type="tns:BookingSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CancelBooking">
+      <soap12:operation soapAction="http://tempuri.org/CancelBooking" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableDates">
+      <soap12:operation soapAction="http://tempuri.org/GetAvailableDates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableTimeslots">
+      <soap12:operation soapAction="http://tempuri.org/GetAvailableTimeslots" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookings">
+      <soap12:operation soapAction="http://tempuri.org/GetBookings" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTimeTypes">
+      <soap12:operation soapAction="http://tempuri.org/GetTimeTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MakeBooking">
+      <soap12:operation soapAction="http://tempuri.org/MakeBooking" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RescheduleBooking">
+      <soap12:operation soapAction="http://tempuri.org/RescheduleBooking" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Booking">
+    <wsdl:port name="BookingSoap" binding="tns:BookingSoap">
+      <soap:address location="https://xchange.profdoccare.se/xchange_node_kus/booking/booking.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BookingSoap12" binding="tns:BookingSoap12">
+      <soap12:address location="https://xchange.profdoccare.se/xchange_node_kus/booking/booking.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

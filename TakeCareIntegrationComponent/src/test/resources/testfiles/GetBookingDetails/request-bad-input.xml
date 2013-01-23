@@ -1,0 +1,4 @@
+<urn:WrongElement xmlns:urn="urn:riv:crm:scheduling:GetBookingDetailsResponder:1">
+	<urn:healthcare_facility>HSA-VKK123</urn:healthcare_facility>
+    <urn:bookingId>1234567890</urn:bookingId>
+</urn:WrongElement>

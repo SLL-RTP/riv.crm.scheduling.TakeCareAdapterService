@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mule 
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc"
+	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+	xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:mule-xml="http://www.mulesoft.org/schema/mule/xml"
+	xmlns:smooks="http://www.muleforge.org/smooks/schema/mule-module-smooks"
+	xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:script="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:rest="http://www.mulesoft.org/schema/mule/rest"
+	xmlns:https="http://www.mulesoft.org/schema/mule/https"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.mulesoft.org/schema/mule/core      http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/vm        http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+		http://www.mulesoft.org/schema/mule/jdbc      http://www.mulesoft.org/schema/mule/jdbc/current/mule-jdbc.xsd
+		http://www.mulesoft.org/schema/mule/cxf       http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+		http://www.mulesoft.org/schema/mule/jms       http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+		http://www.mulesoft.org/schema/mule/http      http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+		http://www.mulesoft.org/schema/mule/xml       http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+		http://www.muleforge.org/smooks/schema/mule-module-smooks http://dist.muleforge.org/smooks/schema/mule-module-smooks/1.3/mule-module-smooks.xsd
+		http://www.mulesoft.org/schema/mule/json      http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+		http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+		http://www.mulesoft.org/schema/mule/rest      http://www.mulesoft.org/schema/mule/rest/current/mule-rest.xsd
+		http://www.mulesoft.org/schema/mule/https      http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
+	">
+
+	<!-- TODO: Add service specific definitions here -->
+
+	<flow name="UpdateBooking-service">
+	
+		<http:inbound-endpoint address="${UPDATEBOOKING_INBOUND_URL}"
+			exchange-pattern="request-response" transformer-refs="logReqIn"
+			responseTransformer-refs="createSoapFaultIfException logRespOut">
+		</http:inbound-endpoint>
+
+		<cxf:proxy-service service="UpdateBookingResponderService"
+			wsdlLocation="classpath:/schemas/interactions/UpdateBookingInteraction/UpdateBookingInteraction_1.0_rivtabp20.wsdl"
+			namespace="urn:riv:crm:scheduling:UpdateBooking:1:rivtabp20">
+		</cxf:proxy-service>
+
+        <custom-transformer doc:name="transform-request" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.updatebooking.UpdateBookingRequestTransformer"/>
+        <response>
+            <custom-transformer doc:name="transform-response" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.updatebooking.UpdateBookingResponseTransformer"/>
+        </response>
+
+        <cxf:proxy-client />
+        
+        <https:outbound-endpoint address="${UPDATEBOOKING_OUTBOUND_URL}"
+			exchange-pattern="request-response" responseTimeout="${SERVICE_TIMEOUT_MS}"
+			transformer-refs="logReqOut" responseTransformer-refs="logRespIn"
+			connector-ref="soitoolkit-https-connector">
+		</https:outbound-endpoint>
+ 
+		<custom-exception-strategy class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy"/>
+	</flow>
+</mule>

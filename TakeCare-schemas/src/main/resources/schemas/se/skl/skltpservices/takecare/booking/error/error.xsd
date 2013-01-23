@@ -1,0 +1,26 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:ProfdocHISMessage:Error">
+	<xs:element name="ProfdocHISMessage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Error">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Code" type="xs:unsignedShort" />
+							<xs:element name="Msg" type="xs:string" />
+						</xs:sequence>
+						<xs:attribute name="Type" type="xs:string" use="required" />
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="MsgType" fixed="Error" type="xs:string" />
+			<xs:attribute name="System" type="xs:string" use="required" />
+			<xs:attribute name="SystemInstance" type="xs:unsignedShort"
+				use="required" />
+			<xs:attribute name="Time" type="xs:unsignedLong" use="required" />
+			<xs:attribute name="User" type="xs:string" use="required" />
+			<xs:attribute name="CareUnitType" type="xs:string" use="required" />
+			<xs:attribute name="CareUnit" type="xs:string" use="required" />
+			<xs:attribute name="Method" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements. See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership. The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License. You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied. See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ -->
+<wsdl:definitions 
+	name="UpdateBookingInteraction"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+	xmlns:wsa="http://www.w3.org/2005/08/addressing" 
+	xmlns:tjs="urn:riv:crm:scheduling:UpdateBookingResponder:1" 
+	xmlns:tns="urn:riv:crm:scheduling:UpdateBooking:1:rivtabp20"
+	targetNamespace="urn:riv:crm:scheduling:UpdateBooking:1:rivtabp20">
+
+	<xs:annotation>
+		<xs:documentation>
+			Tjänsteinteraktionens namn: UpdateBookingInteraction
+			Beskrivning: 
+				Interaction to update a new booking at a healthcare facility with a new timeslot, 
+				i.e to "move" a booking from the existing time slot to a new one.
+ 			Revisioner: 
+				2009-10-26: Utkast Version 1.0, johan.eltes@callistaenterprise.se
+				2010-04-21: Fastställd version 1.0, johan.eltes@callistaenterprise.se
+			Tjänstedomän: crm:scheduling
+			Tjänsteinteraktionstyp: Fråga-svar
+			RIV Teknisk Anvisning: Basic Profile 2.0
+			Förvaltas av: Örebro Läns Landsting
+		</xs:documentation>
+	</xs:annotation>
+
+	<wsdl:types>
+		<xs:schema>
+			<xs:import schemaLocation="UpdateBookingResponder_1.0.xsd" namespace="urn:riv:crm:scheduling:UpdateBookingResponder:1"/>
+		</xs:schema>
+		<xs:schema>
+			<xs:import schemaLocation="../../core_components/ws-addressing-1.0.xsd" namespace="http://www.w3.org/2005/08/addressing"/>
+		</xs:schema>
+	</wsdl:types>
+
+	<wsdl:message name="UpdateBookingRequest">
+		<xs:annotation>
+			<xs:documentation>
+				LogicalAddress is the hsaid of the healthcare_facility owning he schedule within the booking is to be moved.
+			</xs:documentation>
+		</xs:annotation>
+		<wsdl:part name="LogicalAddress" element="wsa:To" />
+		<wsdl:part name="parameters" element="tjs:UpdateBooking" />
+	</wsdl:message>
+
+	<wsdl:message name="UpdateBookingResponse">
+		<wsdl:part name="parameters" element="tjs:UpdateBookingResponse"/>
+	</wsdl:message>
+
+	<wsdl:portType name="UpdateBookingResponderInterface">
+	
+		<wsdl:operation name="UpdateBooking">
+			<wsdl:input message="tns:UpdateBookingRequest"/>
+			<wsdl:output message="tns:UpdateBookingResponse"/>
+		</wsdl:operation>
+		
+	</wsdl:portType>
+	
+	<wsdl:binding name="UpdateBookingResponderBinding" type="tns:UpdateBookingResponderInterface">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+		<wsdl:operation name="UpdateBooking">
+			<soap:operation soapAction="urn:riv:crm:scheduling:UpdateBookingResponder:1:UpdateBooking"/>
+			<wsdl:input>
+				<soap:header use="literal" message="tns:UpdateBookingRequest" part="LogicalAddress"/>
+				<soap:body use="literal" parts="parameters"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+	</wsdl:binding>
+
+	<wsdl:service name="UpdateBookingResponderService">
+		<wsdl:port name="UpdateBookingResponderPort" binding="tns:UpdateBookingResponderBinding">
+			<soap:address location="http://tempuri.org"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

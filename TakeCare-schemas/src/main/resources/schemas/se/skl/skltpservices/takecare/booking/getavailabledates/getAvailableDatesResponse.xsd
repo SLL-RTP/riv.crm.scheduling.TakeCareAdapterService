@@ -1,0 +1,33 @@
+<xs:schema targetNamespace="urn:ProfdocHISMessage:GetAvailableDates:Response"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="ProfdocHISMessage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AvailableDates" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Date" type="xs:unsignedInt"
+								minOccurs="0" maxOccurs="unbounded" />
+						</xs:sequence>
+						<xs:attribute name="CareUnitIdType" type="xs:string"
+							use="required" />
+						<xs:attribute name="CareUnitId" type="xs:string" use="required" />
+						<xs:attribute name="CareUnitName" type="xs:string"
+							use="required" />
+						<xs:attribute name="TimeTypeId" type="xs:unsignedShort" />
+						<xs:attribute name="ResourceId" type="xs:unsignedLong" />
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="MsgType" fixed="Response" type="xs:string" />
+			<xs:attribute name="System" type="xs:string" use="required" />
+			<xs:attribute name="SystemInstance" type="xs:unsignedShort"
+				use="required" />
+			<xs:attribute name="Time" type="xs:unsignedLong" use="required" />
+			<xs:attribute name="User" type="xs:string" use="required" />
+			<xs:attribute name="CareUnitType" type="xs:string" use="required" />
+			<xs:attribute name="CareUnit" type="xs:string" use="required" />
+			<xs:attribute name="Method" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

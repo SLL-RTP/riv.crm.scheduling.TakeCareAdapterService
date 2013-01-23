@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xmlns:management="http://www.mulesoft.org/schema/mule/management"
+	xmlns:json="http://www.mulesoft.org/schema/mule/json" 
+	xmlns:script="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:rest="http://www.mulesoft.org/schema/mule/rest" 
+	xmlns:https="http://www.mulesoft.org/schema/mule/https"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.mulesoft.org/schema/mule/core       http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/jms        http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+		http://www.mulesoft.org/schema/mule/management http://www.mulesoft.org/schema/mule/management/current/mule-management.xsd
+		http://www.mulesoft.org/schema/mule/json       http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+		http://www.mulesoft.org/schema/mule/scripting  http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+		http://www.mulesoft.org/schema/mule/rest       http://www.mulesoft.org/schema/mule/rest/current/mule-rest.xsd
+		http://www.mulesoft.org/schema/mule/https      http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
+	">
+	
+	<!-- Load property files in three steps... -->
+
+	<!-- 1. Support for decrypting encrypted properties. The encryption password 
+		will be read from an environment variable called "SOITOOLKIT_ENCRYPTION_PASSWORD" 
+		which, once the application has been started, could be safely unset. -->
+	<spring:bean id="environmentVariablesConfiguration"
+		class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
+		<spring:property name="algorithm" value="PBEWithMD5AndDES" />
+		<spring:property name="passwordEnvName" value="SOITOOLKIT_ENCRYPTION_PASSWORD" />
+	</spring:bean>
+
+
+	<!-- 2. Support for decrypting encrypted properties -->
+	<spring:bean id="configurationEncryptor"
+		class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+		<spring:property name="config"
+			ref="environmentVariablesConfiguration" />
+	</spring:bean>
+
+
+	<!-- 3. Replacement for org.springframework.beans.factory.config.PropertyPlaceholderConfigurer 
+		that supports decrypting encrypted property values -->
+	<spring:bean id="propertyConfigurer"
+		class="org.jasypt.spring.properties.EncryptablePropertyPlaceholderConfigurer">
+		<spring:constructor-arg ref="configurationEncryptor" />
+		<spring:property name="ignoreResourceNotFound" value="true" />
+		<spring:property name="locations">
+			<spring:list>
+				<spring:value>classpath:TakeCareIntegrationComponent-config.properties
+				</spring:value>
+				<spring:value>classpath:TakeCareIntegrationComponent-config-override.properties
+				</spring:value>
+			</spring:list>
+		</spring:property>
+	</spring:bean>
+	
+	<https:connector name="soitoolkit-https-connector" clientSoTimeout="${SOITOOLKIT_MULE_HTTPS_CLIENT_SO_TIMEOUT}" >
+  		<service-overrides sessionHandler="org.mule.session.NullSessionHandler"/>
+    	<https:tls-key-store path="${SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE}" storePassword="${SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE_PASSWORD}" keyPassword="${SOITOOLKIT_MULE_HTTPS_TLS_KEY_PASSWORD}" class="${SOITOOLKIT_MULE_HTTPS_TLS_KEY_TYPE}" />
+    	<https:tls-server path="${SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE}" storePassword="${SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_PASSWORD}" requireClientAuthentication="${SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_REQUIRE_CLIENT_AUTH}"/>
+	</https:connector>
+
+	<!-- <management:jmx-default-config port="${JMX_PORT}" registerMx4jAdapter="false" 
+		> <management:credentials> <spring:entry key="${JMX_USER}" value="${JMX_PWD}"/> 
+		</management:credentials> </management:jmx-default-config> -->
+
+	<!-- Common connectors and endpoints, i.e. that not needs to be changed 
+		for different config-files (local unit-test, integration-test or production 
+		environments) -->
+
+	<rest:config />
+
+	<spring:beans>
+
+	</spring:beans>
+
+	<message-properties-transformer name="setJsonContentType"
+		scope="outbound">
+		<add-message-property key="Content-Type"
+			value="application/json;charset=UTF-8" />
+	</message-properties-transformer>
+
+	<json:object-to-json-transformer name="jaxbToJson" />
+	
+	<custom-transformer name="exceptionTransformer" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.ExceptionTransformer"/>
+
+	<custom-transformer name="objToStr"
+		class="org.soitoolkit.commons.mule.core.ObjectToStringTransformer" />
+
+	<custom-transformer name="createCorrId"
+		class="org.soitoolkit.commons.mule.log.correlationid.CreateCorrelationIdTransformer" />
+	<custom-transformer name="saveCorrId"
+		class="org.soitoolkit.commons.mule.log.correlationid.SaveCorrelationIdTransformer" />
+	<custom-transformer name="restoreCorrId"
+		class="org.soitoolkit.commons.mule.log.correlationid.RestoreCorrelationIdTransformer" />
+
+	<custom-transformer name="objToXml"
+		class="org.soitoolkit.commons.mule.jaxb.JaxbObjectToXmlTransformer">
+		<spring:property name="contextPath" value="org.w3.wsaddressing10:se.riv.itintegration.monitoring.v1" />
+	</custom-transformer>
+
+	<custom-transformer name="xmlToObj"
+		class="org.soitoolkit.commons.mule.jaxb.XmlToJaxbObjectTransformer">
+		<spring:property name="contextPath" value="org.w3.wsaddressing10:se.riv.itintegration.monitoring.v1" />
+	</custom-transformer>
+
+	<custom-transformer name="createSoapFaultIfException"
+		class="org.soitoolkit.commons.mule.soap.CreateSoapFaultIfExceptionTransformer" />
+
+	<custom-transformer name="mimeToStr"
+		class="org.soitoolkit.commons.mule.mime.MimeToStringTransformer" />
+
+	<custom-transformer name="logMsgIn"
+		class="org.soitoolkit.commons.mule.log.LogTransformer">
+		<spring:property name="logType" value="msg-in" />
+		<spring:property name="jaxbObjectToXml" ref="objToXml" />
+	</custom-transformer>
+
+	<custom-transformer name="logMsgOut"
+		class="org.soitoolkit.commons.mule.log.LogTransformer">
+		<spring:property name="logType" value="msg-out" />
+		<spring:property name="jaxbObjectToXml" ref="objToXml" />
+	</custom-transformer>
+
+	<custom-transformer name="logReqIn"
+		class="org.soitoolkit.commons.mule.log.LogTransformer">
+		<spring:property name="logType" value="req-in" />
+		<spring:property name="jaxbObjectToXml" ref="objToXml" />
+	</custom-transformer>
+
+	<custom-transformer name="logReqOut"
+		class="org.soitoolkit.commons.mule.log.LogTransformer">
+		<spring:property name="logType" value="req-out" />
+		<spring:property name="jaxbObjectToXml" ref="objToXml" />
+	</custom-transformer>
+
+	<custom-transformer name="logRespIn"
+		class="org.soitoolkit.commons.mule.log.LogTransformer">
+		<spring:property name="logType" value="resp-in" />
+		<spring:property name="jaxbObjectToXml" ref="objToXml" />
+	</custom-transformer>
+
+	<custom-transformer name="logRespOut"
+		class="org.soitoolkit.commons.mule.log.LogTransformer">
+		<spring:property name="logType" value="resp-out" />
+		<spring:property name="jaxbObjectToXml" ref="objToXml" />
+	</custom-transformer>
+
+	<!-- TODO: Add global definitions here -->
+
+</mule>

@@ -1,0 +1,42 @@
+<xs:schema targetNamespace="urn:ProfdocHISMessage:GetAvailableTimeslots:Response"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="ProfdocHISMessage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AvailableTimeslots" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Timeslot" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="StartTime" type="xs:unsignedLong" />
+										<xs:element name="EndTime" type="xs:unsignedLong" />
+										<xs:element name="TimeTypeId" type="xs:unsignedShort" />
+										<xs:element name="TimeTypeName" type="xs:string" />
+										<xs:element name="ResourceType" type="xs:unsignedByte" />
+										<xs:element name="ResourceId" type="xs:unsignedLong" />
+										<xs:element name="ResourceName" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="CareUnitIdType" type="xs:string"
+							use="required" />
+						<xs:attribute name="CareUnitId" type="xs:string" use="required" />
+						<xs:attribute name="CareUnitName" type="xs:string"
+							use="required" />
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="MsgType" fixed="Response" type="xs:string" />
+			<xs:attribute name="System" type="xs:string" use="required" />
+			<xs:attribute name="SystemInstance" type="xs:unsignedShort"
+				use="required" />
+			<xs:attribute name="Time" type="xs:unsignedLong" use="required" />
+			<xs:attribute name="User" type="xs:string" use="required" />
+			<xs:attribute name="CareUnitType" type="xs:string" use="required" />
+			<xs:attribute name="CareUnit" type="xs:string" use="required" />
+			<xs:attribute name="Method" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
