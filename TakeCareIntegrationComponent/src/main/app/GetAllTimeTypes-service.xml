@@ -47,6 +47,10 @@
 				class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesResponseTransformer" />
 		</response>
 
+        <message-properties-transformer doc:name="AddSoapActionHeader" overwrite="true">
+            <add-message-property key="SOAPAction" value="http://tempuri.org/GetTimeTypes"/>
+        </message-properties-transformer>
+
 		<cxf:proxy-client />
 
 		<https:outbound-endpoint address="${GETALLTIMETYPES_OUTBOUND_URL}"

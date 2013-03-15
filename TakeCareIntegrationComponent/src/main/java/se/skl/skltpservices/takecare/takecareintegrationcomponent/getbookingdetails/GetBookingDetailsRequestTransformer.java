@@ -52,7 +52,11 @@ public class GetBookingDetailsRequestTransformer extends TakeCareRequestTransfor
 			outgoingRequest.setExternaluser(TakeCareUtil.EXTERNAL_USER);
 			outgoingRequest.setTcpassword("");
 			outgoingRequest.setTcusername("");
-			outgoingRequest.setXml(jaxbUtil_message.marshal(message));
+            //TakeCare eXchange can not handle xml declarations in CDATA so do not generate that.
+            jaxbUtil_message.addMarshallProperty("com.sun.xml.bind.xmlDeclaration", false);
+            //TakeCare eXchange can not handle namespaces in CDATA
+            outgoingRequest.setXml(jaxbUtil_message.marshal(message, "", "ProfdocHISMessage"));
+			//outgoingRequest.setXml(jaxbUtil_message.marshal(message));
 
 			Object outgoingPayload = jaxbUtil_outgoing.marshal(outgoingRequest);
 

@@ -1,22 +1,34 @@
 package se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.List;
 
-import javax.xml.bind.JAXBElement;
+import javax.xml.bind.*;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.mule.api.transformer.TransformerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLFilter;
+import org.xml.sax.XMLReader;
 import se.riv.crm.scheduling.getsubjectofcareschedule.v1.GetSubjectOfCareScheduleResponseType;
 import se.riv.crm.scheduling.getsubjectofcareschedule.v1.ObjectFactory;
 import se.riv.crm.scheduling.v1.TimeslotType;
+import se.skl.skltpservices.takecare.TakeCareNamespacePrefixMapper;
 import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
 import se.skl.skltpservices.takecare.booking.GetBookingsResponse;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage.Bookings;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage.Bookings.Booking;
+import se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareValidationEventHandler;
+
 import static se.skl.skltpservices.takecare.TakeCareUtil.shortToBoolean;
 
 public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareResponseTransformer {
@@ -64,8 +76,8 @@ public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareRespons
 	}
 
 	private Object transformResponse(String incoming_string) {
-		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
-
+        ProfdocHISMessage message = new ProfdocHISMessage();
+        message = (ProfdocHISMessage) super.transformResponse(message, "urn:ProfdocHISMessage:GetBookings:Response", incoming_string);
 		JAXBElement<GetSubjectOfCareScheduleResponseType> outgoing_res = new ObjectFactory()
 				.createGetSubjectOfCareScheduleResponse(new GetSubjectOfCareScheduleResponseType());
 
@@ -98,9 +110,7 @@ public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareRespons
 
 				outgoing_res.getValue().getTimeslotDetail().add(timeslot);
 			}
-
 		}
-
 		return jaxbUtil_outgoing.marshal(outgoing_res);
 	}
 }

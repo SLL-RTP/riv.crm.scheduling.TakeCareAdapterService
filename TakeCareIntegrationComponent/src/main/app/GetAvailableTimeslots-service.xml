@@ -45,6 +45,10 @@
 				class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabletimeslots.GetAvailableTimeslotsResponseTransformer" />
 		</response>
 
+        <message-properties-transformer doc:name="AddSoapActionHeader" overwrite="true">
+            <add-message-property key="SOAPAction" value="http://tempuri.org/GetAvailableTimeslots"/>
+        </message-properties-transformer>
+
 		<cxf:proxy-client />
 
 		<https:outbound-endpoint address="${GETAVAILABLETIMESLOTS_OUTBOUND_URL}"

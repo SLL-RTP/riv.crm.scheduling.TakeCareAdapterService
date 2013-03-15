@@ -13,6 +13,7 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import org.soitoolkit.commons.mule.util.MiscUtil;
 
 import se.skl.skltpservices.takecare.TakeCareUtil;
+import se.skl.skltpservices.takecare.JaxbHelper;
 import se.skl.skltpservices.takecare.booking.GetAvailableDates;
 import se.skl.skltpservices.takecare.booking.getavailabledatesrequest.ProfdocHISMessage;
 
@@ -44,7 +45,8 @@ public class GetAvailableDatesRequestTransformerTest {
 		assertEquals("", tcUsername);
 
 		/* ProfdocHISMessage */
-		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(xml);
+		ProfdocHISMessage message = new ProfdocHISMessage();
+        message = (ProfdocHISMessage) JaxbHelper.transform(message, "urn:ProfdocHISMessage:GetAvailableDates:Request", xml);
 		String msgCareunitId = message.getCareUnitId();
 		String msgCareunitIdType = message.getCareUnitIdType();
 		String msgInvokingSystem = message.getInvokingSystem();

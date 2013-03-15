@@ -61,7 +61,8 @@ public class GetAvailableDatesResponseTransformer extends TakeCareResponseTransf
 	}
 
 	private Object transformResponse(String incoming_string) {
-		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
+        ProfdocHISMessage message = new ProfdocHISMessage();
+        message = (ProfdocHISMessage) super.transformResponse(message, "urn:ProfdocHISMessage:GetAvailableDates:Response", incoming_string);
 		List<AvailableDates> incoming_availableDates = message.getAvailableDates();
 
 		AvailableDates availableDates = incoming_availableDates.get(0);

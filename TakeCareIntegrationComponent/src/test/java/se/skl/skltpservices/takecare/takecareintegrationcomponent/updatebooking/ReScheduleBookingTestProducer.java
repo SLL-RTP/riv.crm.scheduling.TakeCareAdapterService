@@ -13,6 +13,7 @@ import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
 import se.skl.skltpservices.takecare.TakeCareTestProducer;
 import se.skl.skltpservices.takecare.TakeCareUtil;
+import se.skl.skltpservices.takecare.JaxbHelper;
 import se.skl.skltpservices.takecare.booking.BookingSoap;
 import se.skl.skltpservices.takecare.booking.reschedulebookingresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.reschedulebookingresponse.ProfdocHISMessage.BookingConfirmation;
@@ -35,8 +36,11 @@ public class ReScheduleBookingTestProducer extends TakeCareTestProducer implemen
 	public String rescheduleBooking(String tcusername, String tcpassword, String externaluser, String careunitidtype,
 			String careunitid, String xml) {
 
-		se.skl.skltpservices.takecare.booking.reschedulebookingrequest.ProfdocHISMessage incomingMessage = (se.skl.skltpservices.takecare.booking.reschedulebookingrequest.ProfdocHISMessage) jaxbUtil_incoming
-				.unmarshal(xml);
+		//se.skl.skltpservices.takecare.booking.reschedulebookingrequest.ProfdocHISMessage incomingMessage = (se.skl.skltpservices.takecare.booking.reschedulebookingrequest.ProfdocHISMessage) jaxbUtil_incoming
+		//		.unmarshal(xml);
+        
+        se.skl.skltpservices.takecare.booking.reschedulebookingrequest.ProfdocHISMessage incomingMessage = new se.skl.skltpservices.takecare.booking.reschedulebookingrequest.ProfdocHISMessage();
+        incomingMessage = (se.skl.skltpservices.takecare.booking.reschedulebookingrequest.ProfdocHISMessage) JaxbHelper.transform(incomingMessage, "urn:ProfdocHISMessage:RescheduleBooking:Request", xml);
 
 		String incomingCareUnitId = incomingMessage.getCareUnitId();
 

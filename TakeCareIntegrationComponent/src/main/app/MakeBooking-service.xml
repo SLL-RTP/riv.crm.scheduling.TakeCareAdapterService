@@ -46,6 +46,10 @@
 				class="se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking.MakeBookingResponseTransformer" />
 		</response>
 
+        <message-properties-transformer doc:name="AddSoapActionHeader" overwrite="true">
+            <add-message-property key="SOAPAction" value="http://tempuri.org/MakeBooking"/>
+        </message-properties-transformer>
+
 		<cxf:proxy-client />
 
 		<https:outbound-endpoint address="${MAKEBOOKING_OUTBOUND_URL}"

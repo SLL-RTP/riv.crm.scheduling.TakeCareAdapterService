@@ -1,19 +1,33 @@
 package se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking;
 
-import javax.xml.bind.JAXBElement;
+import javax.xml.bind.*;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.mule.api.transformer.TransformerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLFilter;
+import org.xml.sax.XMLReader;
+import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesResponseType;
 import se.riv.crm.scheduling.makebooking.v1.MakeBookingResponseType;
 import se.riv.crm.scheduling.makebooking.v1.ObjectFactory;
 import se.riv.crm.scheduling.v1.ResultCodeEnum;
+import se.skl.skltpservices.takecare.TakeCareNamespacePrefixMapper;
 import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
 import se.skl.skltpservices.takecare.booking.MakeBookingResponse;
 import se.skl.skltpservices.takecare.booking.makebookingresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.makebookingresponse.ProfdocHISMessage.BookingConfirmation;
+import se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareValidationEventHandler;
+import se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesResponseTransformer;
+
+import java.io.IOException;
+import java.io.StringReader;
 
 public class MakeBookingResponseTransformer extends TakeCareResponseTransformer {
 
@@ -58,7 +72,9 @@ public class MakeBookingResponseTransformer extends TakeCareResponseTransformer 
 	}
 
 	private Object transformResponse(String incoming_string) {
-		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
+        ProfdocHISMessage message = new ProfdocHISMessage();
+        message = (ProfdocHISMessage) super.transformResponse(message, "urn:ProfdocHISMessage:MakeBooking:Response", incoming_string);
+
 		JAXBElement<MakeBookingResponseType> outgoing_res = new ObjectFactory()
 				.createMakeBookingResponse(new MakeBookingResponseType());
 		BookingConfirmation incoming_bookingconfirm = message.getBookingConfirmation();

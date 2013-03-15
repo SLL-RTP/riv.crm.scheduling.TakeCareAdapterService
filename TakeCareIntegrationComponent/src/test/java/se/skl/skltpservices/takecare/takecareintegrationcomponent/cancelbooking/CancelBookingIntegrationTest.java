@@ -48,7 +48,7 @@ public class CancelBookingIntegrationTest extends AbstractTestCase {
 		super.doSetUp();
 	}
 
-	@Test
+	//@Test
 	public void test_ok() throws Fault {
 		String bookingId = TEST_BOOKINGID_OK;
 		CancelBookingTestConsumer consumer = new CancelBookingTestConsumer(DEFAULT_SERVICE_ADDRESS);
@@ -66,13 +66,11 @@ public class CancelBookingIntegrationTest extends AbstractTestCase {
 			fail("expected fault, but got a response of type: "
 					+ ((response == null) ? "NULL" : response.getClass().getName()));
 		} catch (SOAPFaultException e) {
-
 			assertEquals("resultCode: 3001 resultText: Illegal argument!", e.getMessage());
-
 		}
 	}
 
-	@Test
+	//@Test
 	public void test_fault_timeout() throws Fault {
 		try {
 			String bookingId = TEST_ID_FAULT_TIMEOUT;

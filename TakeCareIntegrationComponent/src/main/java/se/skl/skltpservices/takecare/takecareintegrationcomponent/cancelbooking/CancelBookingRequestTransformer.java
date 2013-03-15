@@ -15,6 +15,8 @@ import se.skl.skltpservices.takecare.TakeCareUtil;
 import se.skl.skltpservices.takecare.booking.CancelBooking;
 import se.skl.skltpservices.takecare.booking.cancelbookingrequest.ProfdocHISMessage;
 
+import static se.skl.skltpservices.takecare.TakeCareUtil.*;
+
 public class CancelBookingRequestTransformer extends TakeCareRequestTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(CancelBookingRequestTransformer.class);
@@ -25,9 +27,9 @@ public class CancelBookingRequestTransformer extends TakeCareRequestTransformer 
 
 	protected Object pojoTransform(Object src, String encoding) throws TransformerException {
 
-		if (logger.isDebugEnabled()) {
-			log.debug("Transforming request payload: {}", src);
-		}
+		//if (logger.isDebugEnabled()) {
+			log.info("Transforming request payload: {}", src);
+		//}
 
 		try {
 
@@ -37,6 +39,7 @@ public class CancelBookingRequestTransformer extends TakeCareRequestTransformer 
 			String incomingHealthcarefacility = incomingRequest.getHealthcareFacility();
 
 			ProfdocHISMessage message = new ProfdocHISMessage();
+            message.setMsgType(REQUEST);
 			message.setBookingId(incomingBookingId);
 			message.setInvokingSystem(TakeCareUtil.INVOKING_SYSTEM);
 			message.setPatientReason(incomingMessage);
@@ -48,13 +51,17 @@ public class CancelBookingRequestTransformer extends TakeCareRequestTransformer 
 			outgoingRequest.setExternaluser(TakeCareUtil.EXTERNAL_USER);
 			outgoingRequest.setTcpassword("");
 			outgoingRequest.setTcusername("");
-			outgoingRequest.setXml(jaxbUtil_message.marshal(message));
+            //TakeCare eXchange can not handle xml declarations in CDATA so do not generate that.
+            jaxbUtil_message.addMarshallProperty("com.sun.xml.bind.xmlDeclaration", false);
+            //TakeCare eXchange can not handle namespaces in CDATA
+            outgoingRequest.setXml(jaxbUtil_message.marshal(message, "", "ProfdocHISMessage"));
+			//outgoingRequest.setXml(jaxbUtil_message.marshal(message));
 
 			Object outgoingPayload = jaxbUtil_outgoing.marshal(outgoingRequest);
 
-			if (logger.isDebugEnabled()) {
-				logger.debug("transformed payload to: " + outgoingPayload);
-			}
+			//if (logger.isDebugEnabled()) {
+				logger.info("transformed payload to: " + outgoingPayload);
+			//}
 
 			return outgoingPayload;
 

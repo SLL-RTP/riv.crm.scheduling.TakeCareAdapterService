@@ -44,9 +44,7 @@ public class CancelBookingResponseTransformer extends TakeCareResponseTransforme
 			if (logger.isDebugEnabled()) {
 				logger.debug("transformed payload to: " + payloadOut);
 			}
-
 			return payloadOut;
-
 		} catch (Exception e) {
 			throw new TransformerException(this, e);
 		}
@@ -59,7 +57,8 @@ public class CancelBookingResponseTransformer extends TakeCareResponseTransforme
 	}
 
 	private Object transformResponse(String incoming_string) {
-		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
+        ProfdocHISMessage message = new ProfdocHISMessage();
+        message = (ProfdocHISMessage) super.transformResponse(message, "urn:ProfdocHISMessage:CancelBooking:Response", incoming_string);
 		BookingStatus incoming_timeTypes = message.getBookingStatus();
 
 		JAXBElement<CancelBookingResponseType> outgoing_res = new ObjectFactory()

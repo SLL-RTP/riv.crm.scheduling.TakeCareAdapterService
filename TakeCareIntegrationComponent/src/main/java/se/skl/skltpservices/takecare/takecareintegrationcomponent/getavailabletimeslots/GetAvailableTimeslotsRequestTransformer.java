@@ -1,6 +1,5 @@
 package se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabletimeslots;
 
-import static se.skl.skltpservices.takecare.TakeCareDateHelper.toTakeCareShortTime;
 import static se.skl.skltpservices.takecare.TakeCareDateHelper.yyyyMMddHHmmss;
 import static se.skl.skltpservices.takecare.TakeCareUtil.EXTERNAL_USER;
 import static se.skl.skltpservices.takecare.TakeCareUtil.HSAID;
@@ -49,10 +48,16 @@ public class GetAvailableTimeslotsRequestTransformer extends TakeCareRequestTran
 			message.setMsgType(REQUEST);
 			message.setTime(yyyyMMddHHmmss(new Date()));
 			message.setBookingId(incomingBookingId);
-			message.setEndDate(toTakeCareShortTime(incomingEndDate));
+			message.setEndDate(Long.valueOf(incomingEndDate));
 			message.setResourceId(null);
-			message.setStartDate(toTakeCareShortTime(incomingStartDate));
-			message.setTimeTypeId(numericToInteger(incomingTymeTypeId));
+			message.setStartDate(Long.valueOf(incomingStartDate));
+            if (incomingBookingId != null) {
+                if (incomingBookingId.isEmpty()) {
+                    message.setTimeTypeId(numericToInteger(incomingTymeTypeId));
+                }
+            } else {
+                message.setTimeTypeId(numericToInteger(incomingTymeTypeId));
+            }
 
 			GetAvailableTimeslots outgoingRequest = new GetAvailableTimeslots();
 			outgoingRequest.setCareunitid(incomingHealthcarefacility);
@@ -60,19 +65,20 @@ public class GetAvailableTimeslotsRequestTransformer extends TakeCareRequestTran
 			outgoingRequest.setExternaluser(EXTERNAL_USER);
 			outgoingRequest.setTcpassword("");
 			outgoingRequest.setTcusername("");
-			outgoingRequest.setXml(jaxbUtil_message.marshal(message));
+            //TakeCare eXchange can not handle xml declarations in CDATA so do not generate that.
+            jaxbUtil_message.addMarshallProperty("com.sun.xml.bind.xmlDeclaration", false);
+            //TakeCare eXchange can not handle namespaces in CDATA
+            outgoingRequest.setXml(jaxbUtil_message.marshal(message, "", "ProfdocHISMessage"));
+			//outgoingRequest.setXml(jaxbUtil_message.marshal(message));
 
 			Object outgoingPayload = jaxbUtil_outgoing.marshal(outgoingRequest);
 
 			if (logger.isDebugEnabled()) {
 				logger.debug("transformed payload to: " + outgoingPayload);
 			}
-
 			return outgoingPayload;
-
 		} catch (Exception e) {
 			throw new TransformerException(this, e);
 		}
-
 	}
 }

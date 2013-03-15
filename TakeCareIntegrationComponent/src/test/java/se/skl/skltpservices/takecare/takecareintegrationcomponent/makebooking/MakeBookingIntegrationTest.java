@@ -72,9 +72,7 @@ public class MakeBookingIntegrationTest extends AbstractTestCase {
 			fail("expected fault, but got a response of type: "
 					+ ((response == null) ? "NULL" : response.getClass().getName()));
 		} catch (SOAPFaultException e) {
-
 			assertEquals("resultCode: 3001 resultText: Illegal argument!", e.getMessage());
-
 		}
 	}
 

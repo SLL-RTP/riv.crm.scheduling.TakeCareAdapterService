@@ -64,7 +64,8 @@ public class GetBookingDetailsResponseTransformer extends TakeCareResponseTransf
 	}
 
 	private Object transformResponse(String incoming_string) {
-		ProfdocHISMessage message = (ProfdocHISMessage) jaxbUtil_message.unmarshal(incoming_string);
+        ProfdocHISMessage message = new ProfdocHISMessage();
+        message = (ProfdocHISMessage) super.transformResponse(message, "urn:ProfdocHISMessage:GetBookings:Response", incoming_string);
 
 		JAXBElement<GetBookingDetailsResponseType> outgoing_res = new ObjectFactory()
 				.createGetBookingDetailsResponse(new GetBookingDetailsResponseType());
