@@ -7,7 +7,7 @@
 				<xs:element name="PatientReason" type="xs:string"
 					minOccurs="0" />
 			</xs:sequence>
-			<xs:attribute name=" MsgType " fixed="Request" type="xs:string" />
+			<xs:attribute name="MsgType" fixed="Request" type="xs:string" />
 			<xs:attribute name="Time" type="xs:unsignedLong" use="required" />
 			<xs:attribute name="InvokingSystem" type="xs:string"
 				use="required" />
