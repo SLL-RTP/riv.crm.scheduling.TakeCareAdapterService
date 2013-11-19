@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><MakeBookingResponse xmlns:ns2="urn:riv:crm:scheduling:1" xmlns="urn:riv:crm:scheduling:MakeBookingResponder:1"><bookingId>29290d91-6d1b-4b08-8a79-1d7fd6d20dff</bookingId><resultCode>INFO</resultCode><resultText>Tyvärr kunde inte telefonnumret sparas med bokningen</resultText></MakeBookingResponse>
