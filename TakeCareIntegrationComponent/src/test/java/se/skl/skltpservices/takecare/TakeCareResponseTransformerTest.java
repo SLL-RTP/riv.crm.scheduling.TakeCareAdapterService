@@ -10,38 +10,34 @@ import se.riv.crm.scheduling.v1.TimeslotType;
 
 public class TakeCareResponseTransformerTest {
 
-	@Test
-	public void testBuildReasonFromReasonAndPhone() throws Exception {
+    @Test
+    public void testBuildReasonFromReasonAndPhone() throws Exception {
+        SubjectOfCareType subjectOfCare = new SubjectOfCareType();
+        subjectOfCare.setPhone("1234567890");
+        TimeslotType timeslot = new TimeslotType();
+        timeslot.setReason("Ont i ryggen");
 
-		SubjectOfCareType subjectOfCare = new SubjectOfCareType();
-		subjectOfCare.setPhone("1234567890");
-		TimeslotType timeslot = new TimeslotType();
-		timeslot.setReason("Ont i ryggen");
+        String reason = buildReason(subjectOfCare, timeslot);
+        assertEquals("Ont i ryggen", reason);
+    }
 
-		String reason = buildReason(subjectOfCare, timeslot);
-		assertEquals("Ont i ryggen 1234567890", reason);
-	}
+    @Test
+    public void testBuildReasonWithoutPhone() throws Exception {
+        SubjectOfCareType subjectOfCare = new SubjectOfCareType();
+        TimeslotType timeslot = new TimeslotType();
+        timeslot.setReason("Ont i ryggen");
 
-	@Test
-	public void testBuildReasonWithoutPhone() throws Exception {
+        String reason = buildReason(subjectOfCare, timeslot);
+        assertEquals("Ont i ryggen", reason);
+    }
 
-		SubjectOfCareType subjectOfCare = new SubjectOfCareType();
-		TimeslotType timeslot = new TimeslotType();
-		timeslot.setReason("Ont i ryggen");
+    @Test
+    public void testBuildReasonWithOnlyPhone() throws Exception {
+        SubjectOfCareType subjectOfCare = new SubjectOfCareType();
+        subjectOfCare.setPhone("1234567890");
+        TimeslotType timeslot = new TimeslotType();
 
-		String reason = buildReason(subjectOfCare, timeslot);
-		assertEquals("Ont i ryggen ", reason);
-	}
-
-	@Test
-	public void testBuildReasonWithOnlyPhone() throws Exception {
-
-		SubjectOfCareType subjectOfCare = new SubjectOfCareType();
-		subjectOfCare.setPhone("1234567890");
-		TimeslotType timeslot = new TimeslotType();
-
-		String reason = buildReason(subjectOfCare, timeslot);
-		assertEquals("1234567890", reason);
-	}
-
+        String reason = buildReason(subjectOfCare, timeslot);
+        assertEquals("", reason);
+    }
 }

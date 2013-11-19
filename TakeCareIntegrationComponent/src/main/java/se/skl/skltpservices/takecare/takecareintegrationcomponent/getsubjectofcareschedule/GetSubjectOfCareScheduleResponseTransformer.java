@@ -47,7 +47,7 @@ public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareRespons
 	 * @param src
 	 * @param outputEncoding
 	 */
-	public Object pojoTransform(Object src, String outputEncoding) throws TransformerException {
+	public Object pojoTransform(Object src, String outputEncoding, Object property) throws TransformerException {
 
 		if (logger.isDebugEnabled()) {
 			log.debug("Transforming response payload: {}", src);

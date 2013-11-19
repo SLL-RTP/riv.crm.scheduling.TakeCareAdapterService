@@ -27,7 +27,7 @@ public class GetAvailableDatesRequestTransformerTest {
 		String input = MiscUtil.readFileAsString("src/test/resources/testfiles/GetAvailableDates/request-input.xml");
 
 		GetAvailableDatesRequestTransformer transformer = new GetAvailableDatesRequestTransformer();
-		String result = (String) transformer.pojoTransform(input, "UTF-8");
+		String result = (String) transformer.pojoTransform(null, input, "UTF-8");
 
 		/* GetTimeTypes */
 		GetAvailableDates timeTypes = (GetAvailableDates) jaxbUtil_outgoing.unmarshal(result);
@@ -76,7 +76,7 @@ public class GetAvailableDatesRequestTransformerTest {
 		String input = MiscUtil
 				.readFileAsString("src/test/resources/testfiles/GetAvailableDates/request-bad-input.xml");
 		GetAvailableDatesRequestTransformer transformer = new GetAvailableDatesRequestTransformer();
-		transformer.pojoTransform(input, "UTF-8");
+		transformer.pojoTransform(null, input, "UTF-8");
 		fail("Expected TransformException when bad input");
 	}
 }

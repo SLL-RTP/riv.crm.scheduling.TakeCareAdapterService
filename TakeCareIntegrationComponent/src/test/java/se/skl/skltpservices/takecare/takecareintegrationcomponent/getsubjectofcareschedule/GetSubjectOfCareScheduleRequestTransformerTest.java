@@ -29,7 +29,7 @@ public class GetSubjectOfCareScheduleRequestTransformerTest {
 				.readFileAsString("src/test/resources/testfiles/GetSubjectOfCareSchedule/request-input.xml");
 
 		GetSubjectOfCareScheduleRequestTransformer transformer = new GetSubjectOfCareScheduleRequestTransformer();
-		String result = (String) transformer.pojoTransform(input, "UTF-8");
+		String result = (String) transformer.pojoTransform(null, input, "UTF-8");
 
 		/* Bookings */
 		GetBookings bookings = (GetBookings) jaxbUtil_outgoing.unmarshal(result);
@@ -72,7 +72,7 @@ public class GetSubjectOfCareScheduleRequestTransformerTest {
 		String input = MiscUtil
 				.readFileAsString("src/test/resources/testfiles/GetSubjectOfCareSchedule/request-bad-input.xml");
 		GetSubjectOfCareScheduleRequestTransformer transformer = new GetSubjectOfCareScheduleRequestTransformer();
-		transformer.pojoTransform(input, "UTF-8");
+		transformer.pojoTransform(null, input, "UTF-8");
 		fail("Expected TransformException when bad input");
 	}
 }

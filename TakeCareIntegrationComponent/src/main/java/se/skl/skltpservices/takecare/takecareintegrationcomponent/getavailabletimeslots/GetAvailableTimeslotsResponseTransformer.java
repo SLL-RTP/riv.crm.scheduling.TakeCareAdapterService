@@ -36,7 +36,7 @@ public class GetAvailableTimeslotsResponseTransformer extends TakeCareResponseTr
      * @param src
      * @param outputEncoding
      */
-    protected Object pojoTransform(Object src, String outputEncoding) throws TransformerException {
+    protected Object pojoTransform(Object src, String outputEncoding, Object property) throws TransformerException {
 
         if (logger.isDebugEnabled()) {
             log.debug("Transforming response payload: {}", src);

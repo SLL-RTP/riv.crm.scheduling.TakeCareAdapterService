@@ -16,7 +16,7 @@ public class GetAllTimeTypesResponseTransformerTest {
         String expectedResult = MiscUtil
                 .readFileAsString("src/test/resources/testfiles/GetAllTimeTypes/response-output.xml");
         GetAllTimeTypesResponseTransformer transformer = new GetAllTimeTypesResponseTransformer();
-        String result = (String) transformer.pojoTransform(input, "UTF-8");
+        String result = (String) transformer.pojoTransform(input, "UTF-8", "");
         System.out.println("***");
         System.out.println("result: " + result);
         System.out.println("***");
@@ -30,7 +30,7 @@ public class GetAllTimeTypesResponseTransformerTest {
         String input = MiscUtil
                 .readFileAsString("src/test/resources/testfiles/GetAllTimeTypes/response-error-input.xml");
         GetAllTimeTypesResponseTransformer transformer = new GetAllTimeTypesResponseTransformer();
-        transformer.pojoTransform(input, "UTF-8");
+        transformer.pojoTransform(input, "UTF-8", "");
 
         fail("Expected RuntimeException!");
     }
@@ -43,7 +43,7 @@ public class GetAllTimeTypesResponseTransformerTest {
         GetAllTimeTypesResponseTransformer transformer = new GetAllTimeTypesResponseTransformer();
 
         try {
-            transformer.pojoTransform(input, "UTF-8");
+            transformer.pojoTransform(input, "UTF-8", "");
         } catch (Exception e) {
             assertEquals("resultCode: 3001 resultText: Illegal argument! (java.lang.RuntimeException)", e.getMessage());
             return;

@@ -29,7 +29,7 @@ public class CancelBookingRequestTransformerTest {
         // transformation
 
         CancelBookingRequestTransformer transformer = new CancelBookingRequestTransformer();
-        String result = (String) transformer.pojoTransform(input, "UTF-8");
+        String result = (String) transformer.pojoTransform(null, input, "UTF-8");
 
         /* CancelBooking */
         CancelBooking cancelBooking = (CancelBooking) jaxbUtil_outgoing.unmarshal(result);

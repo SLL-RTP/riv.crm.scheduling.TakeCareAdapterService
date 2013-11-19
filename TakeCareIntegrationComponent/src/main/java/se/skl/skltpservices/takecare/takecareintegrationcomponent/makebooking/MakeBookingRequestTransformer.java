@@ -10,8 +10,10 @@ import static se.skl.skltpservices.takecare.TakeCareUtil.numericToBigInteger;
 import static se.skl.skltpservices.takecare.TakeCareUtil.numericToInt;
 
 import java.util.Date;
+import org.mule.api.MuleMessage;
 
 import org.mule.api.transformer.TransformerException;
+import org.mule.api.transport.PropertyScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
@@ -34,7 +36,7 @@ public class MakeBookingRequestTransformer extends TakeCareRequestTransformer {
      * Simple pojo transformer method that can be tested with plain unit
      * testing...
      */
-    protected Object pojoTransform(Object src, String encoding) throws TransformerException {
+    protected Object pojoTransform(MuleMessage muleMessage, Object src, String encoding) throws TransformerException {
 
         if (logger.isDebugEnabled()) {
             log.debug("Transforming request payload: {}", src);
@@ -52,6 +54,13 @@ public class MakeBookingRequestTransformer extends TakeCareRequestTransformer {
             String incomingResourceId = incomingTimeslot.getResourceID();
             String incomingSubjectOfCare = incomingTimeslot.getSubjectOfCare();
             String incomingReason = buildReason(subjectOfCare, incomingTimeslot);
+            if (muleMessage != null) {
+                if (incomingRequest.getSubjectOfCareInfo().getPhone().length() > 0) {
+                    muleMessage.setProperty("telephone", new Boolean(true), PropertyScope.SESSION);
+                } else {
+                    muleMessage.setProperty("telephone", new Boolean(false), PropertyScope.SESSION);
+                }
+            }
 
             ProfdocHISMessage message = new ProfdocHISMessage();
             message.setCareUnitId(incomingHealthcarefacility);
@@ -83,9 +92,7 @@ public class MakeBookingRequestTransformer extends TakeCareRequestTransformer {
             if (logger.isDebugEnabled()) {
                 logger.debug("transformed payload to: " + outgoingPayload);
             }
-
             return outgoingPayload;
-
         } catch (Exception e) {
             throw new TransformerException(this, e);
         }

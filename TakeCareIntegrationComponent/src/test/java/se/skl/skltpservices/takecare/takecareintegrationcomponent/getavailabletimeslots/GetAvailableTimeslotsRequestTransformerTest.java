@@ -33,7 +33,7 @@ public class GetAvailableTimeslotsRequestTransformerTest {
 		// transformation
 
 		GetAvailableTimeslotsRequestTransformer transformer = new GetAvailableTimeslotsRequestTransformer();
-		String result = (String) transformer.pojoTransform(input, "UTF-8");
+		String result = (String) transformer.pojoTransform(null, input, "UTF-8");
 
 		/* GetAvailableTimeslots */
 		GetAvailableTimeslots timeTypes = new GetAvailableTimeslots();
@@ -82,7 +82,7 @@ public class GetAvailableTimeslotsRequestTransformerTest {
 		String input = MiscUtil
 				.readFileAsString("src/test/resources/testfiles/GetAvailableTimeslots/request-bad-input.xml");
 		GetAvailableTimeslotsRequestTransformer transformer = new GetAvailableTimeslotsRequestTransformer();
-		transformer.pojoTransform(input, "UTF-8");
+		transformer.pojoTransform(null, input, "UTF-8");
 		fail("Expected TransformException when bad input");
 	}
 }

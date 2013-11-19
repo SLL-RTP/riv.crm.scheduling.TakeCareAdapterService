@@ -10,6 +10,7 @@ import se.skl.skltpservices.takecare.booking.GetTimeTypes;
 import se.skl.skltpservices.takecare.booking.gettimetypesrequest.ProfdocHISMessage;
 
 import java.util.Date;
+import org.mule.api.MuleMessage;
 
 import static se.skl.skltpservices.takecare.TakeCareDateHelper.yyyyMMddHHmmss;
 import static se.skl.skltpservices.takecare.TakeCareUtil.*;
@@ -22,7 +23,7 @@ public class GetAllTimeTypesRequestTransformer extends TakeCareRequestTransforme
 	private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(GetAllTimeTypesType.class);
 	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetTimeTypes.class);
 
-	protected Object pojoTransform(Object src, String encoding) throws TransformerException {
+	protected Object pojoTransform(MuleMessage muleMessage, Object src, String encoding) throws TransformerException {
 
 		if (logger.isDebugEnabled()) {
 			log.debug("Transforming request payload: {}", src);

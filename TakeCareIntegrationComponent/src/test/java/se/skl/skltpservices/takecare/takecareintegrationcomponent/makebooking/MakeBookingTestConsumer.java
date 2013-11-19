@@ -22,72 +22,83 @@ import se.skl.skltpservices.takecare.TakeCareTestConsumer;
 
 public class MakeBookingTestConsumer extends TakeCareTestConsumer {
 
-	private static final Logger log = LoggerFactory.getLogger(MakeBookingTestConsumer.class);
+    private static final Logger log = LoggerFactory.getLogger(MakeBookingTestConsumer.class);
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+    private MakeBookingResponderInterface _service = null;
 
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+    public static void main(String[] args) throws Fault {
+        String serviceAddress = getAddress("MAKEBOOKING_INBOUND_URL");
+        String subjectOfCare = "191414141414";
+        String healthcareFacility = "HSA-VKK123";
 
-	private MakeBookingResponderInterface _service = null;
+        MakeBookingTestConsumer consumer = new MakeBookingTestConsumer(serviceAddress);
+        MakeBookingResponseType response = consumer.callService(healthcareFacility, subjectOfCare, true);
+        log.info("Returned bookingId = " + response.getBookingId());
+        log.info("Returned resulttext = " + response.getResultText());
+        log.info("Returned resultcode = " + response.getResultCode());
+    }
 
-	public static void main(String[] args) throws Fault {
-		String serviceAddress = getAddress("MAKEBOOKING_INBOUND_URL");
-		String subjectOfCare = "191414141414";
-		String healthcareFacility = "HSA-VKK123";
+    public MakeBookingTestConsumer(String serviceAddress) {
+        try {
+            URL url = new URL(serviceAddress + "?wsdl");
+            _service = new MakeBookingResponderService(url).getMakeBookingResponderPort();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Malformed URL Exception: " + e.getMessage());
+        }
+    }
 
-		MakeBookingTestConsumer consumer = new MakeBookingTestConsumer(serviceAddress);
-		MakeBookingResponseType response = consumer.callService(healthcareFacility, subjectOfCare);
-		log.info("Returned bookingId = " + response.getBookingId());
-		log.info("Returned resulttext = " + response.getResultText());
-		log.info("Returned resultcode = " + response.getResultCode());
-	}
+    /**
+     * tfn is an ugly hack
+     *
+     * @param healthcareFacility
+     * @param subjectOfCare
+     * @param tfn
+     * @return
+     * @throws Fault
+     */
+    public MakeBookingResponseType callService(String healthcareFacility, String subjectOfCare, boolean tfn) throws Fault {
+        log.debug("Calling MakeBooking-service with healthcareFacility {}, subjectOfCare {}", healthcareFacility,
+                subjectOfCare);
+        MakeBookingType request = new MakeBookingType();
+        request.setHealthcareFacilityMed(healthcareFacility);
+        request.setNotification("Notification value");
+        request.setRequestedTimeslot(createTimeslot(healthcareFacility, subjectOfCare));
+        request.setSubjectOfCareInfo(createSubjectOfCare(tfn));
 
-	public MakeBookingTestConsumer(String serviceAddress) {
-		try {
-			URL url = new URL(serviceAddress + "?wsdl");
-			_service = new MakeBookingResponderService(url).getMakeBookingResponderPort();
-		} catch (MalformedURLException e) {
-			throw new RuntimeException("Malformed URL Exception: " + e.getMessage());
-		}
-	}
+        return _service.makeBooking(new AttributedURIType(), request);
+    }
 
-	public MakeBookingResponseType callService(String healthcareFacility, String subjectOfCare) throws Fault {
-		log.debug("Calling MakeBooking-service with healthcareFacility {}, subjectOfCare {}", healthcareFacility,
-				subjectOfCare);
-		MakeBookingType request = new MakeBookingType();
-		request.setHealthcareFacilityMed(healthcareFacility);
-		request.setNotification("Notification value");
-		request.setRequestedTimeslot(createTimeslot(healthcareFacility, subjectOfCare));
-		request.setSubjectOfCareInfo(createSubjectOfCare());
+    private SubjectOfCareType createSubjectOfCare(boolean tfn) {
+        SubjectOfCareType subjectOfCare = new SubjectOfCareType();
+        subjectOfCare.setAddress("En adress");
+        subjectOfCare.setCoaddress("En CO adress");
+        subjectOfCare.setEmail("email@email.dummy");
+        if (tfn) {
+            subjectOfCare.setPhone("0001112223333");
+        } else {
+            subjectOfCare.setPhone("");
+        }
+        return subjectOfCare;
+    }
 
-		return _service.makeBooking(new AttributedURIType(), request);
-	}
+    private TimeslotType createTimeslot(String healthcareFacility, String subjectOfCare) {
+        TimeslotType timeslot = new TimeslotType();
+        timeslot.setCareTypeID("3");
+        timeslot.setCareTypeName("Caretype name");
+        timeslot.setHealthcareFacility(healthcareFacility);
+        timeslot.setHealthcareFacilityName("Healtcare facility name");
+        timeslot.setPerformer("Performer HSAID");
+        timeslot.setPerformerName("Performer name");
+        timeslot.setPurpose("Purpose for patient to book");
+        timeslot.setReason("Reason for patient to book");
+        timeslot.setResourceID("1");
+        timeslot.setResourceName("Resource name");
+        timeslot.setSubjectOfCare(subjectOfCare);
+        timeslot.setTimeTypeID("0");
+        timeslot.setTimeTypeName("Timetype name");
 
-	private SubjectOfCareType createSubjectOfCare() {
-		SubjectOfCareType subjectOfCare = new SubjectOfCareType();
-		subjectOfCare.setAddress("En adress");
-		subjectOfCare.setCoaddress("En CO adress");
-		subjectOfCare.setEmail("email@email.dummy");
-		subjectOfCare.setPhone("0001112223333");
-		return subjectOfCare;
-	}
-
-	private TimeslotType createTimeslot(String healthcareFacility, String subjectOfCare) {
-		TimeslotType timeslot = new TimeslotType();
-		timeslot.setCareTypeID("3");
-		timeslot.setCareTypeName("Caretype name");
-		timeslot.setHealthcareFacility(healthcareFacility);
-		timeslot.setHealthcareFacilityName("Healtcare facility name");
-		timeslot.setPerformer("Performer HSAID");
-		timeslot.setPerformerName("Performer name");
-		timeslot.setPurpose("Purpose for patient to book");
-		timeslot.setReason("Reason for patient to book");
-		timeslot.setResourceID("1");
-		timeslot.setResourceName("Resource name");
-		timeslot.setSubjectOfCare(subjectOfCare);
-		timeslot.setTimeTypeID("0");
-		timeslot.setTimeTypeName("Timetype name");
-
-		timeslot.setStartTimeInclusive(dateFormat.format(new Date()));
-		timeslot.setEndTimeExclusive(dateFormat.format(new Date()));
-		return timeslot;
-	}
+        timeslot.setStartTimeInclusive(dateFormat.format(new Date()));
+        timeslot.setEndTimeExclusive(dateFormat.format(new Date()));
+        return timeslot;
+    }
 }

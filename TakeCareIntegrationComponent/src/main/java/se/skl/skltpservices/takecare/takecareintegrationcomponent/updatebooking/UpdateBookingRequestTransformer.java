@@ -10,6 +10,7 @@ import static se.skl.skltpservices.takecare.TakeCareUtil.numericToBigInteger;
 import static se.skl.skltpservices.takecare.TakeCareUtil.numericToInt;
 
 import java.util.Date;
+import org.mule.api.MuleMessage;
 
 import org.mule.api.transformer.TransformerException;
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ public class UpdateBookingRequestTransformer extends TakeCareRequestTransformer 
 	 * Simple pojo transformer method that can be tested with plain unit
 	 * testing...
 	 */
-	protected Object pojoTransform(Object src, String encoding) throws TransformerException {
+	protected Object pojoTransform(MuleMessage muleMessage, Object src, String encoding) throws TransformerException {
 
 		if (logger.isDebugEnabled()) {
 			log.debug("Transforming request payload: {}", src);

@@ -22,6 +22,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.io.StringReader;
+import org.mule.api.transport.PropertyScope;
 
 /**
  * Base class for Take Care response transformers. Place common features to be
@@ -29,18 +30,18 @@ import java.io.StringReader;
  */
 public abstract class TakeCareResponseTransformer extends AbstractMessageTransformer {
 
-	private static final JaxbUtil jaxbUtil_error = new JaxbUtil(ProfdocHISMessage.class);
+    private static final JaxbUtil jaxbUtil_error = new JaxbUtil(ProfdocHISMessage.class);
 
-	/**
-	 * Message aware transformer.
-	 */
-	@Override
-	public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
-		if (message.getExceptionPayload() != null) {
-			return message;
-		}
-		return pojoTransform(message.getPayload(), outputEncoding);
-	}
+    /**
+     * Message aware transformer.
+     */
+    @Override
+    public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
+        if (message.getExceptionPayload() != null) {
+            return message;
+        }
+        return pojoTransform(message.getPayload(), outputEncoding, message.getProperty("telephone", PropertyScope.SESSION));
+    }
 
     /**
      * @TODO clean up the stacktraces
@@ -84,26 +85,25 @@ public abstract class TakeCareResponseTransformer extends AbstractMessageTransfo
         return message;
     }
 
-	protected abstract Object pojoTransform(Object src, String outputEncoding) throws TransformerException;
+    protected abstract Object pojoTransform(Object src, String outputEncoding, Object property) throws TransformerException;
 
-	/**
-	 * Take Care error messages are in the ProfDocHISMessage in a element called
-	 * Error. Check if it exist and in that case make sure the errortext and
-	 * code is propagated to the user/system calling the service.
-	 * 
-	 * @param incoming_string
-	 *            The message containing the response from Take Care
-	 */
-	protected void handleTakeCareErrorMessages(String incoming_string) {
-		if (containsError(incoming_string)) {
+    /**
+     * Take Care error messages are in the ProfDocHISMessage in a element called
+     * Error. Check if it exist and in that case make sure the errortext and
+     * code is propagated to the user/system calling the service.
+     *
+     * @param incoming_string The message containing the response from Take Care
+     */
+    protected void handleTakeCareErrorMessages(String incoming_string) {
+        if (containsError(incoming_string)) {
             ProfdocHISMessage message = new ProfdocHISMessage();
             message = (ProfdocHISMessage) this.transformResponse(message, "urn:ProfdocHISMessage:Error", incoming_string);
-			throw new RuntimeException("resultCode: " + message.getError().getCode() + " resultText: "
-					+ message.getError().getMsg());
-		}
-	}
+            throw new RuntimeException("resultCode: " + message.getError().getCode() + " resultText: "
+                    + message.getError().getMsg());
+        }
+    }
 
-	private boolean containsError(String incoming_string) {
-		return StringUtils.contains(incoming_string, "Error");
-	}
+    private boolean containsError(String incoming_string) {
+        return StringUtils.contains(incoming_string, "Error");
+    }
 }

@@ -26,7 +26,7 @@ public class GetAllTimeTypesRequestTransformerTest {
 		String input = MiscUtil.readFileAsString("src/test/resources/testfiles/GetAllTimeTypes/request-input.xml");
 
 		GetAllTimeTypesRequestTransformer transformer = new GetAllTimeTypesRequestTransformer();
-		String result = (String) transformer.pojoTransform(input, "UTF-8");
+		String result = (String) transformer.pojoTransform(null, input, "UTF-8");
 
 		/* GetTimeTypes */
 		GetTimeTypes timeTypes = (GetTimeTypes) jaxbUtil_outgoing.unmarshal(result);
@@ -65,7 +65,7 @@ public class GetAllTimeTypesRequestTransformerTest {
 	public void testBadInputGivesTransformerException() throws Exception {
 		String input = MiscUtil.readFileAsString("src/test/resources/testfiles/GetAllTimeTypes/request-bad-input.xml");
 		GetAllTimeTypesRequestTransformer transformer = new GetAllTimeTypesRequestTransformer();
-		transformer.pojoTransform(input, "UTF-8");
+		transformer.pojoTransform(null, input, "UTF-8");
 		fail("Expected TransformException when bad input");
 	}
 }

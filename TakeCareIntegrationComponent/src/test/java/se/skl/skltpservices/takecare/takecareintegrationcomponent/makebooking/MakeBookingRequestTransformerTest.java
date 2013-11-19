@@ -27,7 +27,7 @@ public class MakeBookingRequestTransformerTest {
         String input = MiscUtil.readFileAsString("src/test/resources/testfiles/MakeBooking/request-input.xml");
 
         MakeBookingRequestTransformer transformer = new MakeBookingRequestTransformer();
-        String result = (String) transformer.pojoTransform(input, "UTF-8");
+        String result = (String) transformer.pojoTransform(null, input, "UTF-8");
 
         /* Bookings */
         MakeBooking bookings = (MakeBooking) jaxbUtil_outgoing.unmarshal(result);
@@ -64,7 +64,7 @@ public class MakeBookingRequestTransformerTest {
         assertEquals(TakeCareUtil.INVOKING_SYSTEM, msgInvokingSystem);
         assertEquals(TakeCareUtil.REQUEST, msgMessageType);
         assertEquals("191414141414", patientId.toString());
-        assertEquals("Only phone, no reason specified", "0566789009", patientReason);
+        assertEquals("Only phone, no reason specified", "", patientReason);
         assertNotNull(endTime);
         assertNotNull(startTime);
         assertNull(resourceId);
@@ -80,7 +80,7 @@ public class MakeBookingRequestTransformerTest {
                 .readFileAsString("src/test/resources/testfiles/MakeBooking/request-input-all-takecare-fields.xml");
 
         MakeBookingRequestTransformer transformer = new MakeBookingRequestTransformer();
-        String result = (String) transformer.pojoTransform(input, "UTF-8");
+        String result = (String) transformer.pojoTransform(null, input, "UTF-8");
 
         /* Bookings */
         MakeBooking bookings = (MakeBooking) jaxbUtil_outgoing.unmarshal(result);
@@ -117,7 +117,7 @@ public class MakeBookingRequestTransformerTest {
         assertEquals(TakeCareUtil.INVOKING_SYSTEM, msgInvokingSystem);
         assertEquals(TakeCareUtil.REQUEST, msgMessageType);
         assertEquals("191414141414", patientId.toString());
-        assertEquals("Reason 0566789009", patientReason);
+        assertEquals("Reason", patientReason);
         assertNotNull(endTime);
         assertNotNull(startTime);
         assertEquals(new BigInteger("2"), resourceId);

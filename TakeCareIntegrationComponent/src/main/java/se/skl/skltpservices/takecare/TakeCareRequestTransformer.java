@@ -3,6 +3,7 @@ package se.skl.skltpservices.takecare;
 import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
+import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
 
 import se.riv.crm.scheduling.v1.SubjectOfCareType;
@@ -11,6 +12,7 @@ import se.riv.crm.scheduling.v1.TimeslotType;
 public abstract class TakeCareRequestTransformer extends AbstractMessageTransformer {
 
     private final static int MAX_REASON_LENGTH = 256;
+    private final static boolean MAP_PHONE_NUMBER = false;
 
     /**
      * Simple pojo transformer that transforms crm:scheduling 1.0 to Take Care
@@ -22,25 +24,26 @@ public abstract class TakeCareRequestTransformer extends AbstractMessageTransfor
     @Override
     public Object transformMessage(MuleMessage message, String outputEncoding) throws TransformerException {
         Object src = ((Object[]) message.getPayload())[1];
-        message.setPayload(pojoTransform(src, outputEncoding));
+        message.setPayload(pojoTransform(message, src, outputEncoding));
         return message;
     }
 
-    protected abstract Object pojoTransform(Object src, String encoding) throws TransformerException;
+    protected abstract Object pojoTransform(MuleMessage message, Object src, String encoding) throws TransformerException;
 
     protected static final String buildReason(SubjectOfCareType subjectOfCare, TimeslotType incomingTimeslot) {
         String reason = "";
         if (incomingTimeslot != null && StringUtils.isNotEmpty(incomingTimeslot.getReason())) {
-            reason = incomingTimeslot.getReason() + " ";
+            reason = incomingTimeslot.getReason();
         }
-        if (subjectOfCare != null && StringUtils.isNotEmpty(subjectOfCare.getPhone())) {
-            if (reason.length() > (MAX_REASON_LENGTH - (subjectOfCare.getPhone().length() + 1))) {
-                reason = reason.substring(0, MAX_REASON_LENGTH - (subjectOfCare.getPhone().length() + 1)) + subjectOfCare.getPhone().length();
-            } else {
-                reason += subjectOfCare.getPhone();
+        if (MAP_PHONE_NUMBER) {
+            if (subjectOfCare != null && StringUtils.isNotEmpty(subjectOfCare.getPhone())) {
+                if (reason.length() > (MAX_REASON_LENGTH - (subjectOfCare.getPhone().length() + 1))) {
+                    reason = reason.substring(0, MAX_REASON_LENGTH - (subjectOfCare.getPhone().length() + 1)) + subjectOfCare.getPhone().length();
+                } else {
+                    reason += subjectOfCare.getPhone();
+                }
             }
         }
         return reason;
-
     }
 }

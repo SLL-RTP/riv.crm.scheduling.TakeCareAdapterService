@@ -8,6 +8,7 @@ import static se.skl.skltpservices.takecare.TakeCareUtil.REQUEST;
 import static se.skl.skltpservices.takecare.TakeCareUtil.numericToInteger;
 
 import java.util.Date;
+import org.mule.api.MuleMessage;
 
 import org.mule.api.transformer.TransformerException;
 import org.slf4j.Logger;
@@ -27,7 +28,7 @@ public class GetAvailableDatesRequestTransformer extends TakeCareRequestTransfor
     private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(GetAvailableDatesType.class);
     private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(GetAvailableDates.class);
 
-    protected Object pojoTransform(Object src, String encoding) throws TransformerException {
+    protected Object pojoTransform(MuleMessage muleMessage, Object src, String encoding) throws TransformerException {
 
         if (logger.isDebugEnabled()) {
             log.debug("Transforming request payload: {}", src);
