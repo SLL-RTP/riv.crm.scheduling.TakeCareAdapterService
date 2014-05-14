@@ -29,7 +29,7 @@
         <dependency>
             <groupId>se.skl.skltpservices.takecare</groupId>
             <artifactId>TakeCare-schemas</artifactId>
-            <version>1.0.3-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>se.riv.crm.scheduling</groupId>

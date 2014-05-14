@@ -20,8 +20,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 	</parent>
 
 	<artifactId>TakeCare-schemas</artifactId>
-    <packaging>jar</packaging>
-    <name>TakeCare-schemas</name>
+	 <version>1.0</version>
+    	<packaging>jar</packaging>
+    	<name>TakeCare-schemas</name>
 
 	<scm>
         <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
@@ -65,6 +66,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 			<plugin>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-codegen-plugin</artifactId>
+                 <version>2.7.7</version>
 				<executions>
 					<execution>
 						<id>ws.generate</id>

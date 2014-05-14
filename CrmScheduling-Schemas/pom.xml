@@ -67,7 +67,8 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 			<plugin>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-codegen-plugin</artifactId>
-				<executions>
+                <version>2.7.7</version>
+                <executions>
 					<execution>
 						<id>ws.generate</id>
 						<phase>generate-sources</phase>
