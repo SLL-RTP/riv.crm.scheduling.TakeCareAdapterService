@@ -56,7 +56,7 @@
 		</spring:property>
 	</spring:bean>
 	
-	<https:connector name="soitoolkit-https-connector" clientSoTimeout="${SOITOOLKIT_MULE_HTTPS_CLIENT_SO_TIMEOUT} sendTcpNoDelay="true"" >
+	<https:connector name="soitoolkit-https-connector" clientSoTimeout="${SOITOOLKIT_MULE_HTTPS_CLIENT_SO_TIMEOUT}" sendTcpNoDelay="true">
 		<spring:property name="keepAlive" value="false"/>
   		<service-overrides sessionHandler="org.mule.session.NullSessionHandler"/>
     	<https:tls-key-store path="${SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE}" storePassword="${SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE_PASSWORD}" keyPassword="${SOITOOLKIT_MULE_HTTPS_TLS_KEY_PASSWORD}" class="${SOITOOLKIT_MULE_HTTPS_TLS_KEY_TYPE}" />
