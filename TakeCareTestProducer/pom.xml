@@ -1,13 +1,13 @@
 	<?xml version="1.0"?>
-<!-- * Copyright 2009 Sjukvardsradgivningen * * This library is free software; 
-	you can redistribute it and/or modify * it under the terms of version 2.1 
-	of the GNU Lesser General Public * License as published by the Free Software 
-	Foundation. * * This library is distributed in the hope that it will be useful, 
-	* but WITHOUT ANY WARRANTY; without even the implied warranty of * MERCHANTABILITY 
-	or FITNESS FOR A PARTICULAR PURPOSE. See the * GNU Lesser General Public 
-	License for more details. * * You should have received a copy of the GNU 
-	Lesser General Public * License along with this library; if not, write to 
-	the * Free Software Foundation, Inc., 59 Temple Place, Suite 330, * Boston, 
+<!-- * Copyright 2009 Sjukvardsradgivningen * * This library is free software;
+	you can redistribute it and/or modify * it under the terms of version 2.1
+	of the GNU Lesser General Public * License as published by the Free Software
+	Foundation. * * This library is distributed in the hope that it will be useful,
+	* but WITHOUT ANY WARRANTY; without even the implied warranty of * MERCHANTABILITY
+	or FITNESS FOR A PARTICULAR PURPOSE. See the * GNU Lesser General Public
+	License for more details. * * You should have received a copy of the GNU
+	Lesser General Public * License along with this library; if not, write to
+	the * Free Software Foundation, Inc., 59 Temple Place, Suite 330, * Boston,
 	MA 02111-1307 USA -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -57,7 +57,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
-			<artifactId>soitoolkit-mule-3.2.1-dependencies</artifactId>
+			<artifactId>soitoolkit-mule-3.3.1-dependencies</artifactId>
 			<version>${soitoolkit.version}</version>
 			<type>pom</type>
 		</dependency>
@@ -107,7 +107,7 @@
 				<groupId>org.mule.tools</groupId>
 				<artifactId>maven-mule-plugin</artifactId>
 				<extensions>true</extensions>
-				<!-- Include mule-dependencies that doesn't come with Mule 3.x otherwise 
+				<!-- Include mule-dependencies that doesn't come with Mule 3.x otherwise
 					we can't install to a vanilla Mule 3.x installation -->
 				<configuration>
 					<inclusions>
@@ -153,12 +153,12 @@
 		</plugins>
 
 	</build>
-	
+
 	<profiles>
 		<profile>
 			<id>muleServer</id>
-			<!-- Start mule server with the command "mvn -PmuleServer" or "mvn -PmuleServer 
-				-Dexec.args="${artifaceId}-config.xml"" if you want to override the default 
+			<!-- Start mule server with the command "mvn -PmuleServer" or "mvn -PmuleServer
+				-Dexec.args="${artifaceId}-config.xml"" if you want to override the default
 				config-file -->
 			<build>
 				<defaultGoal>test</defaultGoal>
