@@ -23,11 +23,9 @@
 		http://www.mulesoft.org/schema/mule/https      http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
 	">
 
-	<!-- TODO: Add service specific definitions here -->
+	<flow name="GetAvailableTimeslots-3-service">
 
-	<flow name="GetAvailableTimeslots-service">
-
-		<http:inbound-endpoint address="${GETAVAILABLETIMESLOTS_INBOUND_URL}"
+		<http:inbound-endpoint address="${GETAVAILABLETIMESLOTS_INBOUND_URL_3}"
 			exchange-pattern="request-response" transformer-refs="logReqIn"
 			responseTransformer-refs="createSoapFaultIfException logRespOut">
 		</http:inbound-endpoint>
@@ -37,10 +35,10 @@
 			namespace="urn:riv:crm:scheduling:GetAvailableTimeslots:1:rivtabp20">
 		</cxf:proxy-service>
 
-		<custom-transformer doc:name="transform-request"
+		<custom-transformer doc:name="transform-3-request"
 			class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabletimeslots.GetAvailableTimeslotsRequestTransformer" />
 		<response>
-			<custom-transformer doc:name="transform-response"
+			<custom-transformer doc:name="transform-3-response"
 				class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabletimeslots.GetAvailableTimeslotsResponseTransformer" />
 		</response>
 
@@ -50,7 +48,7 @@
 
 		<cxf:proxy-client />
 
-		<https:outbound-endpoint address="${GETAVAILABLETIMESLOTS_OUTBOUND_URL}"
+		<https:outbound-endpoint address="${GETAVAILABLETIMESLOTS_OUTBOUND_URL_3}"
 			exchange-pattern="request-response" responseTimeout="${SERVICE_TIMEOUT_MS}"
 			transformer-refs="logReqOut" responseTransformer-refs="logRespIn"
 			connector-ref="soitoolkit-https-connector">

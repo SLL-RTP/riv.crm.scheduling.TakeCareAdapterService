@@ -22,7 +22,8 @@ public class UpdateBookingIntegrationTest extends AbstractTestCase {
 
     private static final Logger log = LoggerFactory.getLogger(UpdateBookingIntegrationTest.class);
     private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
-    private static final String DEFAULT_SERVICE_ADDRESS = getAddress("UPDATEBOOKING_INBOUND_URL");
+    private static final String DEFAULT_SERVICE_ADDRESS = getAddress("UPDATEBOOKING_INBOUND_URL_1");
+    private static final String SECOND_SERVICE_ADDRESS = getAddress("UPDATEBOOKING_INBOUND_URL_2");
 
     public UpdateBookingIntegrationTest() {
 
@@ -33,11 +34,13 @@ public class UpdateBookingIntegrationTest extends AbstractTestCase {
     }
 
     protected String getConfigResources() {
-        return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"
-                + "TakeCareIntegrationComponent-common.xml," + "TakeCareIntegrationComponent-integrationtests-common.xml,"
-                + // FIXME. MULE STUDIO.
-                // "services/UpdateBooking-service.xml," +
-                "UpdateBooking-service.xml," + "teststub-services/UpdateBooking-teststub-service.xml";
+        return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"      + 
+               "TakeCareIntegrationComponent-common.xml,"                  + 
+               "TakeCareIntegrationComponent-integrationtests-common.xml," + 
+               "UpdateBooking-1-service.xml,"                            + 
+               "UpdateBooking-2-service.xml,"                            + 
+               "teststub-services/UpdateBooking-teststub-1-service.xml," +
+               "teststub-services/UpdateBooking-teststub-2-service.xml";
     }
 
     @Override
@@ -51,7 +54,11 @@ public class UpdateBookingIntegrationTest extends AbstractTestCase {
         String subjectOfCare = "191414141414";
         UpdateBookingTestConsumer consumer = new UpdateBookingTestConsumer(DEFAULT_SERVICE_ADDRESS);
         UpdateBookingResponseType response = consumer.callService(healthcareFacility, subjectOfCare);
-
+        assertEquals("OK", response.getResultCode().toString());
+        assertEquals("", response.getResultText());
+        
+        consumer = new UpdateBookingTestConsumer(SECOND_SERVICE_ADDRESS);
+        response = consumer.callService(healthcareFacility, subjectOfCare);
         assertEquals("OK", response.getResultCode().toString());
         assertEquals("", response.getResultText());
     }

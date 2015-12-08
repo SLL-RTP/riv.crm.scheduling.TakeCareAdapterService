@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc"
-	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:mule-xml="http://www.mulesoft.org/schema/mule/xml"
+<mule 
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc"
+	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+	xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:mule-xml="http://www.mulesoft.org/schema/mule/xml"
 	xmlns:smooks="http://www.muleforge.org/smooks/schema/mule-module-smooks"
-	xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:script="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:script="http://www.mulesoft.org/schema/mule/scripting"
 	xmlns:https="http://www.mulesoft.org/schema/mule/https"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -23,40 +30,35 @@
 		http://www.mulesoft.org/schema/mule/https      http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
 	">
 
-	<!-- TODO: Add service specific definitions here -->
-
-	<flow name="CancelBooking-service">
-
-		<http:inbound-endpoint address="${CANCELBOOKING_INBOUND_URL}"
+	<flow name="UpdateBooking-1-service">
+	
+		<http:inbound-endpoint address="${UPDATEBOOKING_INBOUND_URL_1}"
 			exchange-pattern="request-response" transformer-refs="logReqIn"
 			responseTransformer-refs="createSoapFaultIfException logRespOut">
 		</http:inbound-endpoint>
 
-		<cxf:proxy-service service="CancelBookingResponderService"
-			wsdlLocation="classpath:/schemas/interactions/CancelBookingInteraction/CancelBookingInteraction_1.0_rivtabp20.wsdl"
-			namespace="urn:riv:crm:scheduling:CancelBooking:1:rivtabp20">
+		<cxf:proxy-service service="UpdateBookingResponderService"
+			wsdlLocation="classpath:/schemas/interactions/UpdateBookingInteraction/UpdateBookingInteraction_1.0_rivtabp20.wsdl"
+			namespace="urn:riv:crm:scheduling:UpdateBooking:1:rivtabp20">
 		</cxf:proxy-service>
 
-		<custom-transformer doc:name="transform-request"
-			class="se.skl.skltpservices.takecare.takecareintegrationcomponent.cancelbooking.CancelBookingRequestTransformer" />
-		<response>
-			<custom-transformer doc:name="transform-response"
-				class="se.skl.skltpservices.takecare.takecareintegrationcomponent.cancelbooking.CancelBookingResponseTransformer" />
-		</response>
+        <custom-transformer doc:name="transform-1-request" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.updatebooking.UpdateBookingRequestTransformer"/>
+        <response>
+            <custom-transformer doc:name="transform-1-response" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.updatebooking.UpdateBookingResponseTransformer"/>
+        </response>
 
         <message-properties-transformer doc:name="AddSoapActionHeader" overwrite="true">
-            <add-message-property key="SOAPAction" value="http://tempuri.org/CancelBooking"/>
+            <add-message-property key="SOAPAction" value="http://tempuri.org/RescheduleBooking"/>
         </message-properties-transformer>
 
-		<cxf:proxy-client />
-
-		<https:outbound-endpoint address="${CANCELBOOKING_OUTBOUND_URL}"
+        <cxf:proxy-client />
+        
+        <https:outbound-endpoint address="${UPDATEBOOKING_OUTBOUND_URL_1}"
 			exchange-pattern="request-response" responseTimeout="${SERVICE_TIMEOUT_MS}"
 			transformer-refs="logReqOut" responseTransformer-refs="logRespIn"
 			connector-ref="soitoolkit-https-connector">
 		</https:outbound-endpoint>
-
-		<custom-exception-strategy
-			class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy" />
+ 
+		<custom-exception-strategy class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy"/>
 	</flow>
 </mule>

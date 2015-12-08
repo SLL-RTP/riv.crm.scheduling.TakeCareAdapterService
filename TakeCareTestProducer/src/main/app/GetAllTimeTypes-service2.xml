@@ -13,16 +13,10 @@
 		http://www.mulesoft.org/schema/mule/jms     http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
 	">
 
-	<!-- TODO: Add teststub-service specific definitions here -->
-
-
 	<simple-service 
-		name="GetAvailableDates-teststub-service"
-        address="${GETAVAILABLEDATES_TESTSTUB_INBOUND_URL}" 
-        component-class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabledates.GetAvailableDatesTestProducer"
+		name="GetAllTimeTypes-teststub-service2"
+        address="${GETALLTIMETYPES_TESTSTUB_INBOUND_URL2}" 
+        component-class="se.skl.skltpservices.takecare.takecaretestproducer.getalltimetypes.GetTimeTypesTestProducer"
         type="jax-ws" />
-
- 
-
  
 </mule>

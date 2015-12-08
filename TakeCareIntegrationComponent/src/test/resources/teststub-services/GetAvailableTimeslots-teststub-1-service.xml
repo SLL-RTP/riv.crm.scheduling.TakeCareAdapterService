@@ -13,16 +13,10 @@
 		http://www.mulesoft.org/schema/mule/jms     http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
 	">
 
-	<!-- TODO: Add teststub-service specific definitions here -->
-
-
 	<simple-service 
-		name="GetAvailableTimeslots-teststub-service"
-        address="${GETAVAILABLETIMESLOTS_TESTSTUB_INBOUND_URL}" 
+		name="GetAvailableTimeslots-teststub-1-service"
+        address="${GETAVAILABLETIMESLOTS_TESTSTUB_INBOUND_URL_1}" 
         component-class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabletimeslots.GetAvailableTimeslotsTestProducer"
         type="jax-ws" />
-
- 
-
  
 </mule>

@@ -23,35 +23,33 @@
 		http://www.mulesoft.org/schema/mule/https      http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
 	">
 
-	<!-- TODO: Add service specific definitions here -->
 
-	<flow name="MakeBooking-service">
+	<flow name="GetSubjectOfCareSchedule-2-service">
 
-		<http:inbound-endpoint address="${MAKEBOOKING_INBOUND_URL}"
+		<http:inbound-endpoint address="${GETSUBJECTOFCARESCHEDULE_INBOUND_URL_2}"
 			exchange-pattern="request-response" transformer-refs="logReqIn"
 			responseTransformer-refs="createSoapFaultIfException logRespOut">
 		</http:inbound-endpoint>
 
-
-		<cxf:proxy-service service="MakeBookingResponderService"
-			wsdlLocation="classpath:/schemas/interactions/MakeBookingInteraction/MakeBookingInteraction_1.0_rivtabp20.wsdl"
-			namespace="urn:riv:crm:scheduling:MakeBooking:1:rivtabp20">
+		<cxf:proxy-service service="GetSubjectOfCareScheduleResponderService"
+			wsdlLocation="classpath:/schemas/interactions/GetSubjectOfCareScheduleInteraction/GetSubjectOfCareScheduleInteraction_1.0_rivtabp20.wsdl"
+			namespace="urn:riv:crm:scheduling:GetSubjectOfCareSchedule:1:rivtabp20">
 		</cxf:proxy-service>
 
-		<custom-transformer doc:name="transform-request"
-			class="se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking.MakeBookingRequestTransformer" />
+		<custom-transformer doc:name="transform-2-request"
+			class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule.GetSubjectOfCareScheduleRequestTransformer" />
 		<response>
-			<custom-transformer doc:name="transform-response"
-				class="se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking.MakeBookingResponseTransformer" />
+			<custom-transformer doc:name="transform-2-response"
+				class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule.GetSubjectOfCareScheduleResponseTransformer" />
 		</response>
 
         <message-properties-transformer doc:name="AddSoapActionHeader" overwrite="true">
-            <add-message-property key="SOAPAction" value="http://tempuri.org/MakeBooking"/>
+            <add-message-property key="SOAPAction" value="http://tempuri.org/GetBookings"/>
         </message-properties-transformer>
 
 		<cxf:proxy-client />
 
-		<https:outbound-endpoint address="${MAKEBOOKING_OUTBOUND_URL}"
+		<https:outbound-endpoint address="${GETSUBJECTOFCARESCHEDULE_OUTBOUND_URL_2}"
 			exchange-pattern="request-response" responseTimeout="${SERVICE_TIMEOUT_MS}"
 			transformer-refs="logReqOut" responseTransformer-refs="logRespIn"
 			connector-ref="soitoolkit-https-connector">

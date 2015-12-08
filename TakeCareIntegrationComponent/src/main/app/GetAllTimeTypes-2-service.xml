@@ -29,9 +29,9 @@
 		http://www.mulesoft.org/schema/mule/https                  http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
 	">
 
-  <flow name="GetAllTimeTypes-service">
+  <flow name="GetAllTimeTypes-2-service">
 
-    <http:inbound-endpoint address                  = "${GETALLTIMETYPES_INBOUND_URL}"
+    <http:inbound-endpoint address                  = "${GETALLTIMETYPES_INBOUND_URL_2}"
                            exchange-pattern         = "request-response" 
                            transformer-refs         = "logReqIn"
                            responseTransformer-refs = "createSoapFaultIfException logRespOut">
@@ -42,19 +42,12 @@
                        namespace    = "urn:riv:crm:scheduling:GetAllTimeTypes:1:rivtabp20">
     </cxf:proxy-service>
 
-    <custom-transformer name  = "transform-request"
+    <custom-transformer name  = "transform-request-2"
                         class = "se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesRequestTransformer" />
                         
-    <logger level="INFO" message="=== retrieved hsaId: #[message.outboundProperties['hsaId']] ===" />
-
-    <custom-transformer name  = "takecare-url-retriever-transformer"
-                        class = "se.skl.skltpservices.takecare.takecareintegrationcomponent.transform.TakeCareUrlRetrieverTransformer" />
-
-    <logger level="INFO" message="=== retrieved takecareUrl: #[message.outboundProperties['takecareUrl']] ===" />
-
-     <response>
+    <response>
       <transformer ref="exceptionTransformer" />
-      <custom-transformer name="transform-response" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesResponseTransformer" />
+      <custom-transformer name="transform-response-2" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesResponseTransformer" />
     </response>
 
     <message-properties-transformer doc:name="AddSoapActionHeader" overwrite="true">
@@ -62,11 +55,10 @@
     </message-properties-transformer>
 
     <logger level="INFO" message="=== prepare to call TakeCare GetTimeTypes ===" />
-    <logger level="INFO" message="=== takeCareUrl:#[message.outboundProperties['takecareUrl']], hsaId:#[message.outboundProperties['hasaId']] ===" />
 
     <cxf:proxy-client />
 
-    <https:outbound-endpoint address                  = "https://#[message.outboundProperties['takecareUrl']]"
+    <https:outbound-endpoint address                  = "${GETALLTIMETYPES_OUTBOUND_URL_2}"
                              exchange-pattern         = "request-response" 
                              responseTimeout          = "${SERVICE_TIMEOUT_MS}"
                              transformer-refs         = "logReqOut" 

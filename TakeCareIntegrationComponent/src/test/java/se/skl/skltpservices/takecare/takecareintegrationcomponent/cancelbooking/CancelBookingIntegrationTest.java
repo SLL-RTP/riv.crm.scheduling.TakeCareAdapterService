@@ -22,7 +22,8 @@ public class CancelBookingIntegrationTest extends AbstractTestCase {
 
 	private static final Logger log = LoggerFactory.getLogger(CancelBookingIntegrationTest.class);
 
-	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("CANCELBOOKING_INBOUND_URL");
+	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("CANCELBOOKING_INBOUND_URL_1");
+    private static final String SECOND_SERVICE_ADDRESS = getAddress("CANCELBOOKING_INBOUND_URL_2");
 
 	private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
 
@@ -35,12 +36,13 @@ public class CancelBookingIntegrationTest extends AbstractTestCase {
 	}
 
 	protected String getConfigResources() {
-		return "soitoolkit-mule-jms-connector-activemq-embedded.xml," +
-
-		"TakeCareIntegrationComponent-common.xml," + "TakeCareIntegrationComponent-integrationtests-common.xml," +
-		// FIXME. MULE STUDIO.
-		// "services/CancelBooking-service.xml," +
-				"CancelBooking-service.xml," + "teststub-services/CancelBooking-teststub-service.xml";
+        return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"      + 
+                "TakeCareIntegrationComponent-common.xml,"                  + 
+                "TakeCareIntegrationComponent-integrationtests-common.xml," + 
+                "CancelBooking-1-service.xml,"                            + 
+                "CancelBooking-2-service.xml,"                            + 
+                "teststub-services/CancelBooking-teststub-1-service.xml," +
+                "teststub-services/CancelBooking-teststub-2-service.xml";
 	}
 
 	@Override
@@ -55,6 +57,11 @@ public class CancelBookingIntegrationTest extends AbstractTestCase {
 		CancelBookingResponseType response = consumer.callService(bookingId);
 		assertEquals("OK", response.getResultCode().toString());
 		assertEquals("CANCELLED", response.getResultText());
+		
+        consumer = new CancelBookingTestConsumer(SECOND_SERVICE_ADDRESS);
+        response = consumer.callService(bookingId);
+        assertEquals("OK", response.getResultCode().toString());
+        assertEquals("CANCELLED", response.getResultText());
 	}
 
 	@Test

@@ -23,36 +23,32 @@
 		http://www.mulesoft.org/schema/mule/https      http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
 	">
 
-	<!-- TODO: Add service specific definitions here -->
+	<flow name="GetAvailableTimeslots-1-service">
 
-
-
-	<flow name="GetAvailableDates-service">
-
-		<http:inbound-endpoint address="${GETAVAILABLEDATES_INBOUND_URL}"
+		<http:inbound-endpoint address="${GETAVAILABLETIMESLOTS_INBOUND_URL_1}"
 			exchange-pattern="request-response" transformer-refs="logReqIn"
 			responseTransformer-refs="createSoapFaultIfException logRespOut">
 		</http:inbound-endpoint>
 
-		<cxf:proxy-service service="GetAvailableDatesResponderService"
-			wsdlLocation="classpath:/schemas/interactions/GetAvailableDatesInteraction/GetAvailableDatesInteraction_1.0_rivtabp20.wsdl"
-			namespace="urn:riv:crm:scheduling:GetAvailableDates:1:rivtabp20">
+		<cxf:proxy-service service="GetAvailableTimeslotsResponderService"
+			wsdlLocation="classpath:/schemas/interactions/GetAvailableTimeslotsInteraction/GetAvailableTimeslotsInteraction_1.0_rivtabp20.wsdl"
+			namespace="urn:riv:crm:scheduling:GetAvailableTimeslots:1:rivtabp20">
 		</cxf:proxy-service>
 
-		<custom-transformer doc:name="transform-request"
-			class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabledates.GetAvailableDatesRequestTransformer" />
+		<custom-transformer doc:name="transform-1-request"
+			class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabletimeslots.GetAvailableTimeslotsRequestTransformer" />
 		<response>
-			<custom-transformer doc:name="transform-response"
-				class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabledates.GetAvailableDatesResponseTransformer" />
+			<custom-transformer doc:name="transform-1-response"
+				class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabletimeslots.GetAvailableTimeslotsResponseTransformer" />
 		</response>
 
         <message-properties-transformer doc:name="AddSoapActionHeader" overwrite="true">
-            <add-message-property key="SOAPAction" value="http://tempuri.org/GetAvailableDates"/>
+            <add-message-property key="SOAPAction" value="http://tempuri.org/GetAvailableTimeslots"/>
         </message-properties-transformer>
 
 		<cxf:proxy-client />
 
-		<https:outbound-endpoint address="${GETAVAILABLEDATES_OUTBOUND_URL}"
+		<https:outbound-endpoint address="${GETAVAILABLETIMESLOTS_OUTBOUND_URL_1}"
 			exchange-pattern="request-response" responseTimeout="${SERVICE_TIMEOUT_MS}"
 			transformer-refs="logReqOut" responseTransformer-refs="logRespIn"
 			connector-ref="soitoolkit-https-connector">

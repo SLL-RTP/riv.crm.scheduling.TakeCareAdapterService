@@ -22,7 +22,7 @@ public class GetSubjectOfCareScheduleIntegrationTest extends AbstractTestCase {
 
 	private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
 
-	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("GETSUBJECTOFCARESCHEDULE_INBOUND_URL");
+	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("GETSUBJECTOFCARESCHEDULE_INBOUND_URL_1");
 
 	public GetSubjectOfCareScheduleIntegrationTest() {
 
@@ -33,15 +33,13 @@ public class GetSubjectOfCareScheduleIntegrationTest extends AbstractTestCase {
 	}
 
 	protected String getConfigResources() {
-		return "soitoolkit-mule-jms-connector-activemq-embedded.xml," +
-
-		"TakeCareIntegrationComponent-common.xml,"
-				+ "TakeCareIntegrationComponent-integrationtests-common.xml,"
-				+
-				// FIXME. MULE STUDIO.
-				// "services/GetSubjectOfCareSchedule-service.xml," +
-				"GetSubjectOfCareSchedule-service.xml,"
-				+ "teststub-services/GetSubjectOfCareSchedule-teststub-service.xml";
+        return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"      + 
+               "TakeCareIntegrationComponent-common.xml,"                  + 
+               "TakeCareIntegrationComponent-integrationtests-common.xml," + 
+               "GetSubjectOfCareSchedule-1-service.xml,"                            + 
+               "GetSubjectOfCareSchedule-2-service.xml,"                            + 
+               "teststub-services/GetSubjectOfCareSchedule-teststub-1-service.xml," +
+               "teststub-services/GetSubjectOfCareSchedule-teststub-2-service.xml";
 	}
 
 	@Override

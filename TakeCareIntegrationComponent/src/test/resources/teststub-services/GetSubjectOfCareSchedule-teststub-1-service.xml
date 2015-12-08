@@ -13,16 +13,10 @@
 		http://www.mulesoft.org/schema/mule/jms     http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
 	">
 
-	<!-- TODO: Add teststub-service specific definitions here -->
-
-
 	<simple-service 
-		name="CancelBooking-teststub-service"
-        address="${CANCELBOOKING_TESTSTUB_INBOUND_URL}" 
-        component-class="se.skl.skltpservices.takecare.takecareintegrationcomponent.cancelbooking.CancelBookingTestProducer"
+		name="GetSubjectOfCareSchedule-teststub-1-service"
+        address="${GETSUBJECTOFCARESCHEDULE_TESTSTUB_INBOUND_URL_1}" 
+        component-class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule.GetBookingsTestProducer"
         type="jax-ws" />
-
- 
-
  
 </mule>

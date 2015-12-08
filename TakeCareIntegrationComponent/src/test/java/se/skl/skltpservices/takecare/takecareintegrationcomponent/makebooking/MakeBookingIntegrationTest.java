@@ -23,7 +23,8 @@ public class MakeBookingIntegrationTest extends AbstractTestCase {
 
     private static final Logger log = LoggerFactory.getLogger(MakeBookingIntegrationTest.class);
     private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
-    private static final String DEFAULT_SERVICE_ADDRESS = getAddress("MAKEBOOKING_INBOUND_URL");
+    private static final String DEFAULT_SERVICE_ADDRESS = getAddress("MAKEBOOKING_INBOUND_URL_1");
+    private static final String SECOND_SERVICE_ADDRESS = getAddress("MAKEBOOKING_INBOUND_URL_2");
 
     public MakeBookingIntegrationTest() {
 
@@ -34,11 +35,13 @@ public class MakeBookingIntegrationTest extends AbstractTestCase {
     }
 
     protected String getConfigResources() {
-        return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"
-                + "TakeCareIntegrationComponent-common.xml," + "TakeCareIntegrationComponent-integrationtests-common.xml,"
-                + // FIXME. MULE STUDIO.
-                // "services/MakeBooking-service.xml," +
-                "MakeBooking-service.xml," + "teststub-services/MakeBooking-teststub-service.xml";
+        return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"      + 
+               "TakeCareIntegrationComponent-common.xml,"                  + 
+               "TakeCareIntegrationComponent-integrationtests-common.xml," + 
+               "MakeBooking-1-service.xml,"                            + 
+               "MakeBooking-2-service.xml,"                            + 
+               "teststub-services/MakeBooking-teststub-1-service.xml," +
+               "teststub-services/MakeBooking-teststub-2-service.xml";
     }
 
     @Override
@@ -52,7 +55,12 @@ public class MakeBookingIntegrationTest extends AbstractTestCase {
         String subjectOfCare = "191414141414";
         MakeBookingTestConsumer consumer = new MakeBookingTestConsumer(DEFAULT_SERVICE_ADDRESS);
         MakeBookingResponseType response = consumer.callService(healthcareFacility, subjectOfCare, false);
-
+        assertNotNull(response.getBookingId());
+        assertEquals("OK", response.getResultCode().toString());
+        assertEquals("", response.getResultText());
+        
+        consumer = new MakeBookingTestConsumer(SECOND_SERVICE_ADDRESS);
+        response = consumer.callService(healthcareFacility, subjectOfCare, false);
         assertNotNull(response.getBookingId());
         assertEquals("OK", response.getResultCode().toString());
         assertEquals("", response.getResultText());
