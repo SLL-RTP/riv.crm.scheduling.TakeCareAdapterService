@@ -44,19 +44,29 @@
 
     <custom-transformer name  = "transform-request"
                         class = "se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesRequestTransformer" />
+                        
+    <logger level="INFO" message="=== retrieved hsaId: #[message.outboundProperties['hsaId']] ===" />
 
-    <response>
+    <custom-transformer name  = "takecare-url-retriever-transformer"
+                        class = "se.skl.skltpservices.takecare.takecareintegrationcomponent.transform.TakeCareUrlRetrieverTransformer" />
+
+    <logger level="INFO" message="=== retrieved takecareUrl: #[message.outboundProperties['takecareUrl']] ===" />
+
+     <response>
       <transformer ref="exceptionTransformer" />
       <custom-transformer name="transform-response" class="se.skl.skltpservices.takecare.takecareintegrationcomponent.getalltimetypes.GetAllTimeTypesResponseTransformer" />
     </response>
 
     <message-properties-transformer doc:name="AddSoapActionHeader" overwrite="true">
-      <add-message-property key="SOAPAction" value="http://tempuri.org/GetTimeTypes" />
+      <add-message-property key="SOAPAction" value="http://tempuri.org/GetTimeTypes" /> <!-- TODO why? -->
     </message-properties-transformer>
+
+    <logger level="INFO" message="=== prepare to call TakeCare GetTimeTypes ===" />
+    <logger level="INFO" message="=== takeCareUrl:#[message.outboundProperties['takecareUrl']], hsaId:#[message.outboundProperties['hasaId']] ===" />
 
     <cxf:proxy-client />
 
-    <https:outbound-endpoint address                  = "${GETALLTIMETYPES_OUTBOUND_URL}"
+    <https:outbound-endpoint address                  = "https://#[message.outboundProperties['takecareUrl']]"
                              exchange-pattern         = "request-response" 
                              responseTimeout          = "${SERVICE_TIMEOUT_MS}"
                              transformer-refs         = "logReqOut" 
@@ -65,5 +75,6 @@
     </https:outbound-endpoint>
 
     <custom-exception-strategy class="org.soitoolkit.commons.mule.error.ServiceExceptionStrategy" />
+    
   </flow>
 </mule>
