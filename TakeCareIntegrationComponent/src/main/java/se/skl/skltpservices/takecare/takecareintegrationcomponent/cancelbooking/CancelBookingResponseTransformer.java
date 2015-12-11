@@ -51,8 +51,12 @@ public class CancelBookingResponseTransformer extends TakeCareResponseTransforme
 	}
 
 	private String extractResponse(Object src) {
+	    // XMLReader which closes the InputStream
+	    // org.mule.module.cxf.support.StreamClosingInterceptor sci = (org.mule.module.cxf.support.StreamClosingInterceptor)src;
+	    
 		CancelBookingResponse incoming_res = (CancelBookingResponse) jaxbUtil_incoming.unmarshal(src);
 		String incoming_string = incoming_res.getCancelBookingResult();
+        logger.debug("unmarshalled incoming TakeCare CancelBookingResponse.CancelBookingResult:" +  incoming_string);
 		return incoming_string;
 	}
 

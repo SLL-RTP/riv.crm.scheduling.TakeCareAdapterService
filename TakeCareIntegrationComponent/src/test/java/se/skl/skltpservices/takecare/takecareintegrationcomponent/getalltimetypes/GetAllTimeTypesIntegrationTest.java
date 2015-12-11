@@ -36,8 +36,8 @@ public class GetAllTimeTypesIntegrationTest extends AbstractTestCase {
                "TakeCareIntegrationComponent-integrationtests-common.xml," + 
                "GetAllTimeTypes-1-service.xml,"                            + 
                "GetAllTimeTypes-2-service.xml,"                            + 
-               "teststub-services/GetAllTimeTypes-1-teststub-service.xml," +
-               "teststub-services/GetAllTimeTypes-2-teststub-service.xml";
+               "teststub-services/GetTimeTypes-1-service.xml,"    +
+               "teststub-services/GetTimeTypes-2-service.xml";
     }
 
     @Override

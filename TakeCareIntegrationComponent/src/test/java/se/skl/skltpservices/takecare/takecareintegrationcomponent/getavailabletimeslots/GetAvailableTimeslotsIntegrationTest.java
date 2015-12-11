@@ -43,8 +43,8 @@ public class GetAvailableTimeslotsIntegrationTest extends AbstractTestCase {
                "TakeCareIntegrationComponent-integrationtests-common.xml," + 
                "GetAvailableTimeslots-1-service.xml,"                            + 
                "GetAvailableTimeslots-2-service.xml,"                            + 
-               "teststub-services/GetAvailableTimeslots-teststub-1-service.xml," +
-               "teststub-services/GetAvailableTimeslots-teststub-2-service.xml";
+               "teststub-services/GetAvailableTimeslots-1-service.xml," +
+               "teststub-services/GetAvailableTimeslots-2-service.xml";
 	}
 
 	@Override

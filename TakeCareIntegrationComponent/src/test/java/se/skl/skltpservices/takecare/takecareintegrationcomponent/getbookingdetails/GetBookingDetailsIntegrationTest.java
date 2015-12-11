@@ -42,8 +42,8 @@ public class GetBookingDetailsIntegrationTest extends AbstractTestCase {
                "TakeCareIntegrationComponent-integrationtests-common.xml," + 
                "GetBookingDetails-1-service.xml,"                            + 
                "GetBookingDetails-2-service.xml,"                            + 
-               "teststub-services/GetBookingDetails-teststub-1-service.xml," +
-               "teststub-services/GetBookingDetails-teststub-2-service.xml";
+               "teststub-services/GetBookings-1-service.xml," +
+               "teststub-services/GetBookings-2-service.xml";
 	}
 
 	@Override

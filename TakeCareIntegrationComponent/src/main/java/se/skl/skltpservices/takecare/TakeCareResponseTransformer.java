@@ -44,13 +44,15 @@ public abstract class TakeCareResponseTransformer extends AbstractMessageTransfo
     }
 
     /**
-     * @TODO clean up the stacktraces
-     * @TODO remove the validation handler
+     * @TODO remove the validation handler - (Why?)
      * @param message
      * @param namespace
      * @return
      */
     public Object transformResponse(Object message, String namespace, String incoming_string) {
+        
+        logger.debug("transformResponse:" + incoming_string);
+        
         JAXBContext jc = null;
 
         try {
@@ -73,14 +75,15 @@ public abstract class TakeCareResponseTransformer extends AbstractMessageTransfo
 
             filter.parse(new InputSource(new StringReader(incoming_string)));
             message = unmarshallerHandler.getResult();
+            logger.debug("unmarshalled to message of type " + message.getClass().getName());
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            throw new RuntimeException(e);
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            throw new RuntimeException(e);
         } catch (SAXException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            throw new RuntimeException(e);
         } catch (JAXBException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            throw new RuntimeException(e);
         }
         return message;
     }

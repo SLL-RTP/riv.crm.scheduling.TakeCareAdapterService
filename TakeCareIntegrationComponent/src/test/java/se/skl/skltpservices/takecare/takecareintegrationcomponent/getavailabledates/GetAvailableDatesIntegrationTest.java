@@ -43,8 +43,8 @@ public class GetAvailableDatesIntegrationTest extends AbstractTestCase {
                "TakeCareIntegrationComponent-integrationtests-common.xml,"   + 
                "GetAvailableDates-1-service.xml,"                            + 
                "GetAvailableDates-2-service.xml,"                            + 
-               "teststub-services/GetAvailableDates-teststub-1-service.xml," +
-               "teststub-services/GetAvailableDates-teststub-2-service.xml";
+               "teststub-services/GetAvailableDates-1-service.xml," +
+               "teststub-services/GetAvailableDates-2-service.xml";
 	}
 
 	@Override

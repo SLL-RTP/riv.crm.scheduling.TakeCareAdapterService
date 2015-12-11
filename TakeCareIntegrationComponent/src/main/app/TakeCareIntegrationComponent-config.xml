@@ -8,8 +8,25 @@
 
 	<spring:beans>
 		<spring:import resource="classpath:soitoolkit-mule-jms-connector-activemq-external.xml" />
-		<spring:import resource="classpath:services/*-1-service.xml" />
-        <spring:import resource="classpath:services/*-2-service.xml" />
+    
+        <spring:import resource="classpath:TakeCareIntegrationComponent-common.xml" />
+        
+        <spring:import resource="classpath:CancelBooking-1-service.xml"/>
+        <spring:import resource="classpath:CancelBooking-2-service.xml"/>
+        <spring:import resource="classpath:GetAllTimeTypes-1-service.xml"/>
+        <spring:import resource="classpath:GetAllTimeTypes-2-service.xml"/>
+        <spring:import resource="classpath:GetAvailableDates-1-service.xml"/>
+        <spring:import resource="classpath:GetAvailableDates-2-service.xml"/>
+        <spring:import resource="classpath:GetAvailableTimeslots-1-service.xml"/>
+        <spring:import resource="classpath:GetAvailableTimeslots-2-service.xml"/>
+        <spring:import resource="classpath:GetBookingDetails-1-service.xml"/>
+        <spring:import resource="classpath:GetBookingDetails-2-service.xml"/>
+        <spring:import resource="classpath:GetSubjectOfCareSchedule-1-service.xml"/>
+        <spring:import resource="classpath:GetSubjectOfCareSchedule-2-service.xml"/>
+        <spring:import resource="classpath:MakeBooking-1-service.xml"/>
+        <spring:import resource="classpath:MakeBooking-2-service.xml"/>
+        <spring:import resource="classpath:UpdateBooking-1-service.xml"/>
+        <spring:import resource="classpath:UpdateBooking-2-service.xml"/>
 	</spring:beans>
 
 </mule>

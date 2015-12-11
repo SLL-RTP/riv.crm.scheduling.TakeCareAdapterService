@@ -40,7 +40,11 @@ public class GetTimeTypesTestProducer extends TakeCareTestProducer implements Bo
             } catch (InterruptedException e) {
             }
         }
-        return createOkResponse(externaluser, careunitid);
+        String result = createOkResponse(externaluser, careunitid);
+        
+        log.debug("result of getTimeTypes():" + result);
+        
+        return result;
     }
 
     private String createOkResponse(String externaluser, String careunitid) {
@@ -56,7 +60,6 @@ public class GetTimeTypesTestProducer extends TakeCareTestProducer implements Bo
         outgoing_response.setTimeTypes(buildTimeTypes(careunitid));
         jaxbUtil_outgoing.addMarshallProperty("com.sun.xml.bind.xmlDeclaration", false);
         return jaxbUtil_outgoing.marshal(outgoing_response, "", "ProfdocHISMessage");
-        //return jaxbUtil_outgoing.marshal(outgoing_response);
     }
 
     private TimeTypes buildTimeTypes(String careunitId) {
@@ -76,4 +79,5 @@ public class GetTimeTypesTestProducer extends TakeCareTestProducer implements Bo
         timeType.setTimeTypeName(timeTypeName);
         return timeType;
     }
+
 }

@@ -41,8 +41,8 @@ public class CancelBookingIntegrationTest extends AbstractTestCase {
                 "TakeCareIntegrationComponent-integrationtests-common.xml," + 
                 "CancelBooking-1-service.xml,"                            + 
                 "CancelBooking-2-service.xml,"                            + 
-                "teststub-services/CancelBooking-teststub-1-service.xml," +
-                "teststub-services/CancelBooking-teststub-2-service.xml";
+                "teststub-services/CancelBooking-1-service.xml," +
+                "teststub-services/CancelBooking-2-service.xml";
 	}
 
 	@Override

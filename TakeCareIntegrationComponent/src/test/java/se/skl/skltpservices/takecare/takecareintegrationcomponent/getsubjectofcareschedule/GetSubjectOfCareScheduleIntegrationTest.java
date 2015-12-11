@@ -36,10 +36,10 @@ public class GetSubjectOfCareScheduleIntegrationTest extends AbstractTestCase {
         return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"      + 
                "TakeCareIntegrationComponent-common.xml,"                  + 
                "TakeCareIntegrationComponent-integrationtests-common.xml," + 
-               "GetSubjectOfCareSchedule-1-service.xml,"                            + 
-               "GetSubjectOfCareSchedule-2-service.xml,"                            + 
-               "teststub-services/GetSubjectOfCareSchedule-teststub-1-service.xml," +
-               "teststub-services/GetSubjectOfCareSchedule-teststub-2-service.xml";
+               "GetSubjectOfCareSchedule-1-service.xml,"                   + 
+               "GetSubjectOfCareSchedule-2-service.xml,"                   + 
+               "teststub-services/GetBookings-1-service.xml,"     +
+               "teststub-services/GetBookings-2-service.xml";
 	}
 
 	@Override

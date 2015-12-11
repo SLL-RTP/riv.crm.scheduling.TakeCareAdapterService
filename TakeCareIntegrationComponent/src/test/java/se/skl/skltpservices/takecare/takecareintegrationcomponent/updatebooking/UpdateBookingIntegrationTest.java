@@ -39,8 +39,8 @@ public class UpdateBookingIntegrationTest extends AbstractTestCase {
                "TakeCareIntegrationComponent-integrationtests-common.xml," + 
                "UpdateBooking-1-service.xml,"                            + 
                "UpdateBooking-2-service.xml,"                            + 
-               "teststub-services/UpdateBooking-teststub-1-service.xml," +
-               "teststub-services/UpdateBooking-teststub-2-service.xml";
+               "teststub-services/RescheduleBooking-1-service.xml," +
+               "teststub-services/RescheduleBooking-2-service.xml";
     }
 
     @Override

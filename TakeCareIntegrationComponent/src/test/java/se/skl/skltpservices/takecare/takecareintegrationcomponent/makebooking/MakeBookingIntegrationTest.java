@@ -40,8 +40,8 @@ public class MakeBookingIntegrationTest extends AbstractTestCase {
                "TakeCareIntegrationComponent-integrationtests-common.xml," + 
                "MakeBooking-1-service.xml,"                            + 
                "MakeBooking-2-service.xml,"                            + 
-               "teststub-services/MakeBooking-teststub-1-service.xml," +
-               "teststub-services/MakeBooking-teststub-2-service.xml";
+               "teststub-services/MakeBooking-1-service.xml," +
+               "teststub-services/MakeBooking-2-service.xml";
     }
 
     @Override

@@ -9,7 +9,22 @@
 	">
 
     <spring:beans>
-        <spring:import resource="classpath:teststub-services/*-teststub-service.xml"/>
+        <spring:import resource="classpath:teststub-services/GetAvailableDates-1-service.xml"/>
+        <spring:import resource="classpath:teststub-services/GetAvailableDates-2-service.xml"/>
+        <spring:import resource="classpath:teststub-services/GetAvailableTimeslots-1-service.xml"/>
+        <spring:import resource="classpath:teststub-services/GetAvailableTimeslots-2-service.xml"/>
+        <spring:import resource="classpath:teststub-services/GetBookings-1-service.xml"/>
+        <spring:import resource="classpath:teststub-services/GetBookings-2-service.xml"/>
+        <spring:import resource="classpath:teststub-services/GetTimeTypes-1-service.xml"/>
+        <spring:import resource="classpath:teststub-services/GetTimeTypes-2-service.xml"/>
+        
+        <spring:import resource="classpath:teststub-services/CancelBooking-1-service.xml"/>
+        <spring:import resource="classpath:teststub-services/CancelBooking-2-service.xml"/>
+        <spring:import resource="classpath:teststub-services/MakeBooking-1-service.xml"/>
+        <spring:import resource="classpath:teststub-services/MakeBooking-2-service.xml"/>
+        <spring:import resource="classpath:teststub-services/RescheduleBooking-1-service.xml"/>
+        <spring:import resource="classpath:teststub-services/RescheduleBooking-2-service.xml"/>
+
     </spring:beans>
 
 </mule>

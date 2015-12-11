@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:spring="http://www.springframework.org/schema/beans"
-	xsi:schemaLocation="
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xmlns:spring="http://www.springframework.org/schema/beans"
+	  xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.mulesoft.org/schema/mule/core    http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 	">
 
 	<spring:beans>
-		<!-- Connectors and endpoints that that are specific for different config-files (local unit-test, integration-test or production environments) -->
-		<!-- TODO: Add import of connector specific configuration files here as required -->
-			
-<!-- 		<spring:import resource="classpath:soitoolkit-mule-jms-connector-activemq-external.xml" /> -->
-<!-- 		<spring:import resource="classpath:TakeCareIntegrationComponent-common.xml" /> -->
-		<spring:import resource="classpath:services/*-service.xml" />
+ 		<spring:import resource="classpath:TakeCareTestProducer-common.xml" />
+    
+        <spring:import resource="classpath:GetAvailableDates-1-service.xml"/>
+        <spring:import resource="classpath:GetAvailableDates-2-service.xml"/>
+        <spring:import resource="classpath:GetAvailableTimeslots-1-service.xml"/>
+        <spring:import resource="classpath:GetAvailableTimeslots-2-service.xml"/>
+        <spring:import resource="classpath:GetBookings-1-service.xml"/>
+        <spring:import resource="classpath:GetBookings-2-service.xml"/>
+        <spring:import resource="classpath:GetTimeTypes-1-service.xml"/>
+        <spring:import resource="classpath:GetTimeTypes-2-service.xml"/>
+        
+        <spring:import resource="classpath:CancelBooking-1-service.xml"/>
+        <spring:import resource="classpath:CancelBooking-2-service.xml"/>
+        <spring:import resource="classpath:MakeBooking-1-service.xml"/>
+        <spring:import resource="classpath:MakeBooking-2-service.xml"/>
+        <spring:import resource="classpath:RescheduleBooking-1-service.xml"/>
+        <spring:import resource="classpath:RescheduleBooking-2-service.xml"/>
 	</spring:beans>
 
 </mule>

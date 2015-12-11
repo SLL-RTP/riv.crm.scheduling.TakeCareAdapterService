@@ -42,6 +42,12 @@ public class TakeCareTestProducer {
 //        jaxbUtil_error.marshal(error_response);
     }
 
+    
+    public String cancelBooking(String tcusername, String tcpassword, String externaluser, String careunitidtype,
+            String careunitid, String xml) {
+        throw new UnsupportedOperationException();
+    }
+    
     public String getAvailableDates(String tcusername, String tcpassword, String externaluser, String careunitidtype,
             String careunitid, String xml) {
         throw new UnsupportedOperationException();
@@ -52,7 +58,7 @@ public class TakeCareTestProducer {
         throw new UnsupportedOperationException();
     }
 
-    public String cancelBooking(String tcusername, String tcpassword, String externaluser, String careunitidtype,
+    public String getBookings(String tcusername, String tcpassword, String externaluser, String careunitidtype,
             String careunitid, String xml) {
         throw new UnsupportedOperationException();
     }
@@ -62,17 +68,12 @@ public class TakeCareTestProducer {
         throw new UnsupportedOperationException();
     }
 
-    public String getBookings(String tcusername, String tcpassword, String externaluser, String careunitidtype,
-            String careunitid, String xml) {
-        throw new UnsupportedOperationException();
-    }
-
-    public String rescheduleBooking(String tcusername, String tcpassword, String externaluser, String careunitidtype,
-            String careunitid, String xml) {
-        throw new UnsupportedOperationException();
-    }
-
     public String makeBooking(String tcusername, String tcpassword, String externaluser, String careunitidtype,
+            String careunitid, String xml) {
+        throw new UnsupportedOperationException();
+    }
+    
+    public String rescheduleBooking(String tcusername, String tcpassword, String externaluser, String careunitidtype,
             String careunitid, String xml) {
         throw new UnsupportedOperationException();
     }

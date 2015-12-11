@@ -45,9 +45,7 @@ public class GetAllTimeTypesResponseTransformer extends TakeCareResponseTransfor
      */
     protected Object pojoTransform(Object src, String outputEncoding, Object property) throws TransformerException {
 
-        if (logger.isDebugEnabled()) {
-            log.debug("Transforming response payload: {}", src);
-        }
+        log.debug("Transforming response payload: {}", src);
 
         try {
             String incoming_string = extractResponse(src);
@@ -72,6 +70,9 @@ public class GetAllTimeTypesResponseTransformer extends TakeCareResponseTransfor
     }
 
     private Object transformResponse(String incoming_string) {
+        
+        log.debug("received incoming string:" + incoming_string);
+        
         //Do unmarshalling
         ProfdocHISMessage message = new ProfdocHISMessage();
         message = (ProfdocHISMessage) super.transformResponse(message, "urn:ProfdocHISMessage:GetTimeTypes:Response", incoming_string);
