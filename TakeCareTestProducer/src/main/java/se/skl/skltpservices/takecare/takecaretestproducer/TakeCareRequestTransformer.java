@@ -4,7 +4,6 @@ import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.mule.transformer.AbstractMessageTransformer;
-import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -29,8 +28,6 @@ import org.mule.api.transport.PropertyScope;
  * used by all transformers here.
  */
 public abstract class TakeCareRequestTransformer extends AbstractMessageTransformer {
-
-    private static final JaxbUtil jaxbUtil_error = new JaxbUtil(ProfdocHISMessage.class);
 
     /**
      * Message aware transformer.

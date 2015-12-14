@@ -34,17 +34,10 @@ public class GetBookingsTestProducer extends TakeCareTestProducer implements Boo
 	private static final long SERVICE_TIMOUT_MS = Long.parseLong(rb.getString("SERVICE_TIMEOUT_MS"));
 
 	private final short NORMAL_BOOKING = 0;
-	private final short GROUP_BOOKING = 1;
-	private final short TEAM_BOOKING = 2;
-	private final short GROUP_TEAM_BOOKING = 2;
 
 	private final int TIMETYPE_NORMAL = 0;
 
-	private final short RESOURCE_INAKTIV_RESURS = 0;
 	private final short RESOURCE_NAMNGIVEN = 1;
-	private final short RESOURCE_BEFATTNING = 2;
-	private final short RESOURCE_SANGPLATS = 3;
-	private final short RESOURCE_LOKAL_RUM = 4;
 
 	private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(ProfdocHISMessage.class);
 
