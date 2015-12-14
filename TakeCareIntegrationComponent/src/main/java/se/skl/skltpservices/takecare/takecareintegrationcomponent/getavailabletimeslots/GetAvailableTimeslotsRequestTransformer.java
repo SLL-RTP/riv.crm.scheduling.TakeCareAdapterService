@@ -16,11 +16,11 @@ import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
 import se.riv.crm.scheduling.getavailabletimeslots.v1.GetAvailableTimeslotsType;
-import se.skl.skltpservices.takecare.TakeCareRequestTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareRequestTransformer;
 import se.skl.skltpservices.takecare.booking.GetAvailableTimeslots;
 import se.skl.skltpservices.takecare.booking.getavailabletimeslotsrequest.ProfdocHISMessage;
 
-public class GetAvailableTimeslotsRequestTransformer extends TakeCareRequestTransformer {
+public class GetAvailableTimeslotsRequestTransformer extends AbstractTakeCareRequestTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(GetAvailableTimeslotsRequestTransformer.class);
 

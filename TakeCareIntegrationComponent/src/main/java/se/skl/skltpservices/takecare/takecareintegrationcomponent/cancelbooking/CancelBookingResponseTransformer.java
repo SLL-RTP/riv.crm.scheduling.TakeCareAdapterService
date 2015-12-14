@@ -10,12 +10,12 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import se.riv.crm.scheduling.cancelbooking.v1.CancelBookingResponseType;
 import se.riv.crm.scheduling.cancelbooking.v1.ObjectFactory;
 import se.riv.crm.scheduling.v1.ResultCodeEnum;
-import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareResponseTransformer;
 import se.skl.skltpservices.takecare.booking.CancelBookingResponse;
 import se.skl.skltpservices.takecare.booking.cancelbookingresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.cancelbookingresponse.ProfdocHISMessage.BookingStatus;
 
-public class CancelBookingResponseTransformer extends TakeCareResponseTransformer {
+public class CancelBookingResponseTransformer extends AbstractTakeCareResponseTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(CancelBookingResponseTransformer.class);
 

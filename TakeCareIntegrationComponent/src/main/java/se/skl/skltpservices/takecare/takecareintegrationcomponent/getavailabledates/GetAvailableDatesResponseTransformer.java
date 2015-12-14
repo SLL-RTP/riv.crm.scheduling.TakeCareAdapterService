@@ -12,12 +12,12 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import se.riv.crm.scheduling.getavailabledates.v1.GetAvailableDatesResponseType;
 import se.riv.crm.scheduling.getavailabledates.v1.ObjectFactory;
 import se.riv.crm.scheduling.getavailabledates.v1.PerformerAvailabilityByDateType;
-import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareResponseTransformer;
 import se.skl.skltpservices.takecare.booking.GetAvailableDatesResponse;
 import se.skl.skltpservices.takecare.booking.getavailabledatesresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.getavailabledatesresponse.ProfdocHISMessage.AvailableDates;
 
-public class GetAvailableDatesResponseTransformer extends TakeCareResponseTransformer {
+public class GetAvailableDatesResponseTransformer extends AbstractTakeCareResponseTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(GetAvailableDatesResponseTransformer.class);
 

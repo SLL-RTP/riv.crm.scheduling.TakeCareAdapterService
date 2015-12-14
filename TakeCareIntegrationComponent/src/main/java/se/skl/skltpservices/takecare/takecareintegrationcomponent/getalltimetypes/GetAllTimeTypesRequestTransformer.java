@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesType;
-import se.skl.skltpservices.takecare.TakeCareRequestTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareRequestTransformer;
 import se.skl.skltpservices.takecare.booking.GetTimeTypes;
 import se.skl.skltpservices.takecare.booking.gettimetypesrequest.ProfdocHISMessage;
 
@@ -15,7 +15,7 @@ import org.mule.api.MuleMessage;
 import static se.skl.skltpservices.takecare.TakeCareDateHelper.yyyyMMddHHmmss;
 import static se.skl.skltpservices.takecare.TakeCareUtil.*;
 
-public class GetAllTimeTypesRequestTransformer extends TakeCareRequestTransformer {
+public class GetAllTimeTypesRequestTransformer extends AbstractTakeCareRequestTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(GetAllTimeTypesRequestTransformer.class);
 

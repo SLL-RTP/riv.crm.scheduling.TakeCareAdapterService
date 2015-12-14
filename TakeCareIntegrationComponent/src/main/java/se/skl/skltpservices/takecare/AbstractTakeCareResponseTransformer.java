@@ -28,7 +28,7 @@ import org.mule.api.transport.PropertyScope;
  * Base class for Take Care response transformers. Place common features to be
  * used by all transformers here.
  */
-public abstract class TakeCareResponseTransformer extends AbstractMessageTransformer {
+public abstract class AbstractTakeCareResponseTransformer extends AbstractMessageTransformer {
 
     private static final JaxbUtil jaxbUtil_error = new JaxbUtil(ProfdocHISMessage.class);
 

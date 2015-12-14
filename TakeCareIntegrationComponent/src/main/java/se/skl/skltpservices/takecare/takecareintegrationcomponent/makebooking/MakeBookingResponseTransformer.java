@@ -10,12 +10,12 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import se.riv.crm.scheduling.makebooking.v1.MakeBookingResponseType;
 import se.riv.crm.scheduling.makebooking.v1.ObjectFactory;
 import se.riv.crm.scheduling.v1.ResultCodeEnum;
-import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareResponseTransformer;
 import se.skl.skltpservices.takecare.booking.MakeBookingResponse;
 import se.skl.skltpservices.takecare.booking.makebookingresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.makebookingresponse.ProfdocHISMessage.BookingConfirmation;
 
-public class MakeBookingResponseTransformer extends TakeCareResponseTransformer {
+public class MakeBookingResponseTransformer extends AbstractTakeCareResponseTransformer {
 
     private static final Logger log = LoggerFactory.getLogger(MakeBookingResponseTransformer.class);
     private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(MakeBookingResponse.class);

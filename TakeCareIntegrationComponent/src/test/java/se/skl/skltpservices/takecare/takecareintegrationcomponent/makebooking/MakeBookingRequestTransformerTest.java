@@ -4,9 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import static org.mockito.Mockito.*;
+
 import java.math.BigInteger;
 
 import org.junit.Test;
+import org.mule.api.MuleMessage;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import org.soitoolkit.commons.mule.util.MiscUtil;
 
@@ -26,8 +29,9 @@ public class MakeBookingRequestTransformerTest {
         // Specify input and expected result
         String input = MiscUtil.readFileAsString("src/test/resources/testfiles/MakeBooking/request-input.xml");
 
+        MuleMessage mockMuleMessage = mock(MuleMessage.class);
         MakeBookingRequestTransformer transformer = new MakeBookingRequestTransformer();
-        String result = (String) transformer.pojoTransform(null, input, "UTF-8");
+        String result = (String) transformer.pojoTransform(mockMuleMessage, input, "UTF-8");
 
         /* Bookings */
         MakeBooking bookings = (MakeBooking) jaxbUtil_outgoing.unmarshal(result);
@@ -79,8 +83,9 @@ public class MakeBookingRequestTransformerTest {
         String input = MiscUtil
                 .readFileAsString("src/test/resources/testfiles/MakeBooking/request-input-all-takecare-fields.xml");
 
+        MuleMessage mockMuleMessage = mock(MuleMessage.class);
         MakeBookingRequestTransformer transformer = new MakeBookingRequestTransformer();
-        String result = (String) transformer.pojoTransform(null, input, "UTF-8");
+        String result = (String) transformer.pojoTransform(mockMuleMessage, input, "UTF-8");
 
         /* Bookings */
         MakeBooking bookings = (MakeBooking) jaxbUtil_outgoing.unmarshal(result);

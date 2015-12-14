@@ -16,11 +16,11 @@ import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
 import se.riv.crm.scheduling.getavailabledates.v1.GetAvailableDatesType;
-import se.skl.skltpservices.takecare.TakeCareRequestTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareRequestTransformer;
 import se.skl.skltpservices.takecare.booking.GetAvailableDates;
 import se.skl.skltpservices.takecare.booking.getavailabledatesrequest.ProfdocHISMessage;
 
-public class GetAvailableDatesRequestTransformer extends TakeCareRequestTransformer {
+public class GetAvailableDatesRequestTransformer extends AbstractTakeCareRequestTransformer {
 
     private static final Logger log = LoggerFactory.getLogger(GetAvailableDatesRequestTransformer.class);
 

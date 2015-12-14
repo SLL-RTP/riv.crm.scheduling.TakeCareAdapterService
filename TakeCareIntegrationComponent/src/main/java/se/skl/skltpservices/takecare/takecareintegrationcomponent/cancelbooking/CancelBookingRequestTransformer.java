@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
 import se.riv.crm.scheduling.cancelbooking.v1.CancelBookingType;
-import se.skl.skltpservices.takecare.TakeCareRequestTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareRequestTransformer;
 import se.skl.skltpservices.takecare.TakeCareUtil;
 import se.skl.skltpservices.takecare.booking.CancelBooking;
 import se.skl.skltpservices.takecare.booking.cancelbookingrequest.ProfdocHISMessage;
 
 import static se.skl.skltpservices.takecare.TakeCareUtil.*;
 
-public class CancelBookingRequestTransformer extends TakeCareRequestTransformer {
+public class CancelBookingRequestTransformer extends AbstractTakeCareRequestTransformer {
 
     private static final Logger log = LoggerFactory.getLogger(CancelBookingRequestTransformer.class);
     private static final JaxbUtil jaxbUtil_message = new JaxbUtil(ProfdocHISMessage.class);

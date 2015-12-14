@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.jws.WebService;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
@@ -41,9 +42,22 @@ public class MakeBookingTestProducer extends TakeCareTestProducer implements Boo
                 = (se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage) super.unmarshalXmlToProfdocHISMessage(incomingMessage, "urn:ProfdocHISMessage:MakeBooking:Request", xml);
 
         String incomingCareUnitId = incomingMessage.getCareUnitId();
+        
+        String patientReason = incomingMessage.getPatientReason();
+        if (StringUtils.isNotBlank(patientReason)) {
+            if (patientReason.length() > 300) {
+                se.skl.skltpservices.takecare.booking.error.ProfdocHISMessage error 
+                = createErrorResponseMessage(incomingCareUnitId, externaluser);
+                error.getError().setCode(3002);
+                error.getError().setMsg("patient reason is longer than 300 characters");;
+                error.getError().setType("System");
+                return this.createErrorResponseXml(error);
+            }
+        }
+        
 
         if (TEST_CAREUNIT_INVALID_ID.equals(incomingCareUnitId)) {
-            return createErrorResponse(externaluser, incomingCareUnitId);
+            return createErrorResponse(incomingCareUnitId, externaluser);
         } else if (TEST_ID_FAULT_TIMEOUT.equals(incomingCareUnitId)) {
             try {
                 Thread.sleep(SERVICE_TIMOUT_MS + 1000);

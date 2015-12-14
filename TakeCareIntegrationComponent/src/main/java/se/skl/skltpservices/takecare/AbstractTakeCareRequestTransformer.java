@@ -3,20 +3,17 @@ package se.skl.skltpservices.takecare;
 import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
-import org.mule.api.transport.PropertyScope;
 import org.mule.transformer.AbstractMessageTransformer;
+import org.slf4j.Logger;
 
-import se.riv.crm.scheduling.v1.SubjectOfCareType;
 import se.riv.crm.scheduling.v1.TimeslotType;
 
-public abstract class TakeCareRequestTransformer extends AbstractMessageTransformer {
+public abstract class AbstractTakeCareRequestTransformer extends AbstractMessageTransformer {
 
-    private final static int MAX_REASON_LENGTH = 256;
-    private final static boolean MAP_PHONE_NUMBER = false;
+    public final static int MAX_REASON_LENGTH = 300;
 
     /**
-     * Simple pojo transformer that transforms crm:scheduling 1.0 to Take Care
-     * format.
+     * Pojo transformer that transforms crm:scheduling 1.0 to Take Care format.
      *
      * @param message
      * @param outputEncoding
@@ -30,18 +27,25 @@ public abstract class TakeCareRequestTransformer extends AbstractMessageTransfor
 
     protected abstract Object pojoTransform(MuleMessage message, Object src, String encoding) throws TransformerException;
 
-    protected static final String buildReason(SubjectOfCareType subjectOfCare, TimeslotType incomingTimeslot) {
+    // 
+    
+    private final static boolean MAP_PHONE_NUMBER = false;
+
+    protected static final String buildReason(TimeslotType incomingTimeslot, String phone, Logger log) {
         String reason = "";
         if (incomingTimeslot != null && StringUtils.isNotEmpty(incomingTimeslot.getReason())) {
             reason = incomingTimeslot.getReason();
         }
+        if (reason.length() > MAX_REASON_LENGTH) {
+            log.warn("truncated reason from length {} to {}", reason.length(), MAX_REASON_LENGTH);
+            reason = reason.substring(0, MAX_REASON_LENGTH);
+        }
+        // TODO - MAP_PHONE_NUMBER = false - can this code be deleted?
         if (MAP_PHONE_NUMBER) {
-            if (subjectOfCare != null && StringUtils.isNotEmpty(subjectOfCare.getPhone())) {
-                if (reason.length() > (MAX_REASON_LENGTH - (subjectOfCare.getPhone().length() + 1))) {
-                    reason = reason.substring(0, MAX_REASON_LENGTH - (subjectOfCare.getPhone().length() + 1)) + subjectOfCare.getPhone().length();
-                } else {
-                    reason += subjectOfCare.getPhone();
-                }
+            if (reason.length() > (MAX_REASON_LENGTH - (phone.trim().length() + 1))) {
+                reason = reason.substring(0, MAX_REASON_LENGTH - (phone.trim().length() + 1)) + phone.trim().length();
+            } else {
+                reason += phone.trim();
             }
         }
         return reason;

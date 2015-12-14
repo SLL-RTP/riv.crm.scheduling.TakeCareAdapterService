@@ -10,12 +10,12 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
 import se.riv.crm.scheduling.getbookingdetails.v1.GetBookingDetailsType;
 import se.skl.skltpservices.takecare.TakeCareDateHelper;
-import se.skl.skltpservices.takecare.TakeCareRequestTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareRequestTransformer;
 import se.skl.skltpservices.takecare.TakeCareUtil;
 import se.skl.skltpservices.takecare.booking.GetBookings;
 import se.skl.skltpservices.takecare.booking.getbookingsrequest.ProfdocHISMessage;
 
-public class GetBookingDetailsRequestTransformer extends TakeCareRequestTransformer {
+public class GetBookingDetailsRequestTransformer extends AbstractTakeCareRequestTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(GetBookingDetailsRequestTransformer.class);
 

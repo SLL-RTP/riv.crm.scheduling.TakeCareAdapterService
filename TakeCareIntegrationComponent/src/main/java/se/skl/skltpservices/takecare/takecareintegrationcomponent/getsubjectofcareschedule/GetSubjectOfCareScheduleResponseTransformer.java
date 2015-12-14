@@ -22,7 +22,7 @@ import se.riv.crm.scheduling.getsubjectofcareschedule.v1.GetSubjectOfCareSchedul
 import se.riv.crm.scheduling.getsubjectofcareschedule.v1.ObjectFactory;
 import se.riv.crm.scheduling.v1.TimeslotType;
 import se.skl.skltpservices.takecare.TakeCareNamespacePrefixMapper;
-import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareResponseTransformer;
 import se.skl.skltpservices.takecare.booking.GetBookingsResponse;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage.Bookings;
@@ -31,7 +31,7 @@ import se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareValida
 
 import static se.skl.skltpservices.takecare.TakeCareUtil.shortToBoolean;
 
-public class GetSubjectOfCareScheduleResponseTransformer extends TakeCareResponseTransformer {
+public class GetSubjectOfCareScheduleResponseTransformer extends AbstractTakeCareResponseTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(GetSubjectOfCareScheduleResponseTransformer.class);
 

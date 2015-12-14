@@ -15,13 +15,13 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import se.riv.crm.scheduling.getavailabletimeslots.v1.GetAvailableTimeslotsResponseType;
 import se.riv.crm.scheduling.getavailabletimeslots.v1.ObjectFactory;
 import se.riv.crm.scheduling.v1.TimeslotType;
-import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareResponseTransformer;
 import se.skl.skltpservices.takecare.booking.GetAvailableTimeslotsResponse;
 import se.skl.skltpservices.takecare.booking.getavailabletimeslotsresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.getavailabletimeslotsresponse.ProfdocHISMessage.AvailableTimeslots;
 import se.skl.skltpservices.takecare.booking.getavailabletimeslotsresponse.ProfdocHISMessage.AvailableTimeslots.Timeslot;
 
-public class GetAvailableTimeslotsResponseTransformer extends TakeCareResponseTransformer {
+public class GetAvailableTimeslotsResponseTransformer extends AbstractTakeCareResponseTransformer {
 
     private static final Logger log = LoggerFactory.getLogger(GetAvailableTimeslotsResponseTransformer.class);
 
