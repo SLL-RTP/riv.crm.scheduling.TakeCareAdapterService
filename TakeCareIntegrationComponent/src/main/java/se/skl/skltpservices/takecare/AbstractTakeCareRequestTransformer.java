@@ -31,21 +31,29 @@ public abstract class AbstractTakeCareRequestTransformer extends AbstractMessage
     
     private final static boolean MAP_PHONE_NUMBER = false;
 
+    @SuppressWarnings("unused")
     protected static final String buildReason(TimeslotType incomingTimeslot, String phone, Logger log) {
         String reason = "";
         if (incomingTimeslot != null && StringUtils.isNotEmpty(incomingTimeslot.getReason())) {
-            reason = incomingTimeslot.getReason();
+            reason = incomingTimeslot.getReason().trim();
         }
         if (reason.length() > MAX_REASON_LENGTH) {
             log.warn("truncated reason from length {} to {}", reason.length(), MAX_REASON_LENGTH);
             reason = reason.substring(0, MAX_REASON_LENGTH);
         }
+        
+        if (phone == null) {
+            phone = "";
+        } else {
+            phone = phone.trim();
+        }
+        
         // TODO - MAP_PHONE_NUMBER = false - can this code be deleted?
-        if (MAP_PHONE_NUMBER) {
+        if (MAP_PHONE_NUMBER && StringUtils.isNotBlank(phone)) {
             if (reason.length() > (MAX_REASON_LENGTH - (phone.trim().length() + 1))) {
-                reason = reason.substring(0, MAX_REASON_LENGTH - (phone.trim().length() + 1)) + phone.trim().length();
+                reason = reason.substring(0, MAX_REASON_LENGTH - (phone.trim().length() + 1)) + " " + phone.trim().length();
             } else {
-                reason += phone.trim();
+                reason = reason + " " + phone.trim();
             }
         }
         return reason;
