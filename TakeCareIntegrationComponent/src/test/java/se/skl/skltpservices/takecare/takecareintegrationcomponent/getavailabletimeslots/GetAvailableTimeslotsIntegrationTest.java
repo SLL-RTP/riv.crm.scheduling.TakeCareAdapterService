@@ -6,9 +6,9 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer.getAddress;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabletimeslots.GetAvailableTimeslotsTestProducer.TEST_HEALTHCAREFACILITY_INVALID_ID;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabletimeslots.GetAvailableTimeslotsTestProducer.TEST_HEALTHCAREFACILITY_OK;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabletimeslots.GetAvailableTimeslotsTestProducer.TEST_ID_FAULT_TIMEOUT;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetAvailableTimeslotsTestProducer.TEST_HEALTHCAREFACILITY_INVALID_ID;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetAvailableTimeslotsTestProducer.TEST_HEALTHCAREFACILITY_OK;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetAvailableTimeslotsTestProducer.TEST_ID_FAULT_TIMEOUT;
 
 import javax.xml.ws.soap.SOAPFaultException;
 

@@ -2,9 +2,9 @@ package se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofc
 
 import static org.junit.Assert.*;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer.getAddress;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule.GetBookingsTestProducer.TEST_ID_FAULT_TIMEOUT;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule.GetBookingsTestProducer.TEST_SUBJECTOFCARE_INVALID_ID;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule.GetBookingsTestProducer.TEST_SUBJECTOFCARE_OK;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetBookingsTestProducer.TEST_ID_FAULT_TIMEOUT;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetBookingsTestProducer.TEST_SUBJECTOFCARE_INVALID_ID;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetBookingsTestProducer.TEST_SUBJECTOFCARE_OK;
 
 import javax.xml.ws.soap.SOAPFaultException;
 

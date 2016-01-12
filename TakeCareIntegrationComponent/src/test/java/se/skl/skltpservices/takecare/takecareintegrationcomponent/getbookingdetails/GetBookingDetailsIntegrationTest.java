@@ -5,9 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer.getAddress;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getbookingdetails.GetBookingTestProducer.TEST_BOOKINGID_INVALID_ID;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getbookingdetails.GetBookingTestProducer.TEST_BOOKINGID_OK;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getbookingdetails.GetBookingTestProducer.TEST_ID_FAULT_TIMEOUT;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetBookingsTestProducer.TEST_BOOKINGID_INVALID_ID;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetBookingsTestProducer.TEST_ID_FAULT_TIMEOUT;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
@@ -53,7 +52,7 @@ public class GetBookingDetailsIntegrationTest extends AbstractTestCase {
 
 	@Test
 	public void test_ok() throws Fault {
-		String bookingId = TEST_BOOKINGID_OK;
+		String bookingId = "123";
 		String healtcareFacility = "HSA-VKK123";
 
 		GetBookingDetailsTestConsumer consumer = new GetBookingDetailsTestConsumer(DEFAULT_SERVICE_ADDRESS);

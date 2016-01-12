@@ -46,6 +46,14 @@ public class MakeBookingTestConsumer extends TakeCareTestConsumer {
             throw new RuntimeException("Malformed URL Exception: " + e.getMessage());
         }
     }
+    
+    public MakeBookingResponseType callService(String healthcareFacility, String subjectOfCare, String requestedTimeslotReason) throws Fault {
+        log.debug("Calling MakeBooking-service with healthcareFacility {}, subjectOfCare {}", healthcareFacility, subjectOfCare);
+        MakeBookingType request = new MakeBookingType();
+        request.setRequestedTimeslot(createTimeslot(healthcareFacility, subjectOfCare));
+        request.getRequestedTimeslot().setReason(requestedTimeslotReason);
+        return callService(request, healthcareFacility);
+    }
 
     /**
      * tfn is an ugly hack
@@ -57,14 +65,16 @@ public class MakeBookingTestConsumer extends TakeCareTestConsumer {
      * @throws Fault
      */
     public MakeBookingResponseType callService(String healthcareFacility, String subjectOfCare, boolean tfn) throws Fault {
-        log.debug("Calling MakeBooking-service with healthcareFacility {}, subjectOfCare {}", healthcareFacility,
-                subjectOfCare);
+        log.debug("Calling MakeBooking-service with healthcareFacility {}, subjectOfCare {}", healthcareFacility, subjectOfCare);
         MakeBookingType request = new MakeBookingType();
-        request.setHealthcareFacilityMed(healthcareFacility);
-        request.setNotification("Notification value");
         request.setRequestedTimeslot(createTimeslot(healthcareFacility, subjectOfCare));
         request.setSubjectOfCareInfo(createSubjectOfCare(tfn));
-
+        return callService(request, healthcareFacility);
+    }
+    
+    private MakeBookingResponseType callService(MakeBookingType request, String healthcareFacility) {
+        request.setHealthcareFacilityMed(healthcareFacility);
+        request.setNotification("Notification value");
         return _service.makeBooking(new AttributedURIType(), request);
     }
 
