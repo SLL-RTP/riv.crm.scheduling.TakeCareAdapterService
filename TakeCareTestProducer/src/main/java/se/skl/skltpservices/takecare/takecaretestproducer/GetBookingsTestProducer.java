@@ -23,11 +23,10 @@ import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessa
 @WebService(targetNamespace = "http://tempuri.org/", name = "BookingSoap", portName = "BookingSoap")
 public class GetBookingsTestProducer extends TakeCareTestProducer implements BookingSoap {
 
-	public static final String TEST_SUBJECTOFCARE_OK = "194001079120";
+	public static final String TEST_SUBJECTOFCARE_OK         = "194001079120";
 	public static final String TEST_SUBJECTOFCARE_INVALID_ID = "194001079121";
-	public static final String TEST_ID_FAULT_TIMEOUT = "194001079122";
-    public static final String TEST_BOOKINGID_INVALID_ID = "194001079121";
-
+	public static final String TEST_ID_FAULT_TIMEOUT         = "194001079122";
+    public static final String TEST_BOOKINGID_INVALID_ID     = "194001079121";
 
 	private static final Logger log = LoggerFactory.getLogger(GetBookingsTestProducer.class);
 	private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("TakeCareTestProducer-config");
@@ -44,12 +43,12 @@ public class GetBookingsTestProducer extends TakeCareTestProducer implements Boo
 	public String getBookings(String tcusername, String tcpassword, String externaluser, String careunitidtype,
 			String careunitid, String xml) {
 
-		log.debug("Incoming username to TakeCare {}", tcusername);
-		log.debug("Incoming password to TakeCare {}", tcpassword);
-		log.debug("Incoming externaluser to TakeCare {}", externaluser);
+		log.debug("Incoming username to TakeCare {}"      , tcusername);
+		log.debug("Incoming password to TakeCare {}"      , tcpassword);
+		log.debug("Incoming externaluser to TakeCare {}"  , externaluser);
 		log.debug("Incoming careunitidtype to TakeCare {}", careunitidtype);
-		log.debug("Incoming careunitid to TakeCare {}", careunitid);
-		log.debug("Incoming xml to TakeCare {}", xml);
+		log.debug("Incoming careunitid to TakeCare {}"    , careunitid);
+		log.debug("Incoming xml to TakeCare {}"           , xml);
 
         se.skl.skltpservices.takecare.booking.getbookingsrequest.ProfdocHISMessage incomingMessage = new se.skl.skltpservices.takecare.booking.getbookingsrequest.ProfdocHISMessage();
         incomingMessage
