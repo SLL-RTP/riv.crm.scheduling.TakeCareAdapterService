@@ -5,9 +5,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer.getAddress;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking.MakeBookingTestProducer.TEST_CAREUNIT_INVALID_ID;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking.MakeBookingTestProducer.TEST_CAREUNIT_OK;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking.MakeBookingTestProducer.TEST_ID_FAULT_TIMEOUT;
+import static se.skl.skltpservices.takecare.takecaretestproducer.MakeBookingTestProducer.TEST_CAREUNIT_INVALID_ID;
+import static se.skl.skltpservices.takecare.takecaretestproducer.MakeBookingTestProducer.TEST_CAREUNIT_OK;
+import static se.skl.skltpservices.takecare.takecaretestproducer.MakeBookingTestProducer.TEST_ID_FAULT_TIMEOUT;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
@@ -18,6 +18,7 @@ import org.soitoolkit.commons.mule.test.junit4.AbstractTestCase;
 import org.soitoolkit.refapps.sd.sample.wsdl.v1.Fault;
 
 import se.riv.crm.scheduling.makebooking.v1.MakeBookingResponseType;
+import se.riv.crm.scheduling.v1.ResultCodeEnum;
 
 public class MakeBookingIntegrationTest extends AbstractTestCase {
 
@@ -107,5 +108,41 @@ public class MakeBookingIntegrationTest extends AbstractTestCase {
         assertNotNull(response.getBookingId());
         assertEquals("INFO", response.getResultCode().toString());
         assertEquals("Tyvärr kunde inte telefonnumret sparas med bokningen", response.getResultText());
+    }
+    
+    
+    @Test
+    public void timeslotReasonTooLong() {
+        String healthcareFacility = TEST_CAREUNIT_OK;
+        String subjectOfCare = "191414141414";
+        MakeBookingTestConsumer consumer = new MakeBookingTestConsumer(DEFAULT_SERVICE_ADDRESS);
+        String fiftyCharacters = "0123456789 123456789 123456789 123456789 123456789";
+        String tooLongReason = fiftyCharacters + fiftyCharacters + fiftyCharacters + fiftyCharacters + fiftyCharacters + fiftyCharacters + "x";
+        assertTrue(tooLongReason.length() > MakeBookingRequestTransformer.MAX_REASON_LENGTH);
+        try {
+            MakeBookingResponseType response = consumer.callService(healthcareFacility, subjectOfCare, tooLongReason);
+            // adapter will truncate to the right length and log a warning
+            // no errors are returned to the consumer
+            assertEquals(ResultCodeEnum.OK, response.getResultCode());
+        } catch (Fault e) {
+            fail("unexpected exception " + e.getLocalizedMessage());
+        }
+    }
+    
+    @Test
+    public void timeslotReasonNotTooLong() {
+        String healthcareFacility = TEST_CAREUNIT_OK;
+        String subjectOfCare = "191414141414";
+        MakeBookingTestConsumer consumer = new MakeBookingTestConsumer(DEFAULT_SERVICE_ADDRESS);
+        String fiftyCharacters = "0123456789 123456789 123456789 123456789 123456789";
+        assertEquals(50,fiftyCharacters.length());
+        String notTooLongReason = fiftyCharacters + fiftyCharacters + fiftyCharacters + fiftyCharacters + fiftyCharacters + fiftyCharacters;
+        assertTrue(notTooLongReason.length() == MakeBookingRequestTransformer.MAX_REASON_LENGTH);
+        try {
+            MakeBookingResponseType response = consumer.callService(healthcareFacility, subjectOfCare, notTooLongReason);
+            assertEquals(ResultCodeEnum.OK, response.getResultCode());
+        } catch (Fault e) {
+            fail("unexpected exception " + e.getLocalizedMessage());
+        }
     }
 }

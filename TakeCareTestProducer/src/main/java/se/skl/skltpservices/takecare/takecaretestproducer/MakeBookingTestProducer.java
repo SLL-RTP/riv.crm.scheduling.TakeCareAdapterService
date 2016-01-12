@@ -16,7 +16,9 @@ import se.skl.skltpservices.takecare.booking.BookingSoap;
 import se.skl.skltpservices.takecare.booking.makebookingresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.makebookingresponse.ProfdocHISMessage.BookingConfirmation;
 
-@WebService(targetNamespace = "http://tempuri.org/", name = "BookingSoap", portName = "BookingSoap")
+@WebService(targetNamespace = "http://tempuri.org/", 
+                       name = "BookingSoap", 
+                   portName = "BookingSoap")
 public class MakeBookingTestProducer extends TakeCareTestProducer implements BookingSoap {
 
     private static final JaxbUtil jaxbUtil_outgoing = new JaxbUtil(ProfdocHISMessage.class);
@@ -27,34 +29,35 @@ public class MakeBookingTestProducer extends TakeCareTestProducer implements Boo
     private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("TakeCareTestProducer-config");
     private static final long SERVICE_TIMOUT_MS = Long.parseLong(rb.getString("SERVICE_TIMEOUT_MS"));
 
-    public String makeBooking(String tcusername, String tcpassword, String externaluser, String careunitidtype,
-            String careunitid, String xml) {
+    public String makeBooking(String tcusername, String tcpassword, String externaluser, String careunitidtype, String careunitid, String xml) {
 
-        log.debug("Incoming username to TakeCare {}", tcusername);
-        log.debug("Incoming password to TakeCare {}", tcpassword);
-        log.debug("Incoming externaluser to TakeCare {}", externaluser);
+        log.debug("Incoming username to TakeCare {}"      , tcusername);
+        log.debug("Incoming password to TakeCare {}"      , tcpassword);
+        log.debug("Incoming externaluser to TakeCare {}"  , externaluser);
         log.debug("Incoming careunitidtype to TakeCare {}", careunitidtype);
-        log.debug("Incoming careunitid to TakeCare {}", careunitid);
-        log.debug("Incoming xml to TakeCare {}", xml);
+        log.debug("Incoming careunitid to TakeCare {}"    , careunitid);
+        log.debug("Incoming xml to TakeCare {}"           , xml);
 
-        se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage incomingMessage = new se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage();
-        incomingMessage
-                = (se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage) super.unmarshalXmlToProfdocHISMessage(incomingMessage, "urn:ProfdocHISMessage:MakeBooking:Request", xml);
+        // ProfdocHISMessage - request
+        se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage incomingMessage
+                = (se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage) 
+                   super.unmarshalXmlToProfdocHISMessage(new se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage(), "urn:ProfdocHISMessage:MakeBooking:Request", xml);
 
         String incomingCareUnitId = incomingMessage.getCareUnitId();
         
         String patientReason = incomingMessage.getPatientReason();
         if (StringUtils.isNotBlank(patientReason)) {
             if (patientReason.length() > 300) {
+                // this should never happen - should be trimmed by the adapter
                 se.skl.skltpservices.takecare.booking.error.ProfdocHISMessage error 
                 = createErrorResponseMessage(incomingCareUnitId, externaluser);
                 error.getError().setCode(3002);
                 error.getError().setMsg("patient reason is longer than 300 characters");;
                 error.getError().setType("System");
+                log.error(error.getError().getMsg());
                 return this.createErrorResponseXml(error);
             }
         }
-        
 
         if (TEST_CAREUNIT_INVALID_ID.equals(incomingCareUnitId)) {
             return createErrorResponse(incomingCareUnitId, externaluser);
@@ -65,52 +68,53 @@ public class MakeBookingTestProducer extends TakeCareTestProducer implements Boo
             }
         }
 
+        // ProfdocHISMessage - response
         return createOkResponse(externaluser, careunitid, incomingMessage);
-
     }
 
     private String createOkResponse(String externaluser, String careunitid,
-            se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage incomingBookingRequest) {
+            se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage incomingMessage) {
 
-        ProfdocHISMessage outgoing_response = new ProfdocHISMessage();
-        outgoing_response.setCareUnit(careunitid);
-        outgoing_response.setCareUnitType(TakeCareUtil.HSAID);
-        outgoing_response.setMethod("Booking.MakeBooking");
-        outgoing_response.setMsgType(TakeCareUtil.RESPONSE);
-        outgoing_response.setSystem("ProfdocHIS");
-        outgoing_response.setSystemInstance(0);
-        outgoing_response.setTime(yyyyMMddHHmmss(new Date()));
-        outgoing_response.setUser(externaluser);
+        ProfdocHISMessage outgoingMessage = new ProfdocHISMessage();
+        outgoingMessage.setCareUnit(careunitid);
+        outgoingMessage.setCareUnitType(TakeCareUtil.HSAID);
+        outgoingMessage.setMethod("Booking.MakeBooking");
+        outgoingMessage.setMsgType(TakeCareUtil.RESPONSE);
+        outgoingMessage.setSystem("ProfdocHIS");
+        outgoingMessage.setSystemInstance(0);
+        outgoingMessage.setTime(yyyyMMddHHmmss(new Date()));
+        outgoingMessage.setUser(externaluser);
 
-        outgoing_response.setBookingConfirmation(createBookingConfirmation(incomingBookingRequest));
+        outgoingMessage.setBookingConfirmation(createBookingConfirmation(incomingMessage));
 
         jaxbUtil_outgoing.addMarshallProperty("com.sun.xml.bind.xmlDeclaration", false);
-        return jaxbUtil_outgoing.marshal(outgoing_response, "", "ProfdocHISMessage");
+        return jaxbUtil_outgoing.marshal(outgoingMessage, "", "ProfdocHISMessage");
     }
 
     private BookingConfirmation createBookingConfirmation(
-            se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage incomingBookingRequest) {
+            se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage incomingMessage) {
 
         BookingConfirmation bookingConfirmation = new BookingConfirmation();
         bookingConfirmation.setBookingId(UUID.randomUUID().toString());
-        bookingConfirmation.setCareUnitId(incomingBookingRequest.getCareUnitId());
+        bookingConfirmation.setCareUnitId(incomingMessage.getCareUnitId());
         bookingConfirmation.setCareUnitIdType(TakeCareUtil.HSAID);
         bookingConfirmation.setCareUnitName("CareUnit name");
 
-        bookingConfirmation.setPatientId(incomingBookingRequest.getPatientId());
-        bookingConfirmation.setPatientReason(incomingBookingRequest.getPatientReason());
+        bookingConfirmation.setPatientId(incomingMessage.getPatientId());
+        bookingConfirmation.setPatientReason(incomingMessage.getPatientReason());
 
-        // ResourceType är ett heltal som anger vilken typ av resurs som
-        // bokades. ResourceType har något av följande värden: 1 (namngiven
-        // resurs), 2 (befattning), 3 (sängplats), eller 4 (lokal/rum).
+        // 1 - namngiven resurs
+        // 2 - befattning
+        // 3 - sängplats       
+        // 4 - lokal/rum
         bookingConfirmation.setResourceId(new BigInteger("1"));
         bookingConfirmation.setResourceName("Namngiven resurs");
         bookingConfirmation.setResourceType(Short.valueOf("1"));
 
-        bookingConfirmation.setStartTime(incomingBookingRequest.getStartTime());
+        bookingConfirmation.setStartTime(incomingMessage.getStartTime());
         bookingConfirmation.setTimeTypeId(1);
         bookingConfirmation.setTimeTypeName("TimeType1");
-        bookingConfirmation.setEndTime(incomingBookingRequest.getEndTime());
+        bookingConfirmation.setEndTime(incomingMessage.getEndTime());
 
         return bookingConfirmation;
     }

@@ -6,17 +6,19 @@ import java.util.UUID;
 
 import javax.jws.WebService;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
-import se.skl.skltpservices.takecare.JaxbHelper;
 
+import se.skl.skltpservices.takecare.JaxbHelper;
 import se.skl.skltpservices.takecare.TakeCareTestProducer;
 import se.skl.skltpservices.takecare.TakeCareUtil;
 import se.skl.skltpservices.takecare.booking.BookingSoap;
 import se.skl.skltpservices.takecare.booking.makebookingresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.makebookingresponse.ProfdocHISMessage.BookingConfirmation;
+import se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking.MakeBookingRequestTransformer;
 
 @WebService(targetNamespace = "http://tempuri.org/", name = "BookingSoap", portName = "BookingSoap")
 public class MakeBookingTestProducer extends TakeCareTestProducer implements BookingSoap {
@@ -39,6 +41,21 @@ public class MakeBookingTestProducer extends TakeCareTestProducer implements Boo
         incomingMessage = (se.skl.skltpservices.takecare.booking.makebookingrequest.ProfdocHISMessage)
                 JaxbHelper.transform(incomingMessage, "urn:ProfdocHISMessage:MakeBooking:Request", xml);
         String incomingCareUnitId = incomingMessage.getCareUnitId();
+        String patientReason = incomingMessage.getPatientReason();
+        
+        if (StringUtils.isNotBlank(patientReason)) {
+            // this should never happen - should be trimmed by the adapter
+            if (patientReason.length() > MakeBookingRequestTransformer.MAX_REASON_LENGTH) {
+                se.skl.skltpservices.takecare.booking.error.ProfdocHISMessage error 
+                = createErrorResponseMessage(incomingCareUnitId, externaluser);
+                error.getError().setCode(3002);
+                error.getError().setMsg("patient reason is longer than " + MakeBookingRequestTransformer.MAX_REASON_LENGTH + " characters");;
+                error.getError().setType("System");
+                log.error(error.getError().getMsg());
+                return this.createErrorResponseXml(error);
+            }
+        }
+
         if (TEST_CAREUNIT_INVALID_ID.equals(incomingCareUnitId)) {
             return createErrorResponse(externaluser, incomingCareUnitId);
         } else if (TEST_ID_FAULT_TIMEOUT.equals(incomingCareUnitId)) {
