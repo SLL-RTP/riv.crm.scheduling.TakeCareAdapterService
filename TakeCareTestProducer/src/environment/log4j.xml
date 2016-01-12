@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
-<!-- src/main/resources -->
+<!-- src/environment -->
+
 
 <log4j:configuration>
 
@@ -75,9 +76,9 @@
 	
 	<root>
 		<priority value="INFO" />
-		<appender-ref ref="CONSOLE" />
         <!--
+		<appender-ref ref="CONSOLE" />
+         -->
 		<appender-ref ref="ROLLINGFILE"/>
-        -->
 	</root>
 </log4j:configuration>

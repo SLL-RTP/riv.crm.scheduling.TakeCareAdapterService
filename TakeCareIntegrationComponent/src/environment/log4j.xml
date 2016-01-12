@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
-<!-- src/main/resources -->
+<!-- src/environment -->
 
 <log4j:configuration>
 
@@ -13,7 +13,7 @@
 	</appender>
 
     <appender name="ROLLINGFILE" class="org.apache.log4j.RollingFileAppender">
-        <param name="file" value="${mule.home}/logs/mule-app-TakeCareTestProducer.log" />
+        <param name="file" value="${mule.home}/logs/mule-app-TakeCareIntegrationComponent.log" />
         <param name="MaxFileSize" value="1000KB" />
         <param name="MaxBackupIndex" value="3" />
         <layout class="org.apache.log4j.PatternLayout">
@@ -63,7 +63,7 @@
 		<level value="INFO" />
 	</logger>
 	
-	<logger name="se.skl.skltpservices.takecare.takecaretestproducer">
+	<logger name="se.skl.skltpservices.takecare">
 		<level value="DEBUG" />
 	</logger>
 
@@ -75,9 +75,9 @@
 	
 	<root>
 		<priority value="INFO" />
-		<appender-ref ref="CONSOLE" />
         <!--
+		<appender-ref ref="CONSOLE" />
+          -->
 		<appender-ref ref="ROLLINGFILE"/>
-        -->
 	</root>
 </log4j:configuration>
