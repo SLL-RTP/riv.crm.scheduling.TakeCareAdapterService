@@ -13,12 +13,12 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 	<parent>
 		<groupId>se.skl.skltpservices.takecare</groupId>
 		<artifactId>TakeCareIntegrationComponent-system</artifactId>
-		<version>1.0.3</version>
+		<version>1.0.4-SNAPSHOT</version>
 	</parent>
 
 	<groupId>se.riv.crm.scheduling</groupId>
 	<artifactId>CrmScheduling-Schemas</artifactId>
-	<version>1.0.3</version>
+	<version>1.0</version>
     <packaging>jar</packaging>
     <name>CrmScheduling-Schemas</name>
 

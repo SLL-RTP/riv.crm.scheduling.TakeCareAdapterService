@@ -14,7 +14,7 @@
 
 	<groupId>se.skl.skltpservices.takecare</groupId>
 	<artifactId>TakeCareIntegrationComponent-system</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 
