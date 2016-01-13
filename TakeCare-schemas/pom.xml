@@ -6,21 +6,18 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 [soi-toolkit.gen.createDate=2012-06-07T10:28:42.240+02:00]
 [soi-toolkit.gen.artifactId=TakeCareServiceSescriptionComponent]
 -->
-<project 
-	xmlns="http://maven.apache.org/POM/4.0.0" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
   
 	<parent>
 		<groupId>se.skl.skltpservices.takecare</groupId>
 		<artifactId>TakeCareIntegrationComponent-system</artifactId>
-		<version>1.0.3-SNAPSHOT</version>
+		<version>1.0.3</version>
 	</parent>
 
 	<artifactId>TakeCare-schemas</artifactId>
-	 <version>1.0</version>
+	 <version>1.0.3</version>
     	<packaging>jar</packaging>
     	<name>TakeCare-schemas</name>
 
