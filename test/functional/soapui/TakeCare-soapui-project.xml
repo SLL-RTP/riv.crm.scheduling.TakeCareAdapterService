@@ -523,7 +523,7 @@ xmlns:tem="http://tempuri.org/">
          <tem:careunitidtype>hsaid</tem:careunitidtype>
          <tem:careunitid>HSA-VKK123</tem:careunitid>
          <tem:xml>
-         <![CDATA[<ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210060537" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:CancelBooking:Request"><BookingId>0</BookingId><PatientReason>I want to cancel this</PatientReason></ProfdocHISMessage>]]]]>><![CDATA[
+         <![CDATA[<ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210060537" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:CancelBooking:Request"><BookingId>1</BookingId><PatientReason>I want to cancel this</PatientReason></ProfdocHISMessage>]]]]>><![CDATA[
          </tem:xml>
       </tem:CancelBooking>
    </soapenv:Body>
