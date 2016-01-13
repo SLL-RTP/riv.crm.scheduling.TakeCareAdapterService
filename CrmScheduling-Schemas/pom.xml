@@ -1,50 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
 DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOING!
 [soi-toolkit.gen.version=0.5.0]
 [soi-toolkit.gen.type=schemas]
 [soi-toolkit.gen.createDate=2012-06-09T19:19:21.944+02:00]
 [soi-toolkit.gen.artifactId=crm-scheduling-schemas]
 -->
-<project 
-	xmlns="http://maven.apache.org/POM/4.0.0" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-  
+
 	<parent>
 		<groupId>se.skl.skltpservices.takecare</groupId>
 		<artifactId>TakeCareIntegrationComponent-system</artifactId>
-		<version>1.0.3-SNAPSHOT</version>
+		<version>1.0.4-SNAPSHOT</version>
 	</parent>
 
 	<groupId>se.riv.crm.scheduling</groupId>
 	<artifactId>CrmScheduling-Schemas</artifactId>
-	<version>1.0</version>
-    <packaging>jar</packaging>
-    <name>CrmScheduling-Schemas</name>
-
-	<scm>
-        <!-- TODO: Sample <scm>-tag, update to reflect you own environment! -->
-		<connection>scm:svn:https://my-subversion-server/svn/crm-scheduling-schemas-schemas/trunk</connection>
-		<developerConnection>scm:svn:https://my-subversion-server/svn/crm-scheduling-schemas-schemas/trunk</developerConnection>
-		<url>https://my-subversion-server/svn/crm-scheduling-schemas-schemas/trunk</url>
-	</scm>
-	
-	<distributionManagement>
-        <!-- TODO: Sample <distributionManagement>-tag, update to reflect you own environment! -->
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Snapshot Repository</name>
-            <url>http://my-maven-repo-server/repositories/snapshots</url>
-        </snapshotRepository>  
-        <repository>
-            <id>releases</id>
-            <name>Release Repository</name>
-            <url>http://my-maven-repo-server/repositories/releases</url>
-        </repository>
-    </distributionManagement>
+  <packaging>jar</packaging>
+  <name>CrmScheduling-Schemas</name>
 
 	<properties>
         <!-- Properties for generating code from WSDL and XML Schemas (JAX-WS + JAXB) -->
@@ -61,7 +36,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
       <scope>provided</scope>
     </dependency>
   </dependencies>
- 
+
  	<build>
 		<plugins>
 			<plugin>
@@ -75,11 +50,11 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 						<configuration>
 							<sourceRoot>${schema.gen.src.dir}</sourceRoot>
 							<wsdlOptions>
-              
+
 								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!
 										<extraarg>
 											urn:riv:crm:scheduling:UpdateBooking:1:rivtabp20=se.riv.crm.scheduling.updatebooking.v1
 										</extraarg>
@@ -97,12 +72,12 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 										</extraarg>
 									</extraargs>
 									<wsdl>${schema.path}/interactions/UpdateBookingInteraction/UpdateBookingInteraction_1.0_rivtabp20.wsdl</wsdl>
-								</wsdlOption>								
+								</wsdlOption>
 
 								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!
 										<extraarg>
 											urn:riv:crm:scheduling:MakeBooking:1:rivtabp20=se.riv.crm.scheduling.makebooking.v1
 										</extraarg>
@@ -120,12 +95,12 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 										</extraarg>
 									</extraargs>
 									<wsdl>${schema.path}/interactions/MakeBookingInteraction/MakeBookingInteraction_1.0_rivtabp20.wsdl</wsdl>
-								</wsdlOption>								
+								</wsdlOption>
 
 								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!
 										<extraarg>
 											urn:riv:crm:scheduling:GetSubjectOfCareSchedule:1:rivtabp20=se.riv.crm.scheduling.getsubjectofcareschedule.v1
 										</extraarg>
@@ -143,12 +118,12 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 										</extraarg>
 									</extraargs>
 									<wsdl>${schema.path}/interactions/GetSubjectOfCareScheduleInteraction/GetSubjectOfCareScheduleInteraction_1.0_rivtabp20.wsdl</wsdl>
-								</wsdlOption>								
+								</wsdlOption>
 
  								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!
 										<extraarg>
 											urn:riv:crm:scheduling:GetCancelledAndRebooked:1:rivtabp20=se.riv.crm.scheduling.getcancelledandrebooked.v1
 										</extraarg>
@@ -166,12 +141,12 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 										</extraarg>
 									</extraargs>
 									<wsdl>${schema.path}/interactions/GetCancelledAndRebookedInteraction/GetCancelledAndRebookedInteraction_1.0_rivtabp20.wsdl</wsdl>
-								</wsdlOption>								
+								</wsdlOption>
 
  								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!
 										<extraarg>
 											urn:riv:crm:scheduling:GetBookingDetails:1:rivtabp20=se.riv.crm.scheduling.getbookingdetails.v1
 										</extraarg>
@@ -189,12 +164,12 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 										</extraarg>
 									</extraargs>
 									<wsdl>${schema.path}/interactions/GetBookingDetailsInteraction/GetBookingDetailsInteraction_1.0_rivtabp20.wsdl</wsdl>
-								</wsdlOption>								
+								</wsdlOption>
 
  								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!
 										<extraarg>
 											urn:riv:crm:scheduling:GetAvailableTimeslots:1:rivtabp20=se.riv.crm.scheduling.getavailabletimeslots.v1
 										</extraarg>
@@ -212,12 +187,12 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 										</extraarg>
 									</extraargs>
 									<wsdl>${schema.path}/interactions/GetAvailableTimeslotsInteraction/GetAvailableTimeslotsInteraction_1.0_rivtabp20.wsdl</wsdl>
-								</wsdlOption>								
+								</wsdlOption>
 
  								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!
 										<extraarg>
 											urn:riv:crm:scheduling:GetAvailableDates:1:rivtabp20=se.riv.crm.scheduling.getavailabledates.v1
 										</extraarg>
@@ -240,7 +215,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
  								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!
 										<extraarg>
 											urn:riv:crm:scheduling:GetAllTimeTypes:1:rivtabp20=se.riv.crm.scheduling.getalltimetypes.v1
 										</extraarg>
@@ -263,7 +238,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
  								<wsdlOption>
 									<extraargs>
 										<extraarg>-p</extraarg>
-										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!										 
+										Note: be careful when changing this - must be in sync for all schemas generations in this namespace!
 										<extraarg>
 											urn:riv:crm:scheduling:CancelBooking:1:rivtabp20=se.riv.crm.scheduling.cancelbooking.v1
 										</extraarg>
@@ -321,5 +296,5 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
 		</plugins>
 	</build>
-  
+
 </project>

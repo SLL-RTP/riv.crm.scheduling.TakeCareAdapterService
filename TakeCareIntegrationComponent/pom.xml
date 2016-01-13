@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOING! 
-    [soi-toolkit.gen.version=0.5.0] 
+<!-- DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOING!
+    [soi-toolkit.gen.version=0.5.0]
     [soi-toolkit.gen.type=services]
-    [soi-toolkit.gen.createDate=2012-05-30T09:57:00.179+02:00] 
+    [soi-toolkit.gen.createDate=2012-05-30T09:57:00.179+02:00]
     [soi-toolkit.gen.artifactId=TakeCareIntegrationComponent] -->
-<project 
-  xmlns="http://maven.apache.org/POM/4.0.0" 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>se.skl.skltpservices.takecare</groupId>
     <artifactId>TakeCareIntegrationComponent-system</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
   </parent>
 
   <artifactId>TakeCareIntegrationComponent</artifactId>
@@ -25,12 +22,12 @@
     <dependency>
       <groupId>se.skl.skltpservices.takecare</groupId>
       <artifactId>TakeCare-schemas</artifactId>
-      <version>1.0</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>se.riv.crm.scheduling</groupId>
       <artifactId>CrmScheduling-Schemas</artifactId>
-      <version>1.0</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.soitoolkit.commons.components</groupId>
@@ -167,9 +164,9 @@
   <profiles>
     <profile>
       <id>muleServer</id>
-      <!-- Start mule server with the command 
-             mvn -PmuleServer or 
-             mvn -PmuleServer -Dexec.args="${artifaceId}-config.xml" 
+      <!-- Start mule server with the command
+             mvn -PmuleServer or
+             mvn -PmuleServer -Dexec.args="${artifaceId}-config.xml"
            if you want to override the default config-file -->
       <build>
         <defaultGoal>test</defaultGoal>
