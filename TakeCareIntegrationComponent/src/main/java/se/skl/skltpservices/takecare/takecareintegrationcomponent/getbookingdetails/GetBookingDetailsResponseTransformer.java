@@ -14,13 +14,13 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import se.riv.crm.scheduling.getbookingdetails.v1.GetBookingDetailsResponseType;
 import se.riv.crm.scheduling.getbookingdetails.v1.ObjectFactory;
 import se.riv.crm.scheduling.v1.TimeslotType;
-import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareResponseTransformer;
 import se.skl.skltpservices.takecare.booking.GetBookingsResponse;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage.Bookings;
 import se.skl.skltpservices.takecare.booking.getbookingsresponse.ProfdocHISMessage.Bookings.Booking;
 
-public class GetBookingDetailsResponseTransformer extends TakeCareResponseTransformer {
+public class GetBookingDetailsResponseTransformer extends AbstractTakeCareResponseTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(GetBookingDetailsResponseTransformer.class);
 

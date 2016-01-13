@@ -1,192 +1,220 @@
 	<?xml version="1.0"?>
-<!-- * Copyright 2009 Sjukvardsradgivningen * * This library is free software; 
-	you can redistribute it and/or modify * it under the terms of version 2.1 
-	of the GNU Lesser General Public * License as published by the Free Software 
-	Foundation. * * This library is distributed in the hope that it will be useful, 
-	* but WITHOUT ANY WARRANTY; without even the implied warranty of * MERCHANTABILITY 
-	or FITNESS FOR A PARTICULAR PURPOSE. See the * GNU Lesser General Public 
-	License for more details. * * You should have received a copy of the GNU 
-	Lesser General Public * License along with this library; if not, write to 
-	the * Free Software Foundation, Inc., 59 Temple Place, Suite 330, * Boston, 
-	MA 02111-1307 USA -->
+<!-- * Copyright 2009 Sjukvardsradgivningen * 
+     * This library is free software; you can redistribute it and/or modify 
+     * it under the terms of version 2.1 of the GNU Lesser General Public 
+     * License as published by the Free Software Foundation. 
+     * 
+     * This library is distributed in the hope that it will be useful,
+     * but WITHOUT ANY WARRANTY; without even the implied warranty of 
+     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+     * GNU Lesser General Public License for more details.
+     *
+     * You should have received a copy of the GNU Lesser General Public 
+     * License along with this library; if not, write to the
+     * Free Software Foundation, Inc., 59 Temple Place, Suite 330, 
+     * Boston, MA 02111-1307 USA -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project 
+  xmlns="http://maven.apache.org/POM/4.0.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>se.skl.skltpservices.takecare</groupId>
-		<artifactId>TakeCareIntegrationComponent-system</artifactId>
-		<version>1.0.3-SNAPSHOT</version>
-	</parent>
+  <parent>
+    <groupId>se.skl.skltpservices.takecare</groupId>
+    <artifactId>TakeCareIntegrationComponent-system</artifactId>
+    <version>1.0.3-SNAPSHOT</version>
+  </parent>
 
-	<artifactId>TakeCareTestProducer</artifactId>
-	<name>TakeCareTestProducer</name>
-	<url>http://maven.apache.org</url>
-	<packaging>mule</packaging>
+  <artifactId>TakeCareTestProducer</artifactId>
+  <name>TakeCareTestProducer</name>
+  <url>http://maven.apache.org</url>
+  <packaging>mule</packaging>
 
+  <properties>
+    <cxf.version>2.6.1</cxf.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
 
-	<properties>
-		<cxf.version>2.6.1</cxf.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	</properties>
+  <dependencies>
+  
+    <!-- schema dependency -->
+    <dependency>
+      <groupId>se.skl.skltpservices.takecare</groupId>
+      <artifactId>TakeCare-schemas</artifactId>
+      <version>1.0</version>
+    </dependency>
 
-	<dependencies>
-		<!-- schema dependency -->
-		<dependency>
-			<groupId>se.skl.skltpservices.takecare</groupId>
-			<artifactId>TakeCare-schemas</artifactId>
-			<version>1.0</version>
-		</dependency>
+    <!-- soitoolkit -->
 
-		<!--soitoolkit -->
+    <dependency>
+      <groupId>org.soitoolkit.commons.components</groupId>
+      <artifactId>soitoolkit-commons-mule</artifactId>
+      <version>${soitoolkit.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.soitoolkit.commons.poms</groupId>
+      <artifactId>soitoolkit-test-dependencies</artifactId>
+      <version>${soitoolkit.version}</version>
+      <type>pom</type>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
+      <artifactId>soitoolkit-mule-3.3.1-dependencies</artifactId>
+      <version>${soitoolkit.version}</version>
+      <type>pom</type>
+    </dependency>
 
-		<dependency>
-			<groupId>org.soitoolkit.commons.components</groupId>
-			<artifactId>soitoolkit-commons-mule</artifactId>
-			<version>${soitoolkit.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.soitoolkit.commons.poms</groupId>
-			<artifactId>soitoolkit-test-dependencies</artifactId>
-			<version>${soitoolkit.version}</version>
-			<type>pom</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.soitoolkit.commons.poms.mule-dependencies</groupId>
-			<artifactId>soitoolkit-mule-3.2.1-dependencies</artifactId>
-			<version>${soitoolkit.version}</version>
-			<type>pom</type>
-		</dependency>
+    <!-- cxf -->
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-frontend-jaxws</artifactId>
+      <version>${cxf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http</artifactId>
+      <version>${cxf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http-jetty</artifactId>
+      <version>${cxf.version}</version>
+    </dependency>
+  </dependencies>
 
-		<!-- CXF -->
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxws</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http-jetty</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-	</dependencies>
+  <build>
+    <resources>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>${basedir}/src/main/app</directory>
+      </resource>
+    </resources>
 
-	<build>
-		<resources>
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
-			</resource>
+    <plugins>
+      <plugin>
+        <!-- Add mule-nature to the eclipse-.project-file -->
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <configuration>
+          <additionalProjectnatures>
+            <projectnature>org.mule.tooling.core.muleNature</projectnature>
+          </additionalProjectnatures>
+        </configuration>
+      </plugin>
 
-			<resource>
-				<directory>${basedir}/src/main/app</directory>
-			</resource>
+      <plugin>
+        <groupId>org.mule.tools</groupId>
+        <artifactId>maven-mule-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <!-- Include mule-dependencies that don't come with Mule 3.x otherwise we can't install to a vanilla Mule 3.x installation -->
+          <inclusions>
+            <inclusion>
+              <groupId>org.mule.modules</groupId>
+              <artifactId>commonretrypolicies</artifactId>
+            </inclusion>
+            <inclusion>
+              <groupId>org.mule.transports</groupId>
+              <artifactId>mule-transport-restlet</artifactId>
+            </inclusion>
+            <inclusion>
+              <groupId>org.mule.modules</groupId>
+              <artifactId>mule-module-rest</artifactId>
+            </inclusion>
+            <inclusion>
+              <groupId>org.mule.modules</groupId>
+              <artifactId>devkit</artifactId>
+            </inclusion>
+          </inclusions>
+        </configuration>
+      </plugin>
 
-		</resources>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <classifier>core</classifier>
+          <excludes>
+            <exclude>log4j.xml</exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 
-		<plugins>
-			<plugin>
-				<!-- Add mule-nature to the eclipse-.project-file -->
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<configuration>
-					<additionalProjectnatures>
-						<projectnature>org.mule.tooling.core.muleNature</projectnature>
-					</additionalProjectnatures>
-				</configuration>
-			</plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-log4j-resource</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <overwrite>true</overwrite>
+              <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/environment</directory>
+                  <includes>
+                    <include>log4j.xml</include>
+                    <include>log4j.dtd</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      
+    </plugins>
 
-			<plugin>
-				<groupId>org.mule.tools</groupId>
-				<artifactId>maven-mule-plugin</artifactId>
-				<extensions>true</extensions>
-				<!-- Include mule-dependencies that doesn't come with Mule 3.x otherwise 
-					we can't install to a vanilla Mule 3.x installation -->
-				<configuration>
-					<inclusions>
-						<inclusion>
-							<groupId>org.mule.modules</groupId>
-							<artifactId>commonretrypolicies</artifactId>
-						</inclusion>
-						<inclusion>
-							<groupId>org.mule.transports</groupId>
-							<artifactId>mule-transport-restlet</artifactId>
-						</inclusion>
-						<inclusion>
-							<groupId>org.mule.modules</groupId>
-							<artifactId>mule-module-rest</artifactId>
-						</inclusion>
-						<inclusion>
-							<groupId>org.mule.modules</groupId>
-							<artifactId>devkit</artifactId>
-						</inclusion>
-					</inclusions>
-				</configuration>
-			</plugin>
+  </build>
 
-
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<classifier>core</classifier>
-					<excludes>
-						<exclude>log4j.xml</exclude>
-					</excludes>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-
-		</plugins>
-
-	</build>
-	
-	<profiles>
-		<profile>
-			<id>muleServer</id>
-			<!-- Start mule server with the command "mvn -PmuleServer" or "mvn -PmuleServer 
-				-Dexec.args="${artifaceId}-config.xml"" if you want to override the default 
-				config-file -->
-			<build>
-				<defaultGoal>test</defaultGoal>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>test</phase>
-								<goals>
-									<goal>java</goal>
-								</goals>
-								<configuration>
-									<mainClass>se.skl.skltpservices.takecare.takecaretestproducer.TakeCareTestProducerMuleServer</mainClass>
-									<classpathScope>test</classpathScope>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<configuration>
-							<skip>true</skip>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+  <profiles>
+    <profile>
+      <id>muleServer</id>
+      <!-- Start mule server with the command 
+             mvn -PmuleServer or 
+             mvn -PmuleServer -Dexec.args="${artifaceId}-config.xml" 
+           if you want to override the default config-file -->
+      <build>
+        <defaultGoal>test</defaultGoal>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>test</phase>
+                <goals>
+                  <goal>java</goal>
+                </goals>
+                <configuration>
+                  <mainClass>se.skl.skltpservices.takecare.takecaretestproducer.TakeCareTestProducerMuleServer</mainClass>
+                  <classpathScope>test</classpathScope>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <skip>true</skip>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

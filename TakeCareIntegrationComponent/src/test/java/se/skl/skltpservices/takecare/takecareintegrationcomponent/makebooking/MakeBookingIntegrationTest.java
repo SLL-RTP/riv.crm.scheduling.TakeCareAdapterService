@@ -5,9 +5,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer.getAddress;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking.MakeBookingTestProducer.TEST_CAREUNIT_INVALID_ID;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking.MakeBookingTestProducer.TEST_CAREUNIT_OK;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.makebooking.MakeBookingTestProducer.TEST_ID_FAULT_TIMEOUT;
+import static se.skl.skltpservices.takecare.takecaretestproducer.MakeBookingTestProducer.TEST_CAREUNIT_INVALID_ID;
+import static se.skl.skltpservices.takecare.takecaretestproducer.MakeBookingTestProducer.TEST_CAREUNIT_OK;
+import static se.skl.skltpservices.takecare.takecaretestproducer.MakeBookingTestProducer.TEST_ID_FAULT_TIMEOUT;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
@@ -18,12 +18,14 @@ import org.soitoolkit.commons.mule.test.junit4.AbstractTestCase;
 import org.soitoolkit.refapps.sd.sample.wsdl.v1.Fault;
 
 import se.riv.crm.scheduling.makebooking.v1.MakeBookingResponseType;
+import se.riv.crm.scheduling.v1.ResultCodeEnum;
 
 public class MakeBookingIntegrationTest extends AbstractTestCase {
 
     private static final Logger log = LoggerFactory.getLogger(MakeBookingIntegrationTest.class);
     private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
-    private static final String DEFAULT_SERVICE_ADDRESS = getAddress("MAKEBOOKING_INBOUND_URL");
+    private static final String DEFAULT_SERVICE_ADDRESS = getAddress("MAKEBOOKING_INBOUND_URL_1");
+    private static final String SECOND_SERVICE_ADDRESS = getAddress("MAKEBOOKING_INBOUND_URL_2");
 
     public MakeBookingIntegrationTest() {
 
@@ -34,11 +36,13 @@ public class MakeBookingIntegrationTest extends AbstractTestCase {
     }
 
     protected String getConfigResources() {
-        return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"
-                + "TakeCareIntegrationComponent-common.xml," + "TakeCareIntegrationComponent-integrationtests-common.xml,"
-                + // FIXME. MULE STUDIO.
-                // "services/MakeBooking-service.xml," +
-                "MakeBooking-service.xml," + "teststub-services/MakeBooking-teststub-service.xml";
+        return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"      + 
+               "TakeCareIntegrationComponent-common.xml,"                  + 
+               "TakeCareIntegrationComponent-integrationtests-common.xml," + 
+               "MakeBooking-1-service.xml,"                            + 
+               "MakeBooking-2-service.xml,"                            + 
+               "teststub-services/MakeBooking-1-service.xml," +
+               "teststub-services/MakeBooking-2-service.xml";
     }
 
     @Override
@@ -52,7 +56,12 @@ public class MakeBookingIntegrationTest extends AbstractTestCase {
         String subjectOfCare = "191414141414";
         MakeBookingTestConsumer consumer = new MakeBookingTestConsumer(DEFAULT_SERVICE_ADDRESS);
         MakeBookingResponseType response = consumer.callService(healthcareFacility, subjectOfCare, false);
-
+        assertNotNull(response.getBookingId());
+        assertEquals("OK", response.getResultCode().toString());
+        assertEquals("", response.getResultText());
+        
+        consumer = new MakeBookingTestConsumer(SECOND_SERVICE_ADDRESS);
+        response = consumer.callService(healthcareFacility, subjectOfCare, false);
         assertNotNull(response.getBookingId());
         assertEquals("OK", response.getResultCode().toString());
         assertEquals("", response.getResultText());
@@ -99,5 +108,41 @@ public class MakeBookingIntegrationTest extends AbstractTestCase {
         assertNotNull(response.getBookingId());
         assertEquals("INFO", response.getResultCode().toString());
         assertEquals("Tyvärr kunde inte telefonnumret sparas med bokningen", response.getResultText());
+    }
+    
+    
+    @Test
+    public void timeslotReasonTooLong() {
+        String healthcareFacility = TEST_CAREUNIT_OK;
+        String subjectOfCare = "191414141414";
+        MakeBookingTestConsumer consumer = new MakeBookingTestConsumer(DEFAULT_SERVICE_ADDRESS);
+        String fiftyCharacters = "0123456789 123456789 123456789 123456789 123456789";
+        String tooLongReason = fiftyCharacters + fiftyCharacters + fiftyCharacters + fiftyCharacters + fiftyCharacters + fiftyCharacters + "x";
+        assertTrue(tooLongReason.length() > MakeBookingRequestTransformer.MAX_REASON_LENGTH);
+        try {
+            MakeBookingResponseType response = consumer.callService(healthcareFacility, subjectOfCare, tooLongReason);
+            // adapter will truncate to the right length and log a warning
+            // no errors are returned to the consumer
+            assertEquals(ResultCodeEnum.OK, response.getResultCode());
+        } catch (Fault e) {
+            fail("unexpected exception " + e.getLocalizedMessage());
+        }
+    }
+    
+    @Test
+    public void timeslotReasonNotTooLong() {
+        String healthcareFacility = TEST_CAREUNIT_OK;
+        String subjectOfCare = "191414141414";
+        MakeBookingTestConsumer consumer = new MakeBookingTestConsumer(DEFAULT_SERVICE_ADDRESS);
+        String fiftyCharacters = "0123456789 123456789 123456789 123456789 123456789";
+        assertEquals(50,fiftyCharacters.length());
+        String notTooLongReason = fiftyCharacters + fiftyCharacters + fiftyCharacters + fiftyCharacters + fiftyCharacters + fiftyCharacters;
+        assertTrue(notTooLongReason.length() == MakeBookingRequestTransformer.MAX_REASON_LENGTH);
+        try {
+            MakeBookingResponseType response = consumer.callService(healthcareFacility, subjectOfCare, notTooLongReason);
+            assertEquals(ResultCodeEnum.OK, response.getResultCode());
+        } catch (Fault e) {
+            fail("unexpected exception " + e.getLocalizedMessage());
+        }
     }
 }

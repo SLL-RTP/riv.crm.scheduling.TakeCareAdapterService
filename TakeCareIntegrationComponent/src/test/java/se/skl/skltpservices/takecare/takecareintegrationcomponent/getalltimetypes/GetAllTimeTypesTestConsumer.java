@@ -23,7 +23,7 @@ public class GetAllTimeTypesTestConsumer extends TakeCareTestConsumer {
 	private GetAllTimeTypesResponderInterface _service = null;
 
 	public static void main(String[] args) throws Fault {
-		String serviceAddress = getAddress("GETALLTIMETYPES_INBOUND_URL");
+		String serviceAddress = getAddress("GETALLTIMETYPES_INBOUND_URL_1");
 		String healthcareFacility = "HSA-VKK123";
 
 		GetAllTimeTypesTestConsumer consumer = new GetAllTimeTypesTestConsumer(serviceAddress);

@@ -2,9 +2,9 @@ package se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofc
 
 import static org.junit.Assert.*;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer.getAddress;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule.GetBookingsTestProducer.TEST_ID_FAULT_TIMEOUT;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule.GetBookingsTestProducer.TEST_SUBJECTOFCARE_INVALID_ID;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getsubjectofcareschedule.GetBookingsTestProducer.TEST_SUBJECTOFCARE_OK;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetBookingsTestProducer.TEST_ID_FAULT_TIMEOUT;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetBookingsTestProducer.TEST_SUBJECTOFCARE_INVALID_ID;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetBookingsTestProducer.TEST_SUBJECTOFCARE_OK;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
@@ -22,7 +22,7 @@ public class GetSubjectOfCareScheduleIntegrationTest extends AbstractTestCase {
 
 	private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
 
-	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("GETSUBJECTOFCARESCHEDULE_INBOUND_URL");
+	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("GETSUBJECTOFCARESCHEDULE_INBOUND_URL_1");
 
 	public GetSubjectOfCareScheduleIntegrationTest() {
 
@@ -33,15 +33,13 @@ public class GetSubjectOfCareScheduleIntegrationTest extends AbstractTestCase {
 	}
 
 	protected String getConfigResources() {
-		return "soitoolkit-mule-jms-connector-activemq-embedded.xml," +
-
-		"TakeCareIntegrationComponent-common.xml,"
-				+ "TakeCareIntegrationComponent-integrationtests-common.xml,"
-				+
-				// FIXME. MULE STUDIO.
-				// "services/GetSubjectOfCareSchedule-service.xml," +
-				"GetSubjectOfCareSchedule-service.xml,"
-				+ "teststub-services/GetSubjectOfCareSchedule-teststub-service.xml";
+        return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"      + 
+               "TakeCareIntegrationComponent-common.xml,"                  + 
+               "TakeCareIntegrationComponent-integrationtests-common.xml," + 
+               "GetSubjectOfCareSchedule-1-service.xml,"                   + 
+               "GetSubjectOfCareSchedule-2-service.xml,"                   + 
+               "teststub-services/GetBookings-1-service.xml,"     +
+               "teststub-services/GetBookings-2-service.xml";
 	}
 
 	@Override

@@ -10,10 +10,10 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import se.riv.crm.scheduling.updatebooking.v1.ObjectFactory;
 import se.riv.crm.scheduling.updatebooking.v1.UpdateBookingResponseType;
 import se.riv.crm.scheduling.v1.ResultCodeEnum;
-import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareResponseTransformer;
 import se.skl.skltpservices.takecare.booking.RescheduleBookingResponse;
 
-public class UpdateBookingResponseTransformer extends TakeCareResponseTransformer {
+public class UpdateBookingResponseTransformer extends AbstractTakeCareResponseTransformer {
 
     private static final Logger log = LoggerFactory.getLogger(UpdateBookingResponseTransformer.class);
     private static final JaxbUtil jaxbUtil_incoming = new JaxbUtil(RescheduleBookingResponse.class);

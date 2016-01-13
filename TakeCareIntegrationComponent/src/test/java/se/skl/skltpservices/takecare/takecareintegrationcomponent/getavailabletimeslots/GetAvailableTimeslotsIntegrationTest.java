@@ -6,9 +6,9 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer.getAddress;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabletimeslots.GetAvailableTimeslotsTestProducer.TEST_HEALTHCAREFACILITY_INVALID_ID;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabletimeslots.GetAvailableTimeslotsTestProducer.TEST_HEALTHCAREFACILITY_OK;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabletimeslots.GetAvailableTimeslotsTestProducer.TEST_ID_FAULT_TIMEOUT;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetAvailableTimeslotsTestProducer.TEST_HEALTHCAREFACILITY_INVALID_ID;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetAvailableTimeslotsTestProducer.TEST_HEALTHCAREFACILITY_OK;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetAvailableTimeslotsTestProducer.TEST_ID_FAULT_TIMEOUT;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
@@ -26,7 +26,8 @@ public class GetAvailableTimeslotsIntegrationTest extends AbstractTestCase {
 
 	private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
 
-	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("GETAVAILABLETIMESLOTS_INBOUND_URL");
+	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("GETAVAILABLETIMESLOTS_INBOUND_URL_1");
+    private static final String SECOND_SERVICE_ADDRESS = getAddress("GETAVAILABLETIMESLOTS_INBOUND_URL_2");
 
 	public GetAvailableTimeslotsIntegrationTest() {
 
@@ -37,12 +38,13 @@ public class GetAvailableTimeslotsIntegrationTest extends AbstractTestCase {
 	}
 
 	protected String getConfigResources() {
-		return "soitoolkit-mule-jms-connector-activemq-embedded.xml," +
-
-		"TakeCareIntegrationComponent-common.xml," + "TakeCareIntegrationComponent-integrationtests-common.xml," +
-		// FIXME. MULE STUDIO.
-		// "services/GetAvailableTimeslots-service.xml," +
-				"GetAvailableTimeslots-service.xml," + "teststub-services/GetAvailableTimeslots-teststub-service.xml";
+        return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"      + 
+               "TakeCareIntegrationComponent-common.xml,"                  + 
+               "TakeCareIntegrationComponent-integrationtests-common.xml," + 
+               "GetAvailableTimeslots-1-service.xml,"                            + 
+               "GetAvailableTimeslots-2-service.xml,"                            + 
+               "teststub-services/GetAvailableTimeslots-1-service.xml," +
+               "teststub-services/GetAvailableTimeslots-2-service.xml";
 	}
 
 	@Override
@@ -56,31 +58,37 @@ public class GetAvailableTimeslotsIntegrationTest extends AbstractTestCase {
 		String careTypeId = "121212121212";
 		GetAvailableTimeslotsTestConsumer consumer = new GetAvailableTimeslotsTestConsumer(DEFAULT_SERVICE_ADDRESS);
 		GetAvailableTimeslotsResponseType response = consumer.callService(healthCareFacility, careTypeId);
-
-		assertEquals("HSA-VKK123", response.getTimeslotDetail().get(0).getHealthcareFacility());
-		assertEquals("careunit name", response.getTimeslotDetail().get(0).getHealthcareFacilityName());
-		assertEquals("191212121212", response.getTimeslotDetail().get(0).getResourceID());
-		assertEquals("Tolvansson Tolvan (läk)", response.getTimeslotDetail().get(0).getResourceName());
-		assertEquals("4", response.getTimeslotDetail().get(0).getTimeTypeID());
-		assertNotNull(response.getTimeslotDetail().get(0).getStartTimeInclusive());
-		assertNotNull(response.getTimeslotDetail().get(0).getEndTimeExclusive());
-		assertEquals("Nybesök Web", response.getTimeslotDetail().get(0).getTimeTypeName());
-		assertEquals(false, response.getTimeslotDetail().get(0).isCancelBookingAllowed());
-		assertEquals(true, response.getTimeslotDetail().get(0).isMessageAllowed());
-		assertEquals(false, response.getTimeslotDetail().get(0).isRebookingAllowed());
-
-		assertEquals("", response.getTimeslotDetail().get(0).getBookingId());
-		assertEquals("", response.getTimeslotDetail().get(0).getCareTypeID());
-		assertEquals("", response.getTimeslotDetail().get(0).getCareTypeName());
-		assertEquals("", response.getTimeslotDetail().get(0).getPerformer());
-		assertEquals("", response.getTimeslotDetail().get(0).getPerformerName());
-		assertEquals("", response.getTimeslotDetail().get(0).getPurpose());
-		assertEquals("", response.getTimeslotDetail().get(0).getReason());
-		assertEquals("", response.getTimeslotDetail().get(0).getSubjectOfCare());
+		checkResponse(response);
 		
+        consumer = new GetAvailableTimeslotsTestConsumer(SECOND_SERVICE_ADDRESS);
+        response = consumer.callService(healthCareFacility, careTypeId);
+        checkResponse(response);
 	}
 
-	@Test
+	private void checkResponse(GetAvailableTimeslotsResponseType response) {
+        assertEquals("HSA-VKK123", response.getTimeslotDetail().get(0).getHealthcareFacility());
+        assertEquals("careunit name", response.getTimeslotDetail().get(0).getHealthcareFacilityName());
+        assertEquals("191212121212", response.getTimeslotDetail().get(0).getResourceID());
+        assertEquals("Tolvansson Tolvan (läk)", response.getTimeslotDetail().get(0).getResourceName());
+        assertEquals("4", response.getTimeslotDetail().get(0).getTimeTypeID());
+        assertNotNull(response.getTimeslotDetail().get(0).getStartTimeInclusive());
+        assertNotNull(response.getTimeslotDetail().get(0).getEndTimeExclusive());
+        assertEquals("Nybesök Web", response.getTimeslotDetail().get(0).getTimeTypeName());
+        assertEquals(false, response.getTimeslotDetail().get(0).isCancelBookingAllowed());
+        assertEquals(true, response.getTimeslotDetail().get(0).isMessageAllowed());
+        assertEquals(false, response.getTimeslotDetail().get(0).isRebookingAllowed());
+
+        assertEquals("", response.getTimeslotDetail().get(0).getBookingId());
+        assertEquals("", response.getTimeslotDetail().get(0).getCareTypeID());
+        assertEquals("", response.getTimeslotDetail().get(0).getCareTypeName());
+        assertEquals("", response.getTimeslotDetail().get(0).getPerformer());
+        assertEquals("", response.getTimeslotDetail().get(0).getPerformerName());
+        assertEquals("", response.getTimeslotDetail().get(0).getPurpose());
+        assertEquals("", response.getTimeslotDetail().get(0).getReason());
+        assertEquals("", response.getTimeslotDetail().get(0).getSubjectOfCare());
+    }
+
+    @Test
 	public void test_fault_invalidInput() throws Exception {
 		try {
 			String healthCareFacility = TEST_HEALTHCAREFACILITY_INVALID_ID;

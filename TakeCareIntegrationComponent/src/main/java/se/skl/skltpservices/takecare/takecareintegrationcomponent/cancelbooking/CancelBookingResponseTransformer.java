@@ -10,12 +10,12 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import se.riv.crm.scheduling.cancelbooking.v1.CancelBookingResponseType;
 import se.riv.crm.scheduling.cancelbooking.v1.ObjectFactory;
 import se.riv.crm.scheduling.v1.ResultCodeEnum;
-import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareResponseTransformer;
 import se.skl.skltpservices.takecare.booking.CancelBookingResponse;
 import se.skl.skltpservices.takecare.booking.cancelbookingresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.cancelbookingresponse.ProfdocHISMessage.BookingStatus;
 
-public class CancelBookingResponseTransformer extends TakeCareResponseTransformer {
+public class CancelBookingResponseTransformer extends AbstractTakeCareResponseTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(CancelBookingResponseTransformer.class);
 
@@ -51,8 +51,12 @@ public class CancelBookingResponseTransformer extends TakeCareResponseTransforme
 	}
 
 	private String extractResponse(Object src) {
+	    // XMLReader which closes the InputStream
+	    // org.mule.module.cxf.support.StreamClosingInterceptor sci = (org.mule.module.cxf.support.StreamClosingInterceptor)src;
+	    
 		CancelBookingResponse incoming_res = (CancelBookingResponse) jaxbUtil_incoming.unmarshal(src);
 		String incoming_string = incoming_res.getCancelBookingResult();
+        logger.debug("unmarshalled incoming TakeCare CancelBookingResponse.CancelBookingResult:" +  incoming_string);
 		return incoming_string;
 	}
 

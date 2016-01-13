@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer.getAddress;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.cancelbooking.CancelBookingTestProducer.TEST_BOOKINGID_OK;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.cancelbooking.CancelBookingTestProducer.TEST_BOOKING_INVALID_ID;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.cancelbooking.CancelBookingTestProducer.TEST_ID_FAULT_TIMEOUT;
+import static se.skl.skltpservices.takecare.takecaretestproducer.CancelBookingTestProducer.TEST_BOOKINGID_OK;
+import static se.skl.skltpservices.takecare.takecaretestproducer.CancelBookingTestProducer.TEST_BOOKING_INVALID_ID;
+import static se.skl.skltpservices.takecare.takecaretestproducer.CancelBookingTestProducer.TEST_ID_FAULT_TIMEOUT;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
@@ -22,7 +22,8 @@ public class CancelBookingIntegrationTest extends AbstractTestCase {
 
 	private static final Logger log = LoggerFactory.getLogger(CancelBookingIntegrationTest.class);
 
-	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("CANCELBOOKING_INBOUND_URL");
+	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("CANCELBOOKING_INBOUND_URL_1");
+    private static final String SECOND_SERVICE_ADDRESS = getAddress("CANCELBOOKING_INBOUND_URL_2");
 
 	private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
 
@@ -35,12 +36,13 @@ public class CancelBookingIntegrationTest extends AbstractTestCase {
 	}
 
 	protected String getConfigResources() {
-		return "soitoolkit-mule-jms-connector-activemq-embedded.xml," +
-
-		"TakeCareIntegrationComponent-common.xml," + "TakeCareIntegrationComponent-integrationtests-common.xml," +
-		// FIXME. MULE STUDIO.
-		// "services/CancelBooking-service.xml," +
-				"CancelBooking-service.xml," + "teststub-services/CancelBooking-teststub-service.xml";
+        return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"      + 
+                "TakeCareIntegrationComponent-common.xml,"                  + 
+                "TakeCareIntegrationComponent-integrationtests-common.xml," + 
+                "CancelBooking-1-service.xml,"                            + 
+                "CancelBooking-2-service.xml,"                            + 
+                "teststub-services/CancelBooking-1-service.xml," +
+                "teststub-services/CancelBooking-2-service.xml";
 	}
 
 	@Override
@@ -55,6 +57,11 @@ public class CancelBookingIntegrationTest extends AbstractTestCase {
 		CancelBookingResponseType response = consumer.callService(bookingId);
 		assertEquals("OK", response.getResultCode().toString());
 		assertEquals("CANCELLED", response.getResultText());
+		
+        consumer = new CancelBookingTestConsumer(SECOND_SERVICE_ADDRESS);
+        response = consumer.callService(bookingId);
+        assertEquals("OK", response.getResultCode().toString());
+        assertEquals("CANCELLED", response.getResultText());
 	}
 
 	@Test

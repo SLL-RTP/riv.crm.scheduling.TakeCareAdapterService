@@ -10,8 +10,9 @@ import static se.skl.skltpservices.takecare.TakeCareUtil.numericToBigInteger;
 import static se.skl.skltpservices.takecare.TakeCareUtil.numericToInt;
 
 import java.util.Date;
-import org.mule.api.MuleMessage;
 
+import org.apache.commons.lang.StringUtils;
+import org.mule.api.MuleMessage;
 import org.mule.api.transformer.TransformerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +21,11 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import se.riv.crm.scheduling.updatebooking.v1.UpdateBookingType;
 import se.riv.crm.scheduling.v1.SubjectOfCareType;
 import se.riv.crm.scheduling.v1.TimeslotType;
-import se.skl.skltpservices.takecare.TakeCareRequestTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareRequestTransformer;
 import se.skl.skltpservices.takecare.booking.RescheduleBooking;
 import se.skl.skltpservices.takecare.booking.reschedulebookingrequest.ProfdocHISMessage;
 
-public class UpdateBookingRequestTransformer extends TakeCareRequestTransformer {
+public class UpdateBookingRequestTransformer extends AbstractTakeCareRequestTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(UpdateBookingRequestTransformer.class);
 
@@ -45,15 +46,24 @@ public class UpdateBookingRequestTransformer extends TakeCareRequestTransformer 
 		try {
 			UpdateBookingType incomingRequest = (UpdateBookingType) jaxbUtil_incoming.unmarshal(src);
 			TimeslotType incomingTimeslot = incomingRequest.getRequestedTimeslot();
-			SubjectOfCareType subjectOfCare = incomingRequest.getSubjectOfCareInfo();
+            if (incomingTimeslot == null) {
+                throw new RuntimeException("missing requestedTimeslot in UpdateBooking");
+            }
 
 			String incomingHealthcarefacility = incomingTimeslot.getHealthcareFacility();
-			String incominStartTime = incomingTimeslot.getStartTimeInclusive();
-			String incominEndTime = incomingTimeslot.getEndTimeExclusive();
+			String incomingStartTime = incomingTimeslot.getStartTimeInclusive();
+			String incomingEndTime = incomingTimeslot.getEndTimeExclusive();
 			String incomingTimeTypeId = incomingTimeslot.getTimeTypeID();
 			String incomingResourceId = incomingTimeslot.getResourceID();
 			String incomingSubjectOfCare = incomingTimeslot.getSubjectOfCare();
-			String incomingReason = buildReason(subjectOfCare, incomingTimeslot);
+			
+            String phone = "";
+            SubjectOfCareType subjectOfCare = incomingRequest.getSubjectOfCareInfo();
+            if (subjectOfCare != null && StringUtils.isNotEmpty(subjectOfCare.getPhone())) {
+                phone = subjectOfCare.getPhone();
+            }
+			String incomingReason = buildReason(incomingTimeslot, phone, log);
+			
 			String bookingId = incomingTimeslot.getBookingId();
 
 			ProfdocHISMessage message = new ProfdocHISMessage();
@@ -61,11 +71,11 @@ public class UpdateBookingRequestTransformer extends TakeCareRequestTransformer 
 			message.setCareUnitIdType(HSAID);
 			message.setInvokingSystem(INVOKING_SYSTEM);
 			message.setMsgType(REQUEST);
-			message.setEndTime(numericToBigInteger(toTakeCareLongTime(incominEndTime)));
+			message.setEndTime(numericToBigInteger(toTakeCareLongTime(incomingEndTime)));
 			message.setPatientId(numericToBigInteger(incomingSubjectOfCare));
 			message.setPatientReason(incomingReason);
 			message.setResourceId(numericToBigInteger(incomingResourceId));
-			message.setStartTime(numericToBigInteger(toTakeCareLongTime(incominStartTime)));
+			message.setStartTime(numericToBigInteger(toTakeCareLongTime(incomingStartTime)));
 			message.setTime(yyyyMMddHHmmss(new Date()));
 			message.setBookingId(bookingId);
 			message.setTimeTypeId(numericToInt(incomingTimeTypeId));

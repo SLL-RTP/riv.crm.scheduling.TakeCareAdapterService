@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="31945b8d-8403-4336-9f96-7dc3d95a5754" activeEnvironment="Default" name="TakeCare - takecare (teststub)" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="52c88125-b28a-4afe-979c-99d317545c79" wsaVersion="NONE" name="BookingSoap" type="wsdl" bindingName="{http://tempuri.org/}BookingSoap" soapVersion="1_1" anonymous="optional" definition="file:/Users/martin/git/riv.crm.scheduling.TakeCareAdapterService/TakeCare-schemas/src/main/resources/schemas/se/skl/skltpservices/takecare/booking/booking.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/Users/martin/git/riv.crm.scheduling.TakeCareAdapterService/TakeCare-schemas/src/main/resources/schemas/se/skl/skltpservices/takecare/booking/booking.wsdl"><con:part><con:url>file:/Users/martin/git/riv.crm.scheduling.TakeCareAdapterService/TakeCare-schemas/src/main/resources/schemas/se/skl/skltpservices/takecare/booking/booking.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CancelBooking">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelBookingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CancelBookingResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAvailableDates">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAvailableDatesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAvailableDatesResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAvailableTimeslots">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAvailableTimeslotsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAvailableTimeslotsResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBookings">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBookingsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBookingsResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTimeTypes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTimeTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTimeTypesResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MakeBooking">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MakeBookingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MakeBookingResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RescheduleBooking">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tcusername" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="tcpassword" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="externaluser" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitidtype" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="careunitid" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="xml" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RescheduleBookingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RescheduleBookingResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CancelBookingSoapIn">
+    <wsdl:part name="parameters" element="tns:CancelBooking"/>
+  </wsdl:message>
+  <wsdl:message name="CancelBookingSoapOut">
+    <wsdl:part name="parameters" element="tns:CancelBookingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetAvailableDatesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAvailableDates"/>
+  </wsdl:message>
+  <wsdl:message name="GetAvailableDatesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAvailableDatesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetAvailableTimeslotsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAvailableTimeslots"/>
+  </wsdl:message>
+  <wsdl:message name="GetAvailableTimeslotsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAvailableTimeslotsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetBookingsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBookings"/>
+  </wsdl:message>
+  <wsdl:message name="GetBookingsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBookingsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetTimeTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTimeTypes"/>
+  </wsdl:message>
+  <wsdl:message name="GetTimeTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTimeTypesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="MakeBookingSoapIn">
+    <wsdl:part name="parameters" element="tns:MakeBooking"/>
+  </wsdl:message>
+  <wsdl:message name="MakeBookingSoapOut">
+    <wsdl:part name="parameters" element="tns:MakeBookingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="RescheduleBookingSoapIn">
+    <wsdl:part name="parameters" element="tns:RescheduleBooking"/>
+  </wsdl:message>
+  <wsdl:message name="RescheduleBookingSoapOut">
+    <wsdl:part name="parameters" element="tns:RescheduleBookingResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="BookingSoap">
+    <wsdl:operation name="CancelBooking">
+      <wsdl:input message="tns:CancelBookingSoapIn"/>
+      <wsdl:output message="tns:CancelBookingSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableDates">
+      <wsdl:input message="tns:GetAvailableDatesSoapIn"/>
+      <wsdl:output message="tns:GetAvailableDatesSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableTimeslots">
+      <wsdl:input message="tns:GetAvailableTimeslotsSoapIn"/>
+      <wsdl:output message="tns:GetAvailableTimeslotsSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookings">
+      <wsdl:input message="tns:GetBookingsSoapIn"/>
+      <wsdl:output message="tns:GetBookingsSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetTimeTypes">
+      <wsdl:input message="tns:GetTimeTypesSoapIn"/>
+      <wsdl:output message="tns:GetTimeTypesSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="MakeBooking">
+      <wsdl:input message="tns:MakeBookingSoapIn"/>
+      <wsdl:output message="tns:MakeBookingSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="RescheduleBooking">
+      <wsdl:input message="tns:RescheduleBookingSoapIn"/>
+      <wsdl:output message="tns:RescheduleBookingSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BookingSoap" type="tns:BookingSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CancelBooking">
+      <soap:operation soapAction="http://tempuri.org/CancelBooking" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableDates">
+      <soap:operation soapAction="http://tempuri.org/GetAvailableDates" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableTimeslots">
+      <soap:operation soapAction="http://tempuri.org/GetAvailableTimeslots" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookings">
+      <soap:operation soapAction="http://tempuri.org/GetBookings" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTimeTypes">
+      <soap:operation soapAction="http://tempuri.org/GetTimeTypes" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MakeBooking">
+      <soap:operation soapAction="http://tempuri.org/MakeBooking" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RescheduleBooking">
+      <soap:operation soapAction="http://tempuri.org/RescheduleBooking" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BookingSoap12" type="tns:BookingSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CancelBooking">
+      <soap12:operation soapAction="http://tempuri.org/CancelBooking" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableDates">
+      <soap12:operation soapAction="http://tempuri.org/GetAvailableDates" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableTimeslots">
+      <soap12:operation soapAction="http://tempuri.org/GetAvailableTimeslots" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookings">
+      <soap12:operation soapAction="http://tempuri.org/GetBookings" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTimeTypes">
+      <soap12:operation soapAction="http://tempuri.org/GetTimeTypes" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MakeBooking">
+      <soap12:operation soapAction="http://tempuri.org/MakeBooking" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RescheduleBooking">
+      <soap12:operation soapAction="http://tempuri.org/RescheduleBooking" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Booking">
+    <wsdl:port name="BookingSoap" binding="tns:BookingSoap">
+      <soap:address location="https://xchange.profdoccare.se/xchange_node_kus/booking/booking.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="BookingSoap12" binding="tns:BookingSoap12">
+      <soap12:address location="https://xchange.profdoccare.se/xchange_node_kus/booking/booking.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://xchange.profdoccare.se/xchange_node_kus/booking/booking.asmx</con:endpoint></con:endpoints><con:operation id="57db0eb1-8279-4a3a-a8f6-488ae7e40433" isOneWay="false" action="http://tempuri.org/CancelBooking" name="CancelBooking" bindingOperationName="CancelBooking" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0feea7d4-20c5-47a9-80f9-1b4076d85dd2" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://xchange.profdoccare.se/xchange_node_kus/booking/booking.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:CancelBooking>
+         <!--Optional:-->
+         <tem:tcusername>?</tem:tcusername>
+         <!--Optional:-->
+         <tem:tcpassword>?</tem:tcpassword>
+         <!--Optional:-->
+         <tem:externaluser>?</tem:externaluser>
+         <!--Optional:-->
+         <tem:careunitidtype>?</tem:careunitidtype>
+         <!--Optional:-->
+         <tem:careunitid>?</tem:careunitid>
+         <!--Optional:-->
+         <tem:xml>?</tem:xml>
+      </tem:CancelBooking>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/></con:call></con:operation><con:operation id="7bb8c007-9153-4708-bfc2-fe8d5ca2d9b6" isOneWay="false" action="http://tempuri.org/GetAvailableDates" name="GetAvailableDates" bindingOperationName="GetAvailableDates" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d05788f9-b4a6-46ad-a41c-5e9aa38b7792" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://xchange.profdoccare.se/xchange_node_kus/booking/booking.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetAvailableDates>
+         <!--Optional:-->
+         <tem:tcusername>?</tem:tcusername>
+         <!--Optional:-->
+         <tem:tcpassword>?</tem:tcpassword>
+         <!--Optional:-->
+         <tem:externaluser>?</tem:externaluser>
+         <!--Optional:-->
+         <tem:careunitidtype>?</tem:careunitidtype>
+         <!--Optional:-->
+         <tem:careunitid>?</tem:careunitid>
+         <!--Optional:-->
+         <tem:xml>?</tem:xml>
+      </tem:GetAvailableDates>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/GetAvailableDates"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="141ea4d4-f7d6-4f65-b88a-b4deaa4addfa" isOneWay="false" action="http://tempuri.org/GetAvailableTimeslots" name="GetAvailableTimeslots" bindingOperationName="GetAvailableTimeslots" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a20b5a50-46dc-4379-b8c0-126f3c8bbd29" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://xchange.profdoccare.se/xchange_node_kus/booking/booking.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetAvailableTimeslots>
+         <!--Optional:-->
+         <tem:tcusername>?</tem:tcusername>
+         <!--Optional:-->
+         <tem:tcpassword>?</tem:tcpassword>
+         <!--Optional:-->
+         <tem:externaluser>?</tem:externaluser>
+         <!--Optional:-->
+         <tem:careunitidtype>?</tem:careunitidtype>
+         <!--Optional:-->
+         <tem:careunitid>?</tem:careunitid>
+         <!--Optional:-->
+         <tem:xml>?</tem:xml>
+      </tem:GetAvailableTimeslots>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/GetAvailableTimeslots"/></con:call></con:operation><con:operation id="94275ce7-78fe-4845-97ca-02d2c28ef1ed" isOneWay="false" action="http://tempuri.org/GetBookings" name="GetBookings" bindingOperationName="GetBookings" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c8d03201-d5aa-4a42-824d-4837ff6ea70f" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://xchange.profdoccare.se/xchange_node_kus/booking/booking.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetBookings>
+         <!--Optional:-->
+         <tem:tcusername>?</tem:tcusername>
+         <!--Optional:-->
+         <tem:tcpassword>?</tem:tcpassword>
+         <!--Optional:-->
+         <tem:externaluser>?</tem:externaluser>
+         <!--Optional:-->
+         <tem:careunitidtype>?</tem:careunitidtype>
+         <!--Optional:-->
+         <tem:careunitid>?</tem:careunitid>
+         <!--Optional:-->
+         <tem:xml>?</tem:xml>
+      </tem:GetBookings>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/GetBookings"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="231610d8-5264-460f-8056-59e239ef182e" isOneWay="false" action="http://tempuri.org/GetTimeTypes" name="GetTimeTypes" bindingOperationName="GetTimeTypes" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5dcf1f90-aedd-4260-bf55-46fbbe086680" name="skltp-box-stub:8082"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://33.33.33.33:8082/TakeCare/services/getAllTimeTypes-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetTimeTypes>
+         <!--Optional:-->
+         <tem:tcusername>?</tem:tcusername>
+         <!--Optional:-->
+         <tem:tcpassword>?</tem:tcpassword>
+         <!--Optional:-->
+         <tem:externaluser>?</tem:externaluser>
+         <!--Optional:-->
+         <tem:careunitidtype>?</tem:careunitidtype>
+         <!--Optional:-->
+         <tem:careunitid>?</tem:careunitid>
+         <!--Optional:-->
+         <tem:xml>?</tem:xml>
+      </tem:GetTimeTypes>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/GetTimeTypes"/><con:wsrmConfig version="1.2"/></con:call><con:call id="3f3759da-8b8a-4e7c-bf99-02946538c0dc" name="TakeCare"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://xchange.karolinska.se/x2nod.net/Booking/booking.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetTimeTypes>
+         <!--Optional:-->
+         <tem:tcusername>?</tem:tcusername>
+         <!--Optional:-->
+         <tem:tcpassword>?</tem:tcpassword>
+         <!--Optional:-->
+         <tem:externaluser>?</tem:externaluser>
+         <!--Optional:-->
+         <tem:careunitidtype>?</tem:careunitidtype>
+         <!--Optional:-->
+         <tem:careunitid>?</tem:careunitid>
+         <!--Optional:-->
+         <tem:xml>?</tem:xml>
+      </tem:GetTimeTypes>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/GetTimeTypes"/><con:wsrmConfig version="1.2"/></con:call><con:call id="4e9f2571-bfce-402c-afb4-e9d9f0643a32" name="skltp-box-stub:8083"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://33.33.33.33:8082/TakeCare/services/getAllTimeTypes-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetTimeTypes>
+         <!--Optional:-->
+         <tem:tcusername>a</tem:tcusername>
+         <!--Optional:-->
+         <tem:tcpassword>b</tem:tcpassword>
+         <!--Optional:-->
+         <tem:externaluser>c</tem:externaluser>
+         <!--Optional:-->
+         <tem:careunitidtype>d</tem:careunitidtype>
+         <!--Optional:-->
+         <tem:careunitid>-1</tem:careunitid>
+         <!--Optional:-->
+         <tem:xml>f</tem:xml>
+      </tem:GetTimeTypes>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/GetTimeTypes"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="aea3bf41-a839-4d63-85b3-3e4c4a3a8021" isOneWay="false" action="http://tempuri.org/MakeBooking" name="MakeBooking" bindingOperationName="MakeBooking" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="485ee03e-45f7-4a0a-bf11-5b40dbb6e77d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://xchange.profdoccare.se/xchange_node_kus/booking/booking.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:MakeBooking>
+         <!--Optional:-->
+         <tem:tcusername>?</tem:tcusername>
+         <!--Optional:-->
+         <tem:tcpassword>?</tem:tcpassword>
+         <!--Optional:-->
+         <tem:externaluser>?</tem:externaluser>
+         <!--Optional:-->
+         <tem:careunitidtype>?</tem:careunitidtype>
+         <!--Optional:-->
+         <tem:careunitid>?</tem:careunitid>
+         <!--Optional:-->
+         <tem:xml>?</tem:xml>
+      </tem:MakeBooking>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/MakeBooking"/></con:call></con:operation><con:operation id="dca3a36d-9be6-47f4-b162-c035f2b9ebcb" isOneWay="false" action="http://tempuri.org/RescheduleBooking" name="RescheduleBooking" bindingOperationName="RescheduleBooking" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="abfb9d1f-a76f-485a-814d-e29727ac5569" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://xchange.profdoccare.se/xchange_node_kus/booking/booking.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:RescheduleBooking>
+         <!--Optional:-->
+         <tem:tcusername>?</tem:tcusername>
+         <!--Optional:-->
+         <tem:tcpassword>?</tem:tcpassword>
+         <!--Optional:-->
+         <tem:externaluser>?</tem:externaluser>
+         <!--Optional:-->
+         <tem:careunitidtype>?</tem:careunitidtype>
+         <!--Optional:-->
+         <tem:careunitid>?</tem:careunitid>
+         <!--Optional:-->
+         <tem:xml>?</tem:xml>
+      </tem:RescheduleBooking>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/RescheduleBooking"/></con:call></con:operation></con:interface><con:testSuite id="0519a818-7bda-466d-9fe2-1bf7da42bd8c" name="teststubben"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="0001fb9b-9f60-4d15-83d2-3afc92b81ead" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="url1" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="request" id="0f92231f-235d-4e00-869e-9c9964594538" name="CancelBooking1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="CancelBooking1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url1}/TakeCare/services/cancelBooking-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:CancelBooking>
+         <tem:tcusername></tem:tcusername>
+         <tem:tcpassword></tem:tcpassword>
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <tem:xml>
+         <![CDATA[<ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210060537" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:CancelBooking:Request"><BookingId>1</BookingId><PatientReason>I want to cancel this</PatientReason></ProfdocHISMessage>]]]]>><![CDATA[
+         </tem:xml>
+      </tem:CancelBooking>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="357bf894-6ee1-48c9-932b-0243fd2a8239" name="GetAvailableDates1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="GetAvailableDates1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url1}/TakeCare/services/getAvailableDates-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetAvailableDates>
+         <!--Optional:-->
+         <tem:tcusername/>
+         <!--Optional:-->
+         <tem:tcpassword/>
+         <!--Optional:-->
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <!--Optional:-->
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <!--Optional:-->
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <!--Optional:-->
+         <tem:xml><![CDATA[
+            <ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210075822" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:GetAvailableDates:Request"><CareUnitIdType>hsaid</CareUnitIdType><CareUnitId>SE2321000016-1HZ3</CareUnitId><StartDate>20111216</StartDate><EndDate>20111231</EndDate><TimeTypeId>1</TimeTypeId></ProfdocHISMessage>
+         ]]]]>><![CDATA[</tem:xml>
+      </tem:GetAvailableDates>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="5228ed04-57d1-4d09-929f-b0408a87531f" name="GetAvailableimeslots1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="GetAvailableimeslots1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url1}/TakeCare/services/getAvailableTimeslots-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetAvailableTimeslots>
+         <tem:tcusername></tem:tcusername>
+         <tem:tcpassword></tem:tcpassword>
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <tem:xml/>
+      </tem:GetAvailableTimeslots>
+      </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="08bd4c60-779b-4179-b7b7-188f7887966c" name="GetBookings1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="GetBookings1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url1}/TakeCare/services/getBookings-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetBookings>
+         <tem:tcusername></tem:tcusername>
+         <tem:tcpassword></tem:tcpassword>
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <tem:xml>
+         <![CDATA[<ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210081252" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:GetBookings:Request"><PatientId>121212121212</PatientId><CareUnitIdType>hsaid</CareUnitIdType><CareUnitId>SE2321000016-1HZ3</CareUnitId></ProfdocHISMessage>]]]]>><![CDATA[
+         </tem:xml>
+      </tem:GetBookings>
+      </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="b0355b66-6027-4671-8912-84cfbc1d3989" name="GetTimeTypes1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="GetTimeTypes1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url1}/TakeCare/services/getTimeTypes-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetTimeTypes>
+         <tem:tcusername></tem:tcusername>
+         <tem:tcpassword></tem:tcpassword>
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <tem:xml>
+         <![CDATA[<ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210081427" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:GetTimeTypes:Request"><CareUnitIdType>hsaid</CareUnitIdType><CareUnitId>HSA-ID-1</CareUnitId><TimeTypeRequest>Web</TimeTypeRequest></ProfdocHISMessage>]]]]>><![CDATA[
+         </tem:xml>
+      </tem:GetTimeTypes></soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="2f8a8977-457a-4bfe-838a-205339d765e5" name="MakeBooking1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="MakeBooking1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url1}/TakeCare/services/makeBooking-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:MakeBooking>
+         <tem:tcusername></tem:tcusername>
+         <tem:tcpassword></tem:tcpassword>
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <tem:xml>
+         <![CDATA[<ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210081608" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:MakeBooking:Request"><CareUnitIdType>hsaid</CareUnitIdType><CareUnitId>SE2321000016-1HZ3</CareUnitId><StartTime>201206152000</StartTime><EndTime>201206152100</EndTime><TimeTypeId>0</TimeTypeId><PatientId>191414141414</PatientId><PatientReason>0123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789.1234567890123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789.1234567890123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789</PatientReason></ProfdocHISMessage>]]]]>><![CDATA[
+         </tem:xml>
+      </tem:MakeBooking>
+      </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="9c5faa8e-13fe-4c64-8654-31d098a897af" name="RescheduleBooking1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="RescheduleBooking1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url1}/TakeCare/services/rescheduleBooking-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:RescheduleBooking>
+         <tem:tcusername></tem:tcusername>
+         <tem:tcpassword></tem:tcpassword>
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <tem:xml>
+         <![CDATA[<ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210081718" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:RescheduleBooking:Request"><BookingId>111222333</BookingId><CareUnitIdType>hsaid</CareUnitIdType><CareUnitId>HSA-VKK123</CareUnitId><StartTime>201206152000</StartTime><EndTime>201206152100</EndTime><TimeTypeId>0</TimeTypeId><PatientId>191414141414</PatientId><PatientReason></PatientReason></ProfdocHISMessage>]]]]>><![CDATA[
+         </tem:xml>
+      </tem:RescheduleBooking>
+      </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="58a967f3-ca55-46c5-84fe-be31a4790d64" name="MakeBooking1.1 patientreason is too long"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="MakeBooking1.1 patientreason is too long" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url1}/TakeCare/services/makeBooking-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:MakeBooking>
+         <tem:tcusername></tem:tcusername>
+         <tem:tcpassword></tem:tcpassword>
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <tem:xml>
+         <![CDATA[<ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210081608" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:MakeBooking:Request"><CareUnitIdType>hsaid</CareUnitIdType><CareUnitId>SE2321000016-1HZ3</CareUnitId><StartTime>201206152000</StartTime><EndTime>201206152100</EndTime><TimeTypeId>0</TimeTypeId><PatientId>191414141414</PatientId><PatientReason>0123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789.1234567890123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789.1234567890123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789X</PatientReason></ProfdocHISMessage>]]]]>><![CDATA[
+         </tem:xml>
+      </tem:MakeBooking>
+      </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="fd7df4f3-8cda-4ad1-86e1-de195d37cd35" failOnError="false" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="url2" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword=""><con:settings/><con:testStep type="request" id="769f7b1a-97ce-4f5d-959f-891fbe1c4eb8" name="CancelBooking1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="CancelBooking1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url2}/TakeCare/services/cancelBooking-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:CancelBooking>
+         <tem:tcusername></tem:tcusername>
+         <tem:tcpassword></tem:tcpassword>
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <tem:xml>
+         <![CDATA[<ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210060537" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:CancelBooking:Request"><BookingId>0</BookingId><PatientReason>I want to cancel this</PatientReason></ProfdocHISMessage>]]]]>><![CDATA[
+         </tem:xml>
+      </tem:CancelBooking>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="34c390a9-a532-4f2c-ab2a-e369490f6464" name="GetAvailableDates1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="GetAvailableDates1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url2}/TakeCare/services/getAvailableDates-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetAvailableDates>
+         <!--Optional:-->
+         <tem:tcusername/>
+         <!--Optional:-->
+         <tem:tcpassword/>
+         <!--Optional:-->
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <!--Optional:-->
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <!--Optional:-->
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <!--Optional:-->
+         <tem:xml><![CDATA[
+            <ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210075822" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:GetAvailableDates:Request"><CareUnitIdType>hsaid</CareUnitIdType><CareUnitId>SE2321000016-1HZ3</CareUnitId><StartDate>20111216</StartDate><EndDate>20111231</EndDate><TimeTypeId>1</TimeTypeId></ProfdocHISMessage>
+         ]]]]>><![CDATA[</tem:xml>
+      </tem:GetAvailableDates>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="e828fcd1-7045-4327-bec1-eaa64152c73a" name="GetAvailableimeslots1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="GetAvailableimeslots1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url2}/TakeCare/services/getAvailableTimeslots-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetAvailableTimeslots>
+         <tem:tcusername></tem:tcusername>
+         <tem:tcpassword></tem:tcpassword>
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <tem:xml/>
+      </tem:GetAvailableTimeslots>
+      </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="fa8ccff0-c184-4e00-b697-0a7a2c9d874c" name="GetBookings1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="GetBookings1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url2}/TakeCare/services/getBookings-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetBookings>
+         <tem:tcusername></tem:tcusername>
+         <tem:tcpassword></tem:tcpassword>
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <tem:xml>
+         <![CDATA[<ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210081252" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:GetBookings:Request"><PatientId>121212121212</PatientId><CareUnitIdType>hsaid</CareUnitIdType><CareUnitId>SE2321000016-1HZ3</CareUnitId></ProfdocHISMessage>]]]]>><![CDATA[
+         </tem:xml>
+      </tem:GetBookings>
+      </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="8e92aab8-25b4-466e-9a38-f5d3198a9f83" name="GetTimeTypes1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="GetTimeTypes1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url2}/TakeCare/services/getTimeTypes-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetTimeTypes>
+         <tem:tcusername></tem:tcusername>
+         <tem:tcpassword></tem:tcpassword>
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <tem:xml>
+         <![CDATA[<ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210081427" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:GetTimeTypes:Request"><CareUnitIdType>hsaid</CareUnitIdType><CareUnitId>HSA-ID-1</CareUnitId><TimeTypeRequest>Web</TimeTypeRequest></ProfdocHISMessage>]]]]>><![CDATA[
+         </tem:xml>
+      </tem:GetTimeTypes></soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="bb0f93f2-b8a0-47c0-90dc-cff28fc91131" name="MakeBooking1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="MakeBooking1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url2}/TakeCare/services/makeBooking-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:MakeBooking>
+         <tem:tcusername></tem:tcusername>
+         <tem:tcpassword></tem:tcpassword>
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <tem:xml>
+         <![CDATA[<ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210081608" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:MakeBooking:Request"><CareUnitIdType>hsaid</CareUnitIdType><CareUnitId>SE2321000016-1HZ3</CareUnitId><StartTime>201206152000</StartTime><EndTime>201206152100</EndTime><TimeTypeId>0</TimeTypeId><PatientId>191414141414</PatientId><PatientReason></PatientReason></ProfdocHISMessage>]]]]>><![CDATA[
+         </tem:xml>
+      </tem:MakeBooking>
+      </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="4dfa12ea-165a-4f6f-b116-5198ed6962cc" name="RescheduleBooking1.1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookingSoap</con:interface><con:operation>CancelBooking</con:operation><con:request name="RescheduleBooking1.1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3c6bc5ec-8b42-457c-a4d7-8a322d8b8c4d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#TestSuite#url2}/TakeCare/services/rescheduleBooking-soap-teststub/v1</con:endpoint><con:request><![CDATA[<soapenv:Envelope 
+xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:RescheduleBooking>
+         <tem:tcusername></tem:tcusername>
+         <tem:tcpassword></tem:tcpassword>
+         <tem:externaluser>ExtUsrMVK</tem:externaluser>
+         <tem:careunitidtype>hsaid</tem:careunitidtype>
+         <tem:careunitid>HSA-VKK123</tem:careunitid>
+         <tem:xml>
+         <![CDATA[<ProfdocHISMessage InvokingSystem="InvSysMVK" Time="20151210081718" MsgType="Request" xmlns:ns2="urn:ProfdocHISMessage:RescheduleBooking:Request"><BookingId>111222333</BookingId><CareUnitIdType>hsaid</CareUnitIdType><CareUnitId>HSA-VKK123</CareUnitId><StartTime>201206152000</StartTime><EndTime>201206152100</EndTime><TimeTypeId>0</TimeTypeId><PatientId>191414141414</PatientId><PatientReason></PatientReason></ProfdocHISMessage>]]]]>><![CDATA[
+         </tem:xml>
+      </tem:RescheduleBooking>
+      </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b2d5092-5fc3-4ab1-b317-6f1e6d0c4ffd" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CancelBooking"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties><con:property><con:name>url1</con:name><con:value>https://33.33.33.33:8081/</con:value></con:property><con:property><con:name>url1-skltp-box</con:name><con:value>https://33.33.33.33:8081/</con:value></con:property><con:property><con:name>url2</con:name><con:value>https://33.33.33.33:8082/</con:value></con:property><con:property><con:name>url2-skltp-box</con:name><con:value>https://33.33.33.33:8082/</con:value></con:property></con:properties></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

@@ -10,12 +10,12 @@ import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 
 import se.riv.crm.scheduling.getsubjectofcareschedule.v1.GetSubjectOfCareScheduleType;
 import se.skl.skltpservices.takecare.TakeCareDateHelper;
-import se.skl.skltpservices.takecare.TakeCareRequestTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareRequestTransformer;
 import se.skl.skltpservices.takecare.TakeCareUtil;
 import se.skl.skltpservices.takecare.booking.GetBookings;
 import se.skl.skltpservices.takecare.booking.getbookingsrequest.ProfdocHISMessage;
 
-public class GetSubjectOfCareScheduleRequestTransformer extends TakeCareRequestTransformer {
+public class GetSubjectOfCareScheduleRequestTransformer extends AbstractTakeCareRequestTransformer {
 
 	private static final Logger log = LoggerFactory.getLogger(GetSubjectOfCareScheduleRequestTransformer.class);
 

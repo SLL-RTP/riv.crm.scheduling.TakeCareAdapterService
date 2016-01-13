@@ -7,7 +7,6 @@
 	xmlns:management="http://www.mulesoft.org/schema/mule/management"
 	xmlns:json="http://www.mulesoft.org/schema/mule/json" 
 	xmlns:script="http://www.mulesoft.org/schema/mule/scripting"
-	xmlns:rest="http://www.mulesoft.org/schema/mule/rest" 
 	xmlns:https="http://www.mulesoft.org/schema/mule/https"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -16,7 +15,6 @@
 		http://www.mulesoft.org/schema/mule/management http://www.mulesoft.org/schema/mule/management/current/mule-management.xsd
 		http://www.mulesoft.org/schema/mule/json       http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
 		http://www.mulesoft.org/schema/mule/scripting  http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
-		http://www.mulesoft.org/schema/mule/rest       http://www.mulesoft.org/schema/mule/rest/current/mule-rest.xsd
 		http://www.mulesoft.org/schema/mule/https      http://www.mulesoft.org/schema/mule/https/current/mule-https.xsd
 	">
 	
@@ -58,28 +56,21 @@
 	
 	<https:connector name="soitoolkit-https-connector" clientSoTimeout="${SOITOOLKIT_MULE_HTTPS_CLIENT_SO_TIMEOUT}" >
   		<service-overrides sessionHandler="org.mule.session.NullSessionHandler"/>
-    	<https:tls-key-store path="${SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE}" storePassword="${SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE_PASSWORD}" keyPassword="${SOITOOLKIT_MULE_HTTPS_TLS_KEY_PASSWORD}" class="${SOITOOLKIT_MULE_HTTPS_TLS_KEY_TYPE}" />
-    	<https:tls-server path="${SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE}" storePassword="${SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_PASSWORD}" requireClientAuthentication="${SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_REQUIRE_CLIENT_AUTH}"/>
+    	<https:tls-key-store path                        = "${SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE}" 
+                             storePassword               = "${SOITOOLKIT_MULE_HTTPS_TLS_KEYSTORE_PASSWORD}" 
+                             keyPassword                 = "${SOITOOLKIT_MULE_HTTPS_TLS_KEY_PASSWORD}" 
+                             class                       = "${SOITOOLKIT_MULE_HTTPS_TLS_KEY_TYPE}" />
+    	<https:tls-server    path                        = "${SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE}" 
+                             storePassword               = "${SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_PASSWORD}" 
+                             requireClientAuthentication = "${SOITOOLKIT_MULE_HTTPS_TLS_TRUSTSTORE_REQUIRE_CLIENT_AUTH}"/>
 	</https:connector>
 
 	<!-- <management:jmx-default-config port="${JMX_PORT}" registerMx4jAdapter="false" 
 		> <management:credentials> <spring:entry key="${JMX_USER}" value="${JMX_PWD}"/> 
 		</management:credentials> </management:jmx-default-config> -->
 
-	<!-- Common connectors and endpoints, i.e. that not needs to be changed 
-		for different config-files (local unit-test, integration-test or production 
-		environments) -->
-
-	<rest:config />
-
-	<spring:beans>
-
-	</spring:beans>
-
-	<message-properties-transformer name="setJsonContentType"
-		scope="outbound">
-		<add-message-property key="Content-Type"
-			value="application/json;charset=UTF-8" />
+	<message-properties-transformer name="setJsonContentType" scope="outbound">
+		<add-message-property key="Content-Type" value="application/json;charset=UTF-8" />
 	</message-properties-transformer>
 
 	<json:object-to-json-transformer name="jaxbToJson" />
@@ -145,7 +136,5 @@
 		<spring:property name="logType" value="resp-out" />
 		<spring:property name="jaxbObjectToXml" ref="objToXml" />
 	</custom-transformer>
-
-	<!-- TODO: Add global definitions here -->
 
 </mule>

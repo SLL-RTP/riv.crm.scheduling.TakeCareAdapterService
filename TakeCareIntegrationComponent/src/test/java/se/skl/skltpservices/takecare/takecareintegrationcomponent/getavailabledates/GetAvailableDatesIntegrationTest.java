@@ -6,9 +6,9 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer.getAddress;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabledates.GetAvailableDatesTestProducer.TEST_HEALTHCAREFACILITY_INVALID_ID;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabledates.GetAvailableDatesTestProducer.TEST_HEALTHCAREFACILITY_OK;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getavailabledates.GetAvailableDatesTestProducer.TEST_ID_FAULT_TIMEOUT;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetAvailableDatesTestProducer.TEST_HEALTHCAREFACILITY_INVALID_ID;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetAvailableDatesTestProducer.TEST_HEALTHCAREFACILITY_OK;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetAvailableDatesTestProducer.TEST_ID_FAULT_TIMEOUT;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
@@ -26,7 +26,8 @@ public class GetAvailableDatesIntegrationTest extends AbstractTestCase {
 
 	private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
 
-	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("GETAVAILABLEDATES_INBOUND_URL");
+	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("GETAVAILABLEDATES_INBOUND_URL_1");
+    private static final String SECOND_SERVICE_ADDRESS = getAddress("GETAVAILABLEDATES_INBOUND_URL_2");
 
 	public GetAvailableDatesIntegrationTest() {
 
@@ -37,12 +38,13 @@ public class GetAvailableDatesIntegrationTest extends AbstractTestCase {
 	}
 
 	protected String getConfigResources() {
-		return "soitoolkit-mule-jms-connector-activemq-embedded.xml," +
-
-		"TakeCareIntegrationComponent-common.xml," + "TakeCareIntegrationComponent-integrationtests-common.xml," +
-		// FIXME. MULE STUDIO.
-		// "services/GetAvailableDates-service.xml," +
-				"GetAvailableDates-service.xml," + "teststub-services/GetAvailableDates-teststub-service.xml";
+        return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"        + 
+               "TakeCareIntegrationComponent-common.xml,"                    + 
+               "TakeCareIntegrationComponent-integrationtests-common.xml,"   + 
+               "GetAvailableDates-1-service.xml,"                            + 
+               "GetAvailableDates-2-service.xml,"                            + 
+               "teststub-services/GetAvailableDates-1-service.xml," +
+               "teststub-services/GetAvailableDates-2-service.xml";
 	}
 
 	@Override
@@ -58,22 +60,29 @@ public class GetAvailableDatesIntegrationTest extends AbstractTestCase {
 
 		GetAvailableDatesTestConsumer consumer = new GetAvailableDatesTestConsumer(DEFAULT_SERVICE_ADDRESS);
 		GetAvailableDatesResponseType response = consumer.callService(careTypeId, healthcareFacility);
-
-		// These are set by Take Care
-		assertNotNull(response.getPerformerAvailabilityByDate().get(0).getDate());
-		assertEquals("HSA-VKK123", response.getPerformerAvailabilityByDate().get(0).getHealthcareFacility());
-		assertEquals("HSA-VKK123", response.getPerformerAvailabilityByDate().get(0).getResourceName());
-		assertEquals("0", response.getPerformerAvailabilityByDate().get(0).getTimeTypeID());
-
-		// Theses are not set by Take Care
-		assertNull(response.getPerformerAvailabilityByDate().get(0).getPerformer());
-		assertNull(response.getPerformerAvailabilityByDate().get(0).getResourceID());
-		assertNull(response.getPerformerAvailabilityByDate().get(0).getTimeTypeName());
-		assertNull(response.getPerformerAvailabilityByDate().get(0).getCareTypeID());
-		assertNull(response.getPerformerAvailabilityByDate().get(0).getCareTypeName());
+		checkResponse(response);
+		
+        consumer = new GetAvailableDatesTestConsumer(SECOND_SERVICE_ADDRESS);
+        response = consumer.callService(careTypeId, healthcareFacility);
+        checkResponse(response);
 	}
 
-	@Test
+	private void checkResponse(GetAvailableDatesResponseType response) {
+        // These are set by Take Care
+        assertNotNull(response.getPerformerAvailabilityByDate().get(0).getDate());
+        assertEquals("HSA-VKK123", response.getPerformerAvailabilityByDate().get(0).getHealthcareFacility());
+        assertEquals("HSA-VKK123", response.getPerformerAvailabilityByDate().get(0).getResourceName());
+        assertEquals("0", response.getPerformerAvailabilityByDate().get(0).getTimeTypeID());
+
+        // Theses are not set by Take Care
+        assertNull(response.getPerformerAvailabilityByDate().get(0).getPerformer());
+        assertNull(response.getPerformerAvailabilityByDate().get(0).getResourceID());
+        assertNull(response.getPerformerAvailabilityByDate().get(0).getTimeTypeName());
+        assertNull(response.getPerformerAvailabilityByDate().get(0).getCareTypeID());
+        assertNull(response.getPerformerAvailabilityByDate().get(0).getCareTypeName());
+    }
+
+    @Test
 	public void test_fault_invalidInput() throws Exception {
 		try {
 			String careTypeId = "191414141414";

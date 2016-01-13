@@ -11,7 +11,7 @@ import org.xml.sax.XMLReader;
 import se.riv.crm.scheduling.getalltimetypes.v1.GetAllTimeTypesResponseType;
 import se.riv.crm.scheduling.getalltimetypes.v1.ObjectFactory;
 import se.riv.crm.scheduling.v1.TimeTypeType;
-import se.skl.skltpservices.takecare.TakeCareResponseTransformer;
+import se.skl.skltpservices.takecare.AbstractTakeCareResponseTransformer;
 import se.skl.skltpservices.takecare.booking.GetTimeTypesResponse;
 import se.skl.skltpservices.takecare.booking.gettimetypesresponse.ProfdocHISMessage;
 import se.skl.skltpservices.takecare.booking.gettimetypesresponse.ProfdocHISMessage.TimeTypes;
@@ -26,7 +26,7 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.io.StringReader;
 
-public class GetAllTimeTypesResponseTransformer extends TakeCareResponseTransformer {
+public class GetAllTimeTypesResponseTransformer extends AbstractTakeCareResponseTransformer {
 
     private static final Logger log = LoggerFactory.getLogger(GetAllTimeTypesResponseTransformer.class);
 
@@ -45,9 +45,7 @@ public class GetAllTimeTypesResponseTransformer extends TakeCareResponseTransfor
      */
     protected Object pojoTransform(Object src, String outputEncoding, Object property) throws TransformerException {
 
-        if (logger.isDebugEnabled()) {
-            log.debug("Transforming response payload: {}", src);
-        }
+        log.debug("Transforming response payload: {}", src);
 
         try {
             String incoming_string = extractResponse(src);
@@ -72,6 +70,9 @@ public class GetAllTimeTypesResponseTransformer extends TakeCareResponseTransfor
     }
 
     private Object transformResponse(String incoming_string) {
+        
+        log.debug("received incoming string:" + incoming_string);
+        
         //Do unmarshalling
         ProfdocHISMessage message = new ProfdocHISMessage();
         message = (ProfdocHISMessage) super.transformResponse(message, "urn:ProfdocHISMessage:GetTimeTypes:Response", incoming_string);

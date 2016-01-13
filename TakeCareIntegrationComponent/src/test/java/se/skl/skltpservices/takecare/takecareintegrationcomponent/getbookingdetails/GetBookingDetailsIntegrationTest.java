@@ -5,9 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static se.skl.skltpservices.takecare.takecareintegrationcomponent.TakeCareIntegrationComponentMuleServer.getAddress;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getbookingdetails.GetBookingTestProducer.TEST_BOOKINGID_INVALID_ID;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getbookingdetails.GetBookingTestProducer.TEST_BOOKINGID_OK;
-import static se.skl.skltpservices.takecare.takecareintegrationcomponent.getbookingdetails.GetBookingTestProducer.TEST_ID_FAULT_TIMEOUT;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetBookingsTestProducer.TEST_BOOKINGID_INVALID_ID;
+import static se.skl.skltpservices.takecare.takecaretestproducer.GetBookingsTestProducer.TEST_ID_FAULT_TIMEOUT;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
@@ -25,7 +24,8 @@ public class GetBookingDetailsIntegrationTest extends AbstractTestCase {
 
 	private static final String EXPECTED_ERR_TIMEOUT_MSG = "Read timed out";
 
-	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("GETBOOKINGDETAILS_INBOUND_URL");
+	private static final String DEFAULT_SERVICE_ADDRESS = getAddress("GETBOOKINGDETAILS_INBOUND_URL_1");
+    private static final String SECOND_SERVICE_ADDRESS = getAddress("GETBOOKINGDETAILS_INBOUND_URL_2");
 
 	public GetBookingDetailsIntegrationTest() {
 
@@ -36,12 +36,13 @@ public class GetBookingDetailsIntegrationTest extends AbstractTestCase {
 	}
 
 	protected String getConfigResources() {
-		return "soitoolkit-mule-jms-connector-activemq-embedded.xml," +
-
-		"TakeCareIntegrationComponent-common.xml," + "TakeCareIntegrationComponent-integrationtests-common.xml," +
-		// FIXME. MULE STUDIO.
-		// "services/GetBookingDetails-service.xml," +
-				"GetBookingDetails-service.xml," + "teststub-services/GetBookingDetails-teststub-service.xml";
+        return "soitoolkit-mule-jms-connector-activemq-embedded.xml,"      + 
+               "TakeCareIntegrationComponent-common.xml,"                  + 
+               "TakeCareIntegrationComponent-integrationtests-common.xml," + 
+               "GetBookingDetails-1-service.xml,"                            + 
+               "GetBookingDetails-2-service.xml,"                            + 
+               "teststub-services/GetBookings-1-service.xml," +
+               "teststub-services/GetBookings-2-service.xml";
 	}
 
 	@Override
@@ -51,7 +52,7 @@ public class GetBookingDetailsIntegrationTest extends AbstractTestCase {
 
 	@Test
 	public void test_ok() throws Fault {
-		String bookingId = TEST_BOOKINGID_OK;
+		String bookingId = "123";
 		String healtcareFacility = "HSA-VKK123";
 
 		GetBookingDetailsTestConsumer consumer = new GetBookingDetailsTestConsumer(DEFAULT_SERVICE_ADDRESS);
@@ -60,6 +61,13 @@ public class GetBookingDetailsIntegrationTest extends AbstractTestCase {
 		assertNotNull(response.getTimeslotDetail());
 		assertEquals(bookingId, response.getTimeslotDetail().getBookingId());
 		assertEquals(healtcareFacility, response.getTimeslotDetail().getHealthcareFacility());
+		
+        consumer = new GetBookingDetailsTestConsumer(SECOND_SERVICE_ADDRESS);
+        response = consumer.callService(healtcareFacility, bookingId);
+
+        assertNotNull(response.getTimeslotDetail());
+        assertEquals(bookingId, response.getTimeslotDetail().getBookingId());
+        assertEquals(healtcareFacility, response.getTimeslotDetail().getHealthcareFacility());
 	}
 
 	@Test
